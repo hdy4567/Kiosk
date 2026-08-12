@@ -44,13 +44,13 @@ namespace Kiosk
             label24 = new Label();
             label20 = new Label();
             lb_sum = new Label();
-            button31 = new Button();
             panel4 = new Panel();
             lb_cusNum = new TextBox();
             lb_phonenum = new Label();
             button32 = new Button();
             lb_roundTop1 = new RoundedToplabel();
             pnl_Pop_Membership = new RoundedPanel();
+            btn_savepoint = new Button();
             btn_del2 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             btn_pClear = new Button();
@@ -71,6 +71,7 @@ namespace Kiosk
             ln_point = new Label();
             lb_cusId = new Label();
             pnlStamp = new RoundedPanel();
+            btn_save = new Button();
             btn_del1 = new Button();
             roundedToplabel1 = new RoundedToplabel();
             tableLayoutPanel2 = new TableLayoutPanel();
@@ -266,17 +267,6 @@ namespace Kiosk
             lb_sum.Text = "대상금액";
             lb_sum.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // button31
-            // 
-            button31.BackColor = Color.FromArgb(255, 128, 0);
-            button31.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button31.Location = new Point(367, 344);
-            button31.Name = "button31";
-            button31.Size = new Size(200, 38);
-            button31.TabIndex = 24;
-            button31.Text = "2. 적립";
-            button31.UseVisualStyleBackColor = false;
-            // 
             // panel4
             // 
             panel4.Controls.Add(lb_cusNum);
@@ -349,20 +339,20 @@ namespace Kiosk
             pnl_Pop_Membership.BorderRadius = 90;
             pnl_Pop_Membership.BorderSize = 1F;
             pnl_Pop_Membership.BottomBorderRadius = 40;
+            pnl_Pop_Membership.Controls.Add(btn_savepoint);
             pnl_Pop_Membership.Controls.Add(btn_del2);
             pnl_Pop_Membership.Controls.Add(lb_roundTop1);
             pnl_Pop_Membership.Controls.Add(tableLayoutPanel1);
             pnl_Pop_Membership.Controls.Add(panel3);
             pnl_Pop_Membership.Controls.Add(button32);
             pnl_Pop_Membership.Controls.Add(panel4);
-            pnl_Pop_Membership.Controls.Add(button31);
             pnl_Pop_Membership.Controls.Add(lb_sum);
             pnl_Pop_Membership.Controls.Add(label20);
             pnl_Pop_Membership.Controls.Add(label24);
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
-            pnl_Pop_Membership.Location = new Point(55, 62);
+            pnl_Pop_Membership.Location = new Point(55, 65);
             pnl_Pop_Membership.Name = "pnl_Pop_Membership";
             pnl_Pop_Membership.RoundBottomLeft = true;
             pnl_Pop_Membership.RoundBottomRight = true;
@@ -373,6 +363,18 @@ namespace Kiosk
             pnl_Pop_Membership.ShowShadow = true;
             pnl_Pop_Membership.Size = new Size(671, 404);
             pnl_Pop_Membership.TabIndex = 16;
+            // 
+            // btn_savepoint
+            // 
+            btn_savepoint.BackColor = Color.FromArgb(255, 128, 0);
+            btn_savepoint.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_savepoint.Location = new Point(376, 350);
+            btn_savepoint.Name = "btn_savepoint";
+            btn_savepoint.Size = new Size(200, 38);
+            btn_savepoint.TabIndex = 34;
+            btn_savepoint.Text = "2. 적립";
+            btn_savepoint.UseVisualStyleBackColor = false;
+            btn_savepoint.Click += btn_savepoint_Click;
             // 
             // btn_del2
             // 
@@ -629,6 +631,7 @@ namespace Kiosk
             pnlStamp.BorderRadius = 90;
             pnlStamp.BorderSize = 1F;
             pnlStamp.BottomBorderRadius = 40;
+            pnlStamp.Controls.Add(btn_save);
             pnlStamp.Controls.Add(btn_del1);
             pnlStamp.Controls.Add(roundedToplabel1);
             pnlStamp.Controls.Add(tableLayoutPanel2);
@@ -650,6 +653,18 @@ namespace Kiosk
             pnlStamp.ShowShadow = true;
             pnlStamp.Size = new Size(671, 404);
             pnlStamp.TabIndex = 22;
+            // 
+            // btn_save
+            // 
+            btn_save.BackColor = Color.FromArgb(255, 128, 0);
+            btn_save.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_save.Location = new Point(388, 344);
+            btn_save.Name = "btn_save";
+            btn_save.Size = new Size(200, 38);
+            btn_save.TabIndex = 32;
+            btn_save.Text = "2. 적립";
+            btn_save.UseVisualStyleBackColor = false;
+            btn_save.Click += btn_save_Click;
             // 
             // btn_del1
             // 
@@ -1063,7 +1078,6 @@ namespace Kiosk
         private Label label24;
         private Label label20;
         private Label lb_sum;
-        private Button button31;
         private Panel panel4;
         private TextBox lb_cusNum;
         private Label lb_phonenum;
@@ -1123,5 +1137,7 @@ namespace Kiosk
         private Label lb_sum1;
         private Label lb_savePoint1;
         private Label lb_cusName1;
+        private Button btn_save;
+        private Button btn_savepoint;
     }
 }

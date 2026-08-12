@@ -280,6 +280,7 @@ namespace Kiosk
 
         private void btn_del2_Click(object sender, EventArgs e)
         {
+
             pnl_Pop_Membership.Hide();
 
         }
@@ -307,6 +308,28 @@ namespace Kiosk
             if (lb_sum1 != null) lb_sum1.Text = sumTexts[langIndex];
             if (lb_savePoint1 != null) lb_savePoint1.Text = savePointTexts[langIndex];
             if (lb_cusName1 != null) lb_cusName1.Text = cusNameTexts[langIndex];
+        }
+
+
+
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            Payment pay_form = new Payment();
+            pay_form.Show();
+            this.Hide();
+        }
+
+        private void btn_savepoint_Click(object sender, EventArgs e)
+        {
+            Payment pay_form= new Payment();
+            pay_form.Show();
+            this.Hide();
         }
     }
 }

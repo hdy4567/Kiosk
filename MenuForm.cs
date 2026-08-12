@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kiosk;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -359,8 +360,11 @@ namespace sushikiosk
             }
         }
 
-        
-        private void CheckWinningEvent()            // 이번에 새로 주문한 메뉴만 대상으로 당첨 이벤트를 확인
+
+        /// <summary>
+            /// 이번에 새로 주문한 메뉴만 대상으로 당첨 이벤트를 확인
+        /// </summary>
+        private void CheckWinningEvent()            
         {
             var plates = currentOrderList
                 .Where(item => item.Category != "음료" &&
@@ -427,8 +431,15 @@ namespace sushikiosk
             }
 
             CheckWinningEvent();
+            Pop_MemberNum member_form= new Pop_MemberNum();
+            member_form.Show();
+            this.Hide();
         }
 
+
+
+
+        
         private void btnCallStaff_Click(object sender, EventArgs e)         // 직원 호출 버튼을 누르면 호출 완료 메시지를 표시.
         {
             MessageBox.Show("직원 호출하였습니다.");
