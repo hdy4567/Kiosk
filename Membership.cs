@@ -119,5 +119,61 @@ namespace Kiosk
         {
 
         }
+
+        private void button15_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_topEarn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_topEarn_Paint(object sender, PaintEventArgs e)
+        {
+            Control ctrl = (Control)sender;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            int radius = 15;
+
+            // 전체 컨트롤 크기 구하기
+            Rectangle rect = new Rectangle(0, 0, ctrl.Width, ctrl.Height);
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+
+            // 위쪽 양쪽 모서리만 둥글게 깎는 경로(Path) 정의
+            path.AddArc(rect.X, rect.Y, radius, radius, 180, 90); // 위쪽 왼쪽
+            path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90); // 위쪽 오른쪽
+            path.AddLine(rect.Right, rect.Bottom, rect.X, rect.Bottom); // 아래쪽은 직각 유지
+            path.CloseFigure();
+
+            // 주황색 배경 채우기 (현재 쓰신 주황색 RGB 값에 맞게 변경 가능)
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 128, 0)))
+            {
+                e.Graphics.FillPath(brush, path);
+            }
+            ctrl.Region = new Region(path);
+
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_topEarn_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void roundTopPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void roundToplabel1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
