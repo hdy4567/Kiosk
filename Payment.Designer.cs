@@ -28,68 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            btn_back = new Button();
+            btn_allDelete = new Button();
+            btn_KakaoPay = new Button();
+            btn_naverPay = new Button();
+            btn_card = new Button();
             label2 = new Label();
             label1 = new Label();
             label4 = new Label();
             label5 = new Label();
-            button7 = new Button();
+            btn_SamsungPay = new Button();
             label3 = new Label();
-            button8 = new Button();
+            btn_coupon = new Button();
             SuspendLayout();
             // 
-            // button6
+            // btn_back
             // 
-            button6.BackColor = SystemColors.Control;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(264, 426);
-            button6.Name = "button6";
-            button6.Size = new Size(200, 68);
-            button6.TabIndex = 20;
-            button6.Text = "이전";
-            button6.UseVisualStyleBackColor = false;
+            btn_back.BackColor = SystemColors.ActiveBorder;
+            btn_back.FlatStyle = FlatStyle.Flat;
+            btn_back.Location = new Point(331, 426);
+            btn_back.Name = "btn_back";
+            btn_back.Size = new Size(200, 68);
+            btn_back.TabIndex = 20;
+            btn_back.Text = "이전";
+            btn_back.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btn_allDelete
             // 
-            button5.BackColor = SystemColors.Control;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(155, 426);
-            button5.Name = "button5";
-            button5.Size = new Size(103, 68);
-            button5.TabIndex = 19;
-            button5.Text = "전체 취소";
-            button5.UseVisualStyleBackColor = false;
+            btn_allDelete.BackColor = Color.FromArgb(211, 47, 47);
+            btn_allDelete.FlatStyle = FlatStyle.Flat;
+            btn_allDelete.Location = new Point(155, 426);
+            btn_allDelete.Name = "btn_allDelete";
+            btn_allDelete.Size = new Size(103, 68);
+            btn_allDelete.TabIndex = 19;
+            btn_allDelete.Text = "전체 취소";
+            btn_allDelete.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btn_KakaoPay
             // 
-            button4.Location = new Point(345, 98);
-            button4.Name = "button4";
-            button4.Size = new Size(186, 91);
-            button4.TabIndex = 18;
-            button4.Text = "카카오 페이";
-            button4.UseVisualStyleBackColor = true;
+            btn_KakaoPay.BackColor = SystemColors.ControlLightLight;
+            btn_KakaoPay.FlatStyle = FlatStyle.Flat;
+            btn_KakaoPay.Location = new Point(345, 98);
+            btn_KakaoPay.Name = "btn_KakaoPay";
+            btn_KakaoPay.Size = new Size(186, 91);
+            btn_KakaoPay.TabIndex = 18;
+            btn_KakaoPay.Text = "카카오 페이";
+            btn_KakaoPay.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btn_naverPay
             // 
-            button3.Location = new Point(250, 98);
-            button3.Name = "button3";
-            button3.Size = new Size(89, 91);
-            button3.TabIndex = 16;
-            button3.Text = "네이버 페이";
-            button3.UseVisualStyleBackColor = true;
+            btn_naverPay.BackColor = SystemColors.ControlLightLight;
+            btn_naverPay.FlatStyle = FlatStyle.Flat;
+            btn_naverPay.Location = new Point(250, 98);
+            btn_naverPay.Name = "btn_naverPay";
+            btn_naverPay.Size = new Size(89, 91);
+            btn_naverPay.TabIndex = 16;
+            btn_naverPay.Text = "네이버 페이";
+            btn_naverPay.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btn_card
             // 
-            button2.Location = new Point(153, 98);
-            button2.Name = "button2";
-            button2.Size = new Size(89, 91);
-            button2.TabIndex = 15;
-            button2.Text = "카드 결제";
-            button2.UseVisualStyleBackColor = true;
+            btn_card.BackColor = SystemColors.ControlLightLight;
+            btn_card.FlatStyle = FlatStyle.Flat;
+            btn_card.Location = new Point(153, 98);
+            btn_card.Name = "btn_card";
+            btn_card.Size = new Size(89, 91);
+            btn_card.TabIndex = 15;
+            btn_card.Text = "카드 결제";
+            btn_card.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -131,14 +137,16 @@
             label5.TabIndex = 21;
             label5.Text = "Step2.";
             // 
-            // button7
+            // btn_SamsungPay
             // 
-            button7.Location = new Point(153, 195);
-            button7.Name = "button7";
-            button7.Size = new Size(186, 91);
-            button7.TabIndex = 23;
-            button7.Text = "삼성페이";
-            button7.UseVisualStyleBackColor = true;
+            btn_SamsungPay.BackColor = SystemColors.ControlLightLight;
+            btn_SamsungPay.FlatStyle = FlatStyle.Flat;
+            btn_SamsungPay.Location = new Point(153, 195);
+            btn_SamsungPay.Name = "btn_SamsungPay";
+            btn_SamsungPay.Size = new Size(186, 91);
+            btn_SamsungPay.TabIndex = 23;
+            btn_SamsungPay.Text = "삼성페이";
+            btn_SamsungPay.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
@@ -150,31 +158,33 @@
             label3.Text = "상품권 결제";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // button8
+            // btn_coupon
             // 
-            button8.Location = new Point(153, 329);
-            button8.Name = "button8";
-            button8.Size = new Size(186, 91);
-            button8.TabIndex = 25;
-            button8.Text = "쿠폰 / 상품권 복합 결제";
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click;
+            btn_coupon.BackColor = SystemColors.ControlLightLight;
+            btn_coupon.FlatStyle = FlatStyle.Flat;
+            btn_coupon.Location = new Point(155, 329);
+            btn_coupon.Name = "btn_coupon";
+            btn_coupon.Size = new Size(186, 91);
+            btn_coupon.TabIndex = 25;
+            btn_coupon.Text = "쿠폰 / 상품권 복합 결제";
+            btn_coupon.UseVisualStyleBackColor = false;
+            btn_coupon.Click += button8_Click;
             // 
             // Payment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 530);
-            Controls.Add(button8);
+            ClientSize = new Size(1219, 700);
+            Controls.Add(btn_coupon);
+            Controls.Add(btn_KakaoPay);
             Controls.Add(label3);
-            Controls.Add(button7);
+            Controls.Add(btn_SamsungPay);
             Controls.Add(label4);
             Controls.Add(label5);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(btn_back);
+            Controls.Add(btn_allDelete);
+            Controls.Add(btn_naverPay);
+            Controls.Add(btn_card);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Payment";
@@ -186,17 +196,17 @@
 
         #endregion
 
-        private Button button6;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
+        private Button btn_back;
+        private Button btn_allDelete;
+        private Button btn_KakaoPay;
+        private Button btn_naverPay;
+        private Button btn_card;
         private Label label2;
         private Label label1;
         private Label label4;
         private Label label5;
-        private Button button7;
+        private Button btn_SamsungPay;
         private Label label3;
-        private Button button8;
+        private Button btn_coupon;
     }
 }

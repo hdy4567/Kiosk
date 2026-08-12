@@ -1,4 +1,5 @@
-﻿using System;
+using sushikiosk;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,19 +11,42 @@ using System.Windows.Forms;
 
 namespace Kiosk
 {
-    public partial class Here_In : Form
+    /// <summary>
+    /// 매장 내 테이블 선택 및 상태 관리를 제공하는 화면입니다.
+    /// 다국어 선택 상태를 지원합니다.
+    /// </summary>
+    public partial class Here_In : BaseLanguageForm
     {
+        /// <summary>
+        /// Here_In 클래스의 새 인스턴스를 생성하고 구성 요소를 초기화합니다.
+        /// </summary>
         public Here_In()
         {
             InitializeComponent();
             buttons_arrayform();
         }
 
+        /// <summary>
+        /// 매장 내 배치된 테이블 버튼 목록을 저장하는 리스트입니다.
+        /// </summary>
         List<Button> buttons = new List<Button>();
+
+        /// 각 테이블(1~34번)의 선택 상태를 기록하는 배열입니다.
         bool[] table_state = new bool[35];
 
-        
+        /// <summary>
+        /// 테이블 선택 알림 메시지의 다국어 템플릿입니다.
+        /// Index 0: 영어, 1: 일본어, 2: 한국어
+        /// </summary>
+        private readonly string[] tableSelectFormats = {
+            "Table {0} has been selected. State: {1}",
+            "テーブル {0} が選択されました。 状態: {1}",
+            "{0}번 테이블이 선택되었습니다. 상태: {1}"
+        };
 
+        /// <summary>
+        /// 폼 내부에서 button1부터 button34까지의 컨트롤을 찾아 이벤트를 연결하고 리스트에 등록합니다.
+        /// </summary>
         private void buttons_arrayform()
         {
 
@@ -43,6 +67,11 @@ namespace Kiosk
             }
         }
 
+        /// <summary>
+        /// 임의의 테이블 버튼을 클릭했을 때 작동하며, 테이블의 상태를 변경하고 다국어 안내 메시지를 출력합니다.
+        /// </summary>
+        /// <param name="sender">클릭 이벤트를 발생시킨 Button 객체입니다.</param>
+        /// <param name="e">이벤트 데이터가 포함된 객체입니다.</param>
         private void Here_In_Button_Click(object sender, EventArgs e)
         {
             Button clicked_Button = sender as Button;
@@ -60,9 +89,15 @@ namespace Kiosk
             // (Properties.Resources에 'SelectedImage'라는 이미지가 등록되어 있어야 합니다)
             //clickedButton.BackgroundImage = Properties.Resources.SelectedImage;
 
-            MessageBox.Show($"{btn_Index}번 테이블이 선택되었습니다. 상태: {table_state[btn_Index]}");
+            // 현재 언어 인덱스에 맞는 포맷을 가져와 바인딩
+            int lang = LanguageManager.CurrentLanguageIndex;
+            string message = string.Format(tableSelectFormats[lang], btn_Index, table_state[btn_Index]);
+            MessageBox.Show(message);
+
+            // 테이블 선택 완료 후 메뉴 주문 화면(MenuForm) 표시 및 현재 창 숨김
+            MenuForm menuForm = new MenuForm();
+            menuForm.Show();
+            this.Hide();
         }
-
-
     }
 }
