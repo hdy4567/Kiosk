@@ -356,6 +356,7 @@ namespace Kiosk
             if (btn_del1 != null) btn_del1.Text = del1Texts[langIndex];
             if (button29 != null) button29.Text = searchTexts[langIndex];
             if (btn_save != null) btn_save.Text = saveTexts[langIndex];
+            if (btn_receive != null) btn_receive.Text = receiveTexts[langIndex];
         }
 
 
@@ -377,6 +378,8 @@ namespace Kiosk
             this.Hide();
 
             MessageBox.Show("적립되었습니다 ! ");
+
+
         }
 
         private void btn_savepoint_Click(object sender, EventArgs e)

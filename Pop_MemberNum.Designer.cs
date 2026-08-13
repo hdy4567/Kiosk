@@ -356,7 +356,7 @@ namespace Kiosk
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
-            pnl_Pop_Membership.Location = new Point(12, 15);
+            pnl_Pop_Membership.Location = new Point(734, 60);
             pnl_Pop_Membership.Name = "pnl_Pop_Membership";
             pnl_Pop_Membership.RoundBottomLeft = true;
             pnl_Pop_Membership.RoundBottomRight = true;
@@ -646,7 +646,7 @@ namespace Kiosk
             pnlStamp.Controls.Add(label14);
             pnlStamp.Controls.Add(label19);
             pnlStamp.Controls.Add(label21);
-            pnlStamp.Location = new Point(12, 12);
+            pnlStamp.Location = new Point(734, 57);
             pnlStamp.Name = "pnlStamp";
             pnlStamp.RoundBottomLeft = true;
             pnlStamp.RoundBottomRight = true;

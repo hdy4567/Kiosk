@@ -84,6 +84,7 @@
             btnNext = new Button();
             lblPage = new Label();
             panel1 = new Panel();
+            btn_receive = new Button();
             btnOrder = new Button();
             lblTotalPrice = new Label();
             dgvOrder = new DataGridView();
@@ -94,7 +95,6 @@
             colPrice = new DataGridViewTextBoxColumn();
             label1 = new Label();
             btnOrderHistory = new Button();
-            btn_receive = new Button();
             menuStrip1.SuspendLayout();
             flpMenu.SuspendLayout();
             panelMenu1.SuspendLayout();
@@ -718,6 +718,19 @@
             panel1.Size = new Size(419, 647);
             panel1.TabIndex = 5;
             // 
+            // btn_receive
+            // 
+            btn_receive.BackColor = Color.Red;
+            btn_receive.FlatStyle = FlatStyle.Flat;
+            btn_receive.Font = new Font("맑은 고딕", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_receive.Location = new Point(272, 579);
+            btn_receive.Name = "btn_receive";
+            btn_receive.Size = new Size(105, 45);
+            btn_receive.TabIndex = 4;
+            btn_receive.Text = "결제하기";
+            btn_receive.UseVisualStyleBackColor = false;
+            btn_receive.Click += btn_receive_Click;
+            // 
             // btnOrder
             // 
             btnOrder.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
@@ -816,19 +829,6 @@
             btnOrderHistory.Text = "주문 내역";
             btnOrderHistory.UseVisualStyleBackColor = true;
             btnOrderHistory.Click += btnOrderHistory_Click;
-            // 
-            // btn_receive
-            // 
-            btn_receive.BackColor = Color.Red;
-            btn_receive.FlatStyle = FlatStyle.Flat;
-            btn_receive.Font = new Font("맑은 고딕", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_receive.Location = new Point(272, 579);
-            btn_receive.Name = "btn_receive";
-            btn_receive.Size = new Size(105, 45);
-            btn_receive.TabIndex = 4;
-            btn_receive.Text = "결제하기";
-            btn_receive.UseVisualStyleBackColor = false;
-            btn_receive.Click += btn_receive_Click;
             // 
             // MenuForm
             // 

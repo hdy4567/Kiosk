@@ -36,7 +36,6 @@ namespace sushikiosk
         Random random = new Random();
 
         string currentCategory = "활어/참치";
-
         int currentPage = 0;        // 현재 페이지
         int pageSize = 8;           // 한 페이지에 8개를 띄워라
 
@@ -156,40 +155,8 @@ namespace sushikiosk
             ShowPage();
         }
 
-        private void AddMenu(string name, int price, string category, string imageFile)     // 메뉴하나의 이름, 가격, 카테고리,
-        {                                                                                   // 이미지 정보를 메뉴 목록에 추가
-            menuList.Add(new SushiMenu
-            {
-                Name = name,
-                Price = price,
-                Category = category,
-                ImageFile = imageFile
-            });
-        }
-
-        private void ShowPage()         // 현재 선택된 카테고리와 페이지에 맞는 메뉴를 화면에 표시
-        {
-            List<SushiMenu> filteredMenu =
-                menuList.Where(menu => menu.Category == currentCategory).ToList();
-
-            int startIndex = currentPage * pageSize;
-
-            for (int i = 0; i < pageSize; i++)
-            {
-                int menuIndex = startIndex + i;
-
-                if (menuIndex >= filteredMenu.Count)
-                {
-                    menuPictures[i].Image?.Dispose();
-                    menuPictures[i].Image = null;
-                    menuPanels[i].Visible = false;
-                    continue;
-                }
-
-                SushiMenu menu = filteredMenu[menuIndex];
-
-                // 다국어 메뉴 이름 매핑 딕셔너리
-                var menuTranslations = new Dictionary<string, string[]>
+        // 다국어 메뉴 이름 매핑 딕셔너리
+        private static readonly Dictionary<string, string[]> menuTranslations = new Dictionary<string, string[]>
                 {
                     { "점성어초밥", new[] { "Red Drum Sushi", "ニ베寿司", "점성어초밥" } },
                     { "숭어초밥", new[] { "Mullet Sushi", "ボラ寿司", "숭어초밥" } },
@@ -254,6 +221,52 @@ namespace sushikiosk
                     { "컵 주세요", new[] { "Give me a cup", "コップをください", "컵 주세요" } },
                     { "직원만 호출", new[] { "Call Staff", "呼び出し", "직원만 호출" } }
                 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void AddMenu(string name, int price, string category, string imageFile)     // 메뉴하나의 이름, 가격, 카테고리,
+        {                                                                                   // 이미지 정보를 메뉴 목록에 추가
+            menuList.Add(new SushiMenu
+            {
+                Name = name,
+                Price = price,
+                Category = category,
+                ImageFile = imageFile
+            });
+        }
+
+        private void ShowPage()         // 현재 선택된 카테고리와 페이지에 맞는 메뉴를 화면에 표시
+        {
+            List<SushiMenu> filteredMenu =
+                menuList.Where(menu => menu.Category == currentCategory).ToList();
+
+            int startIndex = currentPage * pageSize;
+
+            for (int i = 0; i < pageSize; i++)
+            {
+                int menuIndex = startIndex + i;
+
+                if (menuIndex >= filteredMenu.Count)
+                {
+                    menuPictures[i].Image?.Dispose();
+                    menuPictures[i].Image = null;
+                    menuPanels[i].Visible = false;
+                    continue;
+                }
+
+                SushiMenu menu = filteredMenu[menuIndex];
 
                 int lang = LanguageManager.CurrentLanguageIndex;
                 if (menuTranslations.ContainsKey(menu.Name))
@@ -408,24 +421,28 @@ namespace sushikiosk
             dgvOrder.Rows.Clear();
 
             int totalPrice = 0;
+            int lang = LanguageManager.CurrentLanguageIndex;
+
+            string[] currencySymbols = { "KRW", "円", "원" };
+            string[] totalAmountTexts = { "Total Amount : ", "合計金額 : ", "총 금액 : " };
 
             foreach (OrderItem item in currentOrderList)
             {
                 int itemTotal = item.Price * item.Quantity;
 
                 dgvOrder.Rows.Add(
-                    item.Name,
+                    menuTranslations.ContainsKey(item.Name) ? menuTranslations[item.Name][lang] : item.Name,
                     "-",
                     item.Quantity,
                     "+",
-                    itemTotal.ToString("N0") + "원"
+                    itemTotal.ToString("N0") + currencySymbols[lang]
                 );
 
                 totalPrice += itemTotal;
             }
 
             lblTotalPrice.Text =
-                "총 금액 : " + totalPrice.ToString("N0") + "원";
+                totalAmountTexts[lang] + totalPrice.ToString("N0") + currencySymbols[lang];
         }
 
         private void dgvOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)      // 장바구니의 +, - 버튼을 처리하여 
@@ -594,8 +611,9 @@ namespace sushikiosk
             // 일반 Control에 속하는 버튼들의 다국어 텍스트 대입
             if (btnPrevious != null) btnPrevious.Text = new[] { "Previous", "以前", "이전" }[lang];
             if (btnNext != null) btnNext.Text = new[] { "Next", "次へ", "다음" }[lang];
-            if (btnOrderHistory != null) btnOrderHistory.Text = new[] { "Order History", "注文履歴", "주문 내역" }[lang];
+            if (btnOrderHistory != null) btnOrderHistory.Text = new[] { "Order history", "注文履歴", "주문 내역" }[lang];
             if (btnOrder != null) btnOrder.Text = new[] { "Order Confirm", "注文確認", "주문 확인" }[lang];
+            if (btn_receive != null) btn_receive.Text = new[] { "Pay", "決済する", "결제하기" }[lang];
 
             // 현재 카테고리 매칭을 위해 매핑 데이터 사용
             var categoryTranslations = new Dictionary<string, string[]>
@@ -629,6 +647,7 @@ namespace sushikiosk
             }
 
             ShowPage();
+            ShowOrder();
         }
 
         private void btn_receive_Click(object sender, EventArgs e)

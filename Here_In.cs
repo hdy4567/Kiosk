@@ -40,7 +40,7 @@ namespace Kiosk
         /// </summary>
         private readonly string[] tableSelectFormats = { "Table {0} has been selected. State: {1}", "テーブル {0} が選択されました。 状態: {1}", "{0}번 테이블이 선택되었습니다. 상태: {1}" };
 
-                // 버튼(btn_back, btn_choice) 다국어 텍스트 적용 (0: 영어, 1: 일본어, 2: 한국어)
+        // 버튼(btn_back, btn_choice) 다국어 텍스트 적용 (0: 영어, 1: 일본어, 2: 한국어)
         private readonly string[] backBtnTexts = { "← Back", "← 戻る", "← 이전으로" };
         private readonly string[] choiceBtnTexts = { "Select", "選択", "선택" };
 
@@ -99,16 +99,16 @@ namespace Kiosk
             int btn_Index1 = btn_Index;
             MessageBox.Show(message);
 
-            
+
         }
 
 
         private void btn_choice_Click(object sender, EventArgs e)
         {
             // 테이블 선택 완료 후 메뉴 주문 화면(MenuForm) 표시 및 현재 창 숨김
-            MenuForm menuForm = new MenuForm();
-            menuForm.Show();
-            this.Hide();
+            //MenuForm menuForm = new MenuForm();
+            //menuForm.Show();
+            //this.Hide();
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -131,6 +131,14 @@ namespace Kiosk
 
             if (btn_back != null) btn_back.Text = backBtnTexts[lang];
             if (btn_choice != null) btn_choice.Text = choiceBtnTexts[lang];
+        }
+
+        private void btn_choice_Click_1(object sender, EventArgs e)
+        {
+            // 테이블 선택 완료 후 메뉴 주문 화면(MenuForm) 표시 및 현재 창 숨김
+            MenuForm menuForm = new MenuForm();
+            menuForm.Show();
+            this.Hide();
         }
     }
 }
