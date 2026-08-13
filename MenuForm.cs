@@ -229,13 +229,6 @@ namespace sushikiosk
 
 
 
-
-
-
-
-
-
-
         private void AddMenu(string name, int price, string category, string imageFile)     // 메뉴하나의 이름, 가격, 카테고리,
         {                                                                                   // 이미지 정보를 메뉴 목록에 추가
             menuList.Add(new SushiMenu
@@ -473,50 +466,65 @@ namespace sushikiosk
 
         private void CheckWinningEvent()            // 이번에 새로 주문한 메뉴만 대상으로 당첨 이벤트를 확인
         {
-            // 음료와 사이드 메뉴를 제외한 초밥만 이벤트 대상
-            var plates = currentOrderList
-                .Where(item => item.Category == "활어/참치" || item.Category == "해산물" ||
-                               item.Category == "롤/마끼" || item.Category == "단품/기타초밥")
-                .SelectMany(item => Enumerable.Repeat(item, item.Quantity))
-                .ToList();
-
-            // 주문 가능한 초밥이 있고 10% 확률에 당첨되면
-            if (plates.Count > 0 && random.Next(100) < 10)
             {
-                OrderItem winner = plates[random.Next(plates.Count)];
+                // 이벤트 대상 초밥 메뉴만 가져옴
+                List<OrderItem> eventItems = currentOrderList
+                    .Where(item => item.Category == "활어/참치" || item.Category == "해산물" ||
+                                   item.Category == "롤/마끼" || item.Category == "단품/기타초밥")
+                    .ToList();
 
-                string winnerName = winner.Name;
-                int winnerPrice = winner.Price;
-                string winnerCategory = winner.Category;
+                List<string> winningMessages = new List<string>();  // 당첨 결과 메시지를 저장
 
-                // 정상 결제될 수량에서 당첨된 1개 차감
-                winner.Quantity--;
-
-                if (winner.Quantity <= 0)
+                foreach (OrderItem item in eventItems)      // 이벤트 대상 메뉴를 하나씩 검사
                 {
-                    currentOrderList.Remove(winner);
-                }
+                    int winningCount = 0;
 
-                // 기존 주문 내역에 같은 무료 메뉴가 있는지 확인
-                OrderItem freeItem =
-                    orderList.FirstOrDefault(item => item.Name == winnerName && item.IsFree);
-
-                if (freeItem != null)
-                {
-                    freeItem.Quantity++;       // 예전에 같은 메뉴가 당첨된 적이 있으면 무료 수량 누적
-                }
-                else
-                {
-                    orderList.Add(new OrderItem         // 처음 당첨된 메뉴라면 새로운 무료 항목 생성
+                    for (int i = 0; i < item.Quantity; i++)     // 메뉴의 접시 수만큼 각각 5% 확률로 검사
                     {
-                        Name = winnerName,
-                        Price = winnerPrice,
-                        Quantity = 1,
-                        Category = winnerCategory,
-                        IsFree = true
-                    });
+                        if (random.Next(100) < 5)
+                        {
+                            winningCount++;
+                        }
+                    }
+                    if (winningCount == 0)          // 당첨된 접시가 없으면 다음 메뉴 검사
+                        continue;
+
+                    item.Quantity -= winningCount;  // 정상 결제 수량에서 당첨 수량 차감
+
+                    if (item.Quantity <= 0)         // 전부 당첨됐다면 현재 장바구니에서 제거
+                    {
+                        currentOrderList.Remove(item);
+                    }
+
+
+                    OrderItem freeItem =            // 이전 주문에서 같은 메뉴의 당첨 항목이 있는지 확인
+                        orderList.FirstOrDefault(order => order.Name == item.Name && order.IsFree);
+
+                    if (freeItem != null)
+                    {
+                        freeItem.Quantity += winningCount;      // 기존 당첨 항목에 수량 누적
+                    }
+                    else
+                    {
+                        orderList.Add(new OrderItem     // 처음 당첨된 메뉴라면 무료 항목 생성
+                        {
+                            Name = item.Name,
+                            Price = item.Price,
+                            Quantity = winningCount,
+                            Category = item.Category,
+                            IsFree = true
+                        });
+                    }
+
+                    // MessageBox에 표시할 결과 저장
+                    winningMessages.Add(item.Name + " " + winningCount + "접시");
                 }
-                MessageBox.Show("당첨!\n" + winnerName + " 1접시가 무료입니다!");
+                if (winningMessages.Count > 0)      // 하나라도 당첨됐을 때만 표시
+                {
+                    MessageBox.Show("당첨!\n\n" + string.Join("\n", winningMessages) + "\n\n무료입니다!", "이벤트 당첨",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
             }
         }
 
