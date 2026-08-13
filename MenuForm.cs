@@ -347,8 +347,8 @@ namespace sushikiosk
 
         private void dgvOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)      // 장바구니의 +, - 버튼을 처리하여 
         {                                                                                       // 주문 수량을 변경.
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                    return;
 
             int index = e.RowIndex;
 
@@ -477,6 +477,7 @@ namespace sushikiosk
                 return;
             }
             CheckWinningEvent();        // 당첨 여부를 먼저 확인
+            MessageBox.Show("주문이 완료되었습니다.");
 
             SaveCurrentOrder();     // 이벤트 처리 후 남은 정상 결제 메뉴 저장
 

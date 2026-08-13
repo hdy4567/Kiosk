@@ -1,3 +1,4 @@
+using sushikiosk;
 using System.Linq.Expressions;
 
 namespace Kiosk
@@ -39,6 +40,13 @@ namespace Kiosk
         private void btn_JapCh_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_togo_Click(object sender, EventArgs e)
+        {
+            MenuForm mf = new MenuForm();
+            mf.Show();
+            this.Hide();
         }
     }
 }
