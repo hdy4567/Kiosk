@@ -79,11 +79,15 @@ namespace Kiosk
 
             // 버튼의 Tag에 저장해둔 고유 인덱스 번호(1~34) 가져오기
             int btn_Index = (int)clicked_Button.Tag;
-            
+
             // 해당 버튼의 상태를 토글(클릭할 때마다 true/false 전환) 또는 true로 고정
             // 여기서는 클릭 시 true로 변경하고 이미지를 바꾸는 예시입니다.
-            table_state[btn_Index] = true;
-            clicked_Button.BackColor = Color.LightSteelBlue;
+            if (table_state[btn_Index] = true)
+            {
+                clicked_Button.BackColor = Color.LightSteelBlue;
+                btn_choice.BackColor = Color.LightSteelBlue;
+            }
+
 
             // 클릭된 해당 버튼의 이미지 교체 및 시각 효과 변경
             // (Properties.Resources에 'SelectedImage'라는 이미지가 등록되어 있어야 합니다)
@@ -98,6 +102,16 @@ namespace Kiosk
             MenuForm menuForm = new MenuForm();
             menuForm.Show();
             this.Hide();
+        }
+
+        private void Here_In_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_choice_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
