@@ -26,18 +26,61 @@ namespace Kiosk
             this.Hide();
         }
         
+        // 포인트 적립 다국어 메시지 템플릿 (0: 영어, 1: 일본어, 2: 한국어)
+        private readonly string[] pointAskMessages = { "Would you like to earn points?", "ポイントを積立しますか？", "포인트를 적립하시겠습니까?" };
+        private readonly string[] pointAskTitles = { "Earn Points", "ポイント積立", "포인트 적립" };
+        string[] inputs = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "00", "000", "Clear ", "<-" };
+
+        private readonly string[] label4Texts = { "Please select a saving method!", "積立手段を選択してください！", "적립수단을 선택해주세요 !" };
+        private readonly string[] label3Texts = { "Saving Menu", "積立メニュー", "적립 메뉴" };
+        private readonly string[] phoneSelectTexts = { "Phone Number", "携帯電話番号", "휴대폰 번호" };
+        private readonly string[] cusSelectTexts = { "Member Card", "会員カード", "회원 카드" };
+        private readonly string[] allDeleteTexts = { "Clear All", "すべて削除", "전체 삭제" };
+        private readonly string[] backTexts = { "Back", "戻る", "이전" };
+        private readonly string[] receiveTexts = { "Earn Complete", "積立完了", "적립 완료" };
+        private readonly string[] roundTop1Texts = { "Earn", "積立", "적립" };
+        private readonly string[] cusIdTexts = { "Member ID", "会員番号", "회원번호" };
+        private readonly string[] cusId1Texts = { "Member ID", "会員番号", "회원번호" };
+
+
+        private readonly string[] phonenumTexts = { "Phone Number", "携帯電話番号", "휴대폰 번호" };
+        private readonly string[] sumTexts = { "Total Amount", "対象金額", "대상금액" };
+        private readonly string[] cusNameTexts = { "Member Name", "会員명", "회원명" };
+        private readonly string[] savePointTexts = { "Remaining Points", "残高ポイント", "잔여 포인트" };
+
+        // 텍스트 정의
+        private readonly string[] label2Texts = { "Payment Method", "お支払い方法", "결제 방식" };
+        private readonly string[] label19Texts = { "Accumulated Stamps", "累積スタンプ", "누적 스탬프" };
+        private readonly string[] label14Texts = { "Stamp Earn", "スタンプ積立", "스탬프 적립" };
+        private readonly string[] lb_cusid1Texts = { "Member ID", "会員番号", "회원번호" };
+        private readonly string[] lb_cusidTexts = { "Member ID", "会員番号", "회원번호" };
+
+        private readonly string[] del1Texts = { "Close", "閉じる", "닫기" };
+        private readonly string[] del2Texts = { "Close", "閉じる", "닫기" };
+        private readonly string[] button32Texts = { "Cancel", "キャンセル", "취소" };
+        private readonly string[] searchTexts = { "1. Search", "1. 照会", "1. 조회" };
+        private readonly string[] savepointTexts = { "Earn Points", "ポイント積立", "포인트 적립" };
+        private readonly string[] saveTexts = { "Earn", "積立", "적립" };
+
+
+
         private void button2_Click(object sender, EventArgs e)
         {
-
-            DialogResult result = MessageBox.Show("포인트를 적립하겠습니까 ?",
-                "포인트 적립",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Question
-                 );
+            int lang = LanguageManager.CurrentLanguageIndex;
+            DialogResult result = MessageBox.Show(
+                pointAskMessages[lang],
+                pointAskTitles[lang],
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
             if (result == DialogResult.Yes)
             {
-                pnl_Pop_Membership.Show();
+                // 메인 선택 패널 숨기기
+                roundedPanel2.Hide();
 
+                pnl_Pop_Membership.Show();
+                pnl_Pop_Membership.BringToFront();
+                //pnl_Pop_Membership.Focus();
             }
         }
 
@@ -54,34 +97,24 @@ namespace Kiosk
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-            DialogResult result = MessageBox.Show("포인트를 적립하겠습니까 ?",
-                "포인트 적립",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Question
-                 );
+            int lang = LanguageManager.CurrentLanguageIndex;
+            DialogResult result = MessageBox.Show(
+                pointAskMessages[lang],
+                pointAskTitles[lang],
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
             if (result == DialogResult.Yes)
             {
+                // 메인 선택 패널 숨기기
+                //roundedPanel2.Hide();
+
                 pnlStamp.Show();
+                pnlStamp.BringToFront();
+                pnlStamp.Focus();
             }
 
         }
-        string[] inputs = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "00", "000", "Clear ", "<-" };
-
-        private readonly string[] label4Texts = { "Please select a saving method!", "積立手段を選択してください！", "적립수단을 선택해주세요 !" };
-        private readonly string[] label3Texts = { "Saving Menu", "積立メニュー", "적립 메뉴" };
-        private readonly string[] phoneSelectTexts = { "Phone Number", "携帯電話番号", "휴대폰 번호" };
-        private readonly string[] cusSelectTexts = { "Member Card", "会員カード", "회원 카드" };
-        private readonly string[] allDeleteTexts = { "Clear All", "すべて削除", "전체 삭제" };
-        private readonly string[] backTexts = { "Back", "戻る", "이전" };
-        private readonly string[] receiveTexts = { "Earn Complete", "積立完了", "적립 완료" };
-        private readonly string[] roundTop1Texts = { "Earn", "積立", "적립" };
-        private readonly string[] cusIdTexts = { "Member ID", "会員番号", "회원번호" };
-        private readonly string[] phonenumTexts = { "Phone Number", "携帯電話番号", "휴대폰 번호" };
-        private readonly string[] sumTexts = { "Total Amount", "対象金額", "대상금액" };
-        private readonly string[] cusNameTexts = { "Member Name", "会員명", "회원명" };
-        private readonly string[] savePointTexts = { "Remaining Points", "残高ポイント", "잔여 포인트" };
-
 
         private void Pop_Membership_Load(object sender, EventArgs e)
         {
@@ -94,8 +127,6 @@ namespace Kiosk
         }
         private void Pop_MemberNum_Load(object sender, EventArgs e)
         {
-
-
             // 폼 안의 모든 Button 컨트롤을 찾아서 입력 버튼인 경우 이벤트를 바인딩합니다.
             BindNumButtons(this);
         }
@@ -273,6 +304,7 @@ namespace Kiosk
         private void btn_del1_Click(object sender, EventArgs e)
         {
             pnlStamp.Hide();
+            roundedPanel2.Show(); // 메인 선택 패널 다시 표시
         }
         //private void btn_dell1_Click(object sender, EventArgs e)
         //{
@@ -282,6 +314,7 @@ namespace Kiosk
         {
 
             pnl_Pop_Membership.Hide();
+            roundedPanel2.Show(); // 메인 선택 패널 다시 표시
 
         }
 
@@ -297,17 +330,31 @@ namespace Kiosk
             btn_back.Text = backTexts[langIndex];
             btn_receive.Text = receiveTexts[langIndex];
             lb_roundTop1.Text = roundTop1Texts[langIndex];
-            lb_cusId.Text = cusIdTexts[langIndex];
+            lb_cusid.Text = cusIdTexts[langIndex];
+            lb_cusid1.Text = cusId1Texts[langIndex];
             lb_phonenum.Text = phonenumTexts[langIndex];
             lb_sum.Text = sumTexts[langIndex];
             lb_cusName.Text = cusNameTexts[langIndex];
             lb_savePoint.Text = savePointTexts[langIndex];
             roundedToplabel1.Text = roundTop1Texts[langIndex];
 
-            if (lb_cusId1 != null) lb_cusId1.Text = cusIdTexts[langIndex];
+            
+            if (lb_cusid != null) lb_cusid.Text = lb_cusidTexts[langIndex];
+            if (lb_cusid1 != null) lb_cusid1.Text = lb_cusid1Texts[langIndex];
             if (lb_sum1 != null) lb_sum1.Text = sumTexts[langIndex];
             if (lb_savePoint1 != null) lb_savePoint1.Text = savePointTexts[langIndex];
             if (lb_cusName1 != null) lb_cusName1.Text = cusNameTexts[langIndex];
+
+            // 추가 구성 컨트롤 번역 대입
+            if (btn_del2 != null) btn_del2.Text = del2Texts[langIndex];
+            if (button32 != null) button32.Text = button32Texts[langIndex];
+            if (btn_savepoint != null) btn_savepoint.Text = savepointTexts[langIndex];
+            if (label2 != null) label2.Text = label2Texts[langIndex];
+            if (label19 != null) label19.Text = label19Texts[langIndex];
+            if (label14 != null) label14.Text = label14Texts[langIndex];
+            if (btn_del1 != null) btn_del1.Text = del1Texts[langIndex];
+            if (button29 != null) button29.Text = searchTexts[langIndex];
+            if (btn_save != null) btn_save.Text = saveTexts[langIndex];
         }
 
 
@@ -320,16 +367,26 @@ namespace Kiosk
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+
             Payment pay_form = new Payment();
+
+
+
             pay_form.Show();
             this.Hide();
+
+            MessageBox.Show("적립되었습니다 ! ");
         }
 
         private void btn_savepoint_Click(object sender, EventArgs e)
         {
-            Payment pay_form= new Payment();
+            Payment pay_form = new Payment();
+
             pay_form.Show();
             this.Hide();
+
+            MessageBox.Show("적립되었습니다  !");
+
         }
     }
 }

@@ -243,25 +243,7 @@ namespace sushikiosk
        
         private void AddOrder(SushiMenu menu)               // 선택한 메뉴를 장바구니에 추가하고 이미 있으면 수량을 증가.
         {
-            OrderItem existingItem =            // 전체 장바구니에 추가
-                orderList.FirstOrDefault(item => item.Name == menu.Name);
-
-            if (existingItem != null)
-            {
-                existingItem.Quantity++;
-            }
-            else
-            {
-                orderList.Add(new OrderItem
-                {
-                    Name = menu.Name,
-                    Price = menu.Price,
-                    Quantity = 1,
-                    Category = menu.Category
-                });
-            }
-
-            OrderItem currentItem =             // 이번에 새로 주문하는 메뉴에 추가
+            OrderItem currentItem =
                 currentOrderList.FirstOrDefault(item => item.Name == menu.Name);
 
             if (currentItem != null)
@@ -288,16 +270,16 @@ namespace sushikiosk
 
             int totalPrice = 0;
 
-            foreach (OrderItem item in orderList)
+            foreach (OrderItem item in currentOrderList)
             {
                 int itemTotal = item.Price * item.Quantity;
 
                 dgvOrder.Rows.Add(
-                    item.Name,                          // 메뉴명
-                    "-",                                // - 버튼
-                    item.Quantity,                      // 수량
-                    "+",                                // + 버튼
-                    itemTotal.ToString("N0") + "원"     // 금액
+                    item.Name,
+                    "-",
+                    item.Quantity,
+                    "+",
+                    itemTotal.ToString("N0") + "원"
                 );
 
                 totalPrice += itemTotal;
@@ -309,62 +291,31 @@ namespace sushikiosk
 
         private void dgvOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)      // 장바구니의 +, - 버튼을 처리하여 
         {                                                                                       // 주문 수량을 변경.
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                    return;
 
-            int index = e.RowIndex;
-            OrderItem item = orderList[index];
+                int index = e.RowIndex;
 
-            if (dgvOrder.Columns[e.ColumnIndex].Name == "colPlus")
-            {
-                item.Quantity++;                    // 전체 장바구니 수량 증가
+                OrderItem item = currentOrderList[index];
 
-                OrderItem currentItem =             // 이번 주문 목록에서도 같은 메뉴를 찾음
-                    currentOrderList.FirstOrDefault(order => order.Name == item.Name);
-
-                if (currentItem != null)
+                if (dgvOrder.Columns[e.ColumnIndex].Name == "colPlus")
                 {
-                    currentItem.Quantity++;
+                    item.Quantity++;
+
+                    ShowOrder();
                 }
-                else
+                else if (dgvOrder.Columns[e.ColumnIndex].Name == "colMinus")
                 {
-                    currentOrderList.Add(new OrderItem
-                    {
-                        Name = item.Name,
-                        Price = item.Price,
-                        Quantity = 1,
-                        Category = item.Category
-                    });
+                    item.Quantity--;
+
+                    if (item.Quantity <= 0)
+                        currentOrderList.Remove(item);
+
+                    ShowOrder();
                 }
-
-                ShowOrder();
-            }
-            else if (dgvOrder.Columns[e.ColumnIndex].Name == "colMinus")
-            {
-                OrderItem currentItem =
-                    currentOrderList.FirstOrDefault(order => order.Name == item.Name);      // 이번에 새로 추가한 수량이 있으면 먼저 감소
-
-                if (currentItem != null)
-                {
-                    currentItem.Quantity--;
-
-                    if (currentItem.Quantity <= 0)
-                        currentOrderList.Remove(currentItem);
-                }
-                item.Quantity--;            // 전체 장바구니 수량 감소
-
-                if (item.Quantity <= 0)
-                    orderList.Remove(item);
-
-                ShowOrder();
-            }
-        }
-
-
-        /// <summary>
-            /// 이번에 새로 주문한 메뉴만 대상으로 당첨 이벤트를 확인
-        /// </summary>
-        private void CheckWinningEvent()            
+         }
+   
+        private void CheckWinningEvent()            // 이번에 새로 주문한 메뉴만 대상으로 당첨 이벤트를 확인
         {
             var plates = currentOrderList
                 .Where(item => item.Category != "음료" &&
@@ -376,29 +327,44 @@ namespace sushikiosk
             {
                 OrderItem winner = plates[random.Next(plates.Count)];
 
-                OrderItem orderedWinner =           // 전체 장바구니에서 같은 메뉴를 찾음
-                    orderList.First(item => item.Name == winner.Name);
+                winner.Quantity--;
 
-                winner.Quantity--;                  // 이번 주문에서 당첨 접시 1개 차감
-
-                orderedWinner.Quantity--;           // 전체 장바구니에서도 당첨 접시 1개 차감
-
-                if (winner.Quantity == 0)
+                if (winner.Quantity <= 0)
                     currentOrderList.Remove(winner);
-
-                if (orderedWinner.Quantity == 0)
-                    orderList.Remove(orderedWinner);
-
-                ShowOrder();
 
                 MessageBox.Show(
                     "당첨!\n" +
                     winner.Name + " 1접시가 무료입니다!"
                 );
             }
+        }
 
-            
-            currentOrderList.Clear();               // 이번 주문은 이벤트 검사가 끝났으므로 초기화
+        private void SaveCurrentOrder()
+        {
+            foreach (OrderItem currentItem in currentOrderList)
+            {
+                OrderItem orderedItem =
+                    orderList.FirstOrDefault(item => item.Name == currentItem.Name);
+
+                if (orderedItem != null)
+                {
+                    orderedItem.Quantity += currentItem.Quantity;
+                }
+                else
+                {
+                    orderList.Add(new OrderItem
+                    {
+                        Name = currentItem.Name,
+                        Price = currentItem.Price,
+                        Quantity = currentItem.Quantity,
+                        Category = currentItem.Category
+                    });
+                }
+            }
+
+            currentOrderList.Clear();
+
+            ShowOrder();
         }
 
         private void Category_Click(object sender, EventArgs e)     // 클릭한 메뉴스트립 항목에 맞게 
@@ -428,18 +394,20 @@ namespace sushikiosk
             {
                 MessageBox.Show("추가로 주문할 메뉴를 먼저 담아주세요.");
                 return;
-            }
+            }   
+            CheckWinningEvent();            // 이번 주문에 대해서만 당첨 이벤트 확인
 
-            CheckWinningEvent();
-            Pop_MemberNum member_form= new Pop_MemberNum();
-            member_form.Show();
+            SaveCurrentOrder();             // 이벤트 적용이 끝난 주문을 주문 내역에 저장
+
+            MessageBox.Show("주문이 완료되었습니다.");
+
+            // 추가 시 삭제
+
+            Pop_MemberNum membership = new Pop_MemberNum();
+            membership.Show();
             this.Hide();
         }
 
-
-
-
-        
         private void btnCallStaff_Click(object sender, EventArgs e)         // 직원 호출 버튼을 누르면 호출 완료 메시지를 표시.
         {
             MessageBox.Show("직원 호출하였습니다.");

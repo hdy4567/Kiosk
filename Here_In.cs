@@ -38,11 +38,11 @@ namespace Kiosk
         /// 테이블 선택 알림 메시지의 다국어 템플릿입니다.
         /// Index 0: 영어, 1: 일본어, 2: 한국어
         /// </summary>
-        private readonly string[] tableSelectFormats = {
-            "Table {0} has been selected. State: {1}",
-            "テーブル {0} が選択されました。 状態: {1}",
-            "{0}번 테이블이 선택되었습니다. 상태: {1}"
-        };
+        private readonly string[] tableSelectFormats = { "Table {0} has been selected. State: {1}", "テーブル {0} が選択されました。 状態: {1}", "{0}번 테이블이 선택되었습니다. 상태: {1}" };
+
+                // 버튼(btn_back, btn_choice) 다국어 텍스트 적용 (0: 영어, 1: 일본어, 2: 한국어)
+        private readonly string[] backBtnTexts = { "← Back", "← 戻る", "← 이전으로" };
+        private readonly string[] choiceBtnTexts = { "Select", "選択", "선택" };
 
         /// <summary>
         /// 폼 내부에서 button1부터 button34까지의 컨트롤을 찾아 이벤트를 연결하고 리스트에 등록합니다.
@@ -67,6 +67,12 @@ namespace Kiosk
             }
         }
 
+
+
+
+
+
+
         /// <summary>
         /// 임의의 테이블 버튼을 클릭했을 때 작동하며, 테이블의 상태를 변경하고 다국어 안내 메시지를 출력합니다.
         /// </summary>
@@ -87,31 +93,47 @@ namespace Kiosk
                 clicked_Button.BackColor = Color.LightSteelBlue;
                 btn_choice.BackColor = Color.LightSteelBlue;
             }
-
-
-            // 클릭된 해당 버튼의 이미지 교체 및 시각 효과 변경
-            // (Properties.Resources에 'SelectedImage'라는 이미지가 등록되어 있어야 합니다)
-            //clickedButton.BackgroundImage = Properties.Resources.SelectedImage;
-
             // 현재 언어 인덱스에 맞는 포맷을 가져와 바인딩
             int lang = LanguageManager.CurrentLanguageIndex;
             string message = string.Format(tableSelectFormats[lang], btn_Index, table_state[btn_Index]);
+            int btn_Index1 = btn_Index;
             MessageBox.Show(message);
 
+            
+        }
+
+
+        private void btn_choice_Click(object sender, EventArgs e)
+        {
             // 테이블 선택 완료 후 메뉴 주문 화면(MenuForm) 표시 및 현재 창 숨김
             MenuForm menuForm = new MenuForm();
             menuForm.Show();
             this.Hide();
         }
 
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+
+
+
+            Firstform fr = new Firstform();
+            fr.Show();
+            this.Hide();
+        }
         private void Here_In_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void btn_choice_Click(object sender, EventArgs e)
-        {
 
+
+        protected override void ApplyLanguage()
+        {
+            base.ApplyLanguage();
+            int lang = LanguageManager.CurrentLanguageIndex;
+
+            if (btn_back != null) btn_back.Text = backBtnTexts[lang];
+            if (btn_choice != null) btn_choice.Text = choiceBtnTexts[lang];
         }
     }
 }

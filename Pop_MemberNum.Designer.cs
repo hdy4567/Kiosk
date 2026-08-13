@@ -69,7 +69,7 @@ namespace Kiosk
             btn_p010 = new Button();
             panel3 = new Panel();
             ln_point = new Label();
-            lb_cusId = new Label();
+            lb_cusid = new Label();
             pnlStamp = new RoundedPanel();
             btn_save = new Button();
             btn_del1 = new Button();
@@ -91,7 +91,7 @@ namespace Kiosk
             btn_pl010 = new Button();
             panel1 = new Panel();
             lb_point = new Label();
-            label6 = new Label();
+            lb_cusid1 = new Label();
             button29 = new Button();
             panel2 = new Panel();
             textBox2 = new TextBox();
@@ -100,6 +100,8 @@ namespace Kiosk
             label14 = new Label();
             label19 = new Label();
             label21 = new Label();
+            roundedPanel2 = new RoundedPanel();
+            colorDialog1 = new ColorDialog();
             panel4.SuspendLayout();
             pnl_Pop_Membership.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -108,13 +110,14 @@ namespace Kiosk
             tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            roundedPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // btn_receive
             // 
             btn_receive.BackColor = SystemColors.MenuHighlight;
             btn_receive.FlatStyle = FlatStyle.Flat;
-            btn_receive.Location = new Point(443, 366);
+            btn_receive.Location = new Point(371, 318);
             btn_receive.Name = "btn_receive";
             btn_receive.Size = new Size(200, 68);
             btn_receive.TabIndex = 2;
@@ -127,7 +130,7 @@ namespace Kiosk
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(127, 82);
+            label1.Location = new Point(32, 30);
             label1.Name = "label1";
             label1.Size = new Size(48, 15);
             label1.TabIndex = 3;
@@ -137,7 +140,7 @@ namespace Kiosk
             // 
             btn_PhoneSelect.BackColor = SystemColors.ControlLightLight;
             btn_PhoneSelect.FlatStyle = FlatStyle.Flat;
-            btn_PhoneSelect.Location = new Point(128, 157);
+            btn_PhoneSelect.Location = new Point(56, 109);
             btn_PhoneSelect.Name = "btn_PhoneSelect";
             btn_PhoneSelect.Size = new Size(89, 91);
             btn_PhoneSelect.TabIndex = 5;
@@ -149,7 +152,7 @@ namespace Kiosk
             // 
             btn_cusSelect.BackColor = SystemColors.ControlLightLight;
             btn_cusSelect.FlatStyle = FlatStyle.Flat;
-            btn_cusSelect.Location = new Point(223, 157);
+            btn_cusSelect.Location = new Point(151, 109);
             btn_cusSelect.Name = "btn_cusSelect";
             btn_cusSelect.Size = new Size(186, 91);
             btn_cusSelect.TabIndex = 8;
@@ -160,7 +163,7 @@ namespace Kiosk
             // label4
             // 
             label4.Font = new Font("맑은 고딕", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(104, 93);
+            label4.Location = new Point(32, 45);
             label4.Name = "label4";
             label4.Size = new Size(210, 23);
             label4.TabIndex = 12;
@@ -169,7 +172,7 @@ namespace Kiosk
             // label3
             // 
             label3.BackColor = SystemColors.GradientActiveCaption;
-            label3.Location = new Point(128, 123);
+            label3.Location = new Point(56, 75);
             label3.Name = "label3";
             label3.Size = new Size(186, 28);
             label3.TabIndex = 7;
@@ -180,7 +183,7 @@ namespace Kiosk
             // 
             btn_allDelete.BackColor = Color.FromArgb(211, 47, 47);
             btn_allDelete.FlatStyle = FlatStyle.Flat;
-            btn_allDelete.Location = new Point(128, 366);
+            btn_allDelete.Location = new Point(56, 318);
             btn_allDelete.Name = "btn_allDelete";
             btn_allDelete.Size = new Size(103, 68);
             btn_allDelete.TabIndex = 20;
@@ -191,7 +194,7 @@ namespace Kiosk
             // 
             btn_back.BackColor = SystemColors.ActiveBorder;
             btn_back.FlatStyle = FlatStyle.Flat;
-            btn_back.Location = new Point(237, 366);
+            btn_back.Location = new Point(165, 318);
             btn_back.Name = "btn_back";
             btn_back.Size = new Size(200, 68);
             btn_back.TabIndex = 21;
@@ -352,7 +355,7 @@ namespace Kiosk
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
-            pnl_Pop_Membership.Location = new Point(55, 65);
+            pnl_Pop_Membership.Location = new Point(12, 4);
             pnl_Pop_Membership.Name = "pnl_Pop_Membership";
             pnl_Pop_Membership.RoundBottomLeft = true;
             pnl_Pop_Membership.RoundBottomRight = true;
@@ -361,7 +364,7 @@ namespace Kiosk
             pnl_Pop_Membership.ShadowColor = Color.FromArgb(60, 0, 0, 0);
             pnl_Pop_Membership.ShadowDepth = 8;
             pnl_Pop_Membership.ShowShadow = true;
-            pnl_Pop_Membership.Size = new Size(671, 404);
+            pnl_Pop_Membership.Size = new Size(772, 509);
             pnl_Pop_Membership.TabIndex = 16;
             // 
             // btn_savepoint
@@ -596,7 +599,7 @@ namespace Kiosk
             // panel3
             // 
             panel3.Controls.Add(ln_point);
-            panel3.Controls.Add(lb_cusId);
+            panel3.Controls.Add(lb_cusid);
             panel3.Location = new Point(29, 81);
             panel3.Name = "panel3";
             panel3.Size = new Size(387, 41);
@@ -612,18 +615,18 @@ namespace Kiosk
             ln_point.TabIndex = 20;
             ln_point.Click += label15_Click;
             // 
-            // lb_cusId
+            // lb_cusid
             // 
-            lb_cusId.BackColor = SystemColors.ActiveBorder;
-            lb_cusId.FlatStyle = FlatStyle.System;
-            lb_cusId.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_cusId.ImageAlign = ContentAlignment.TopLeft;
-            lb_cusId.Location = new Point(0, 0);
-            lb_cusId.Name = "lb_cusId";
-            lb_cusId.Size = new Size(387, 41);
-            lb_cusId.TabIndex = 0;
-            lb_cusId.Text = "회원번호";
-            lb_cusId.TextAlign = ContentAlignment.MiddleLeft;
+            lb_cusid.BackColor = SystemColors.ActiveBorder;
+            lb_cusid.FlatStyle = FlatStyle.System;
+            lb_cusid.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_cusid.ImageAlign = ContentAlignment.TopLeft;
+            lb_cusid.Location = new Point(0, 0);
+            lb_cusid.Name = "lb_cusid";
+            lb_cusid.Size = new Size(387, 41);
+            lb_cusid.TabIndex = 0;
+            lb_cusid.Text = "회원번호";
+            lb_cusid.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlStamp
             // 
@@ -642,7 +645,7 @@ namespace Kiosk
             pnlStamp.Controls.Add(label14);
             pnlStamp.Controls.Add(label19);
             pnlStamp.Controls.Add(label21);
-            pnlStamp.Location = new Point(55, 62);
+            pnlStamp.Location = new Point(15, 4);
             pnlStamp.Name = "pnlStamp";
             pnlStamp.RoundBottomLeft = true;
             pnlStamp.RoundBottomRight = true;
@@ -651,7 +654,7 @@ namespace Kiosk
             pnlStamp.ShadowColor = Color.FromArgb(60, 0, 0, 0);
             pnlStamp.ShadowDepth = 8;
             pnlStamp.ShowShadow = true;
-            pnlStamp.Size = new Size(671, 404);
+            pnlStamp.Size = new Size(772, 509);
             pnlStamp.TabIndex = 22;
             // 
             // btn_save
@@ -907,7 +910,7 @@ namespace Kiosk
             // panel1
             // 
             panel1.Controls.Add(lb_point);
-            panel1.Controls.Add(label6);
+            panel1.Controls.Add(lb_cusid1);
             panel1.Location = new Point(29, 81);
             panel1.Name = "panel1";
             panel1.Size = new Size(387, 41);
@@ -923,18 +926,18 @@ namespace Kiosk
             lb_point.TabIndex = 20;
             lb_point.Text = "P";
             // 
-            // label6
+            // lb_cusid1
             // 
-            label6.BackColor = SystemColors.ActiveBorder;
-            label6.FlatStyle = FlatStyle.System;
-            label6.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ImageAlign = ContentAlignment.TopLeft;
-            label6.Location = new Point(0, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(387, 41);
-            label6.TabIndex = 0;
-            label6.Text = "회원번호";
-            label6.TextAlign = ContentAlignment.MiddleLeft;
+            lb_cusid1.BackColor = SystemColors.ActiveBorder;
+            lb_cusid1.FlatStyle = FlatStyle.System;
+            lb_cusid1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_cusid1.ImageAlign = ContentAlignment.TopLeft;
+            lb_cusid1.Location = new Point(0, 0);
+            lb_cusid1.Name = "lb_cusid1";
+            lb_cusid1.Size = new Size(387, 41);
+            lb_cusid1.TabIndex = 0;
+            lb_cusid1.Text = "회원번호";
+            lb_cusid1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // button29
             // 
@@ -1024,6 +1027,32 @@ namespace Kiosk
             label21.TabIndex = 22;
             label21.Text = "label12";
             // 
+            // roundedPanel2
+            // 
+            roundedPanel2.BorderColor = Color.Black;
+            roundedPanel2.BorderRadius = 90;
+            roundedPanel2.BorderSize = 1F;
+            roundedPanel2.BottomBorderRadius = 40;
+            roundedPanel2.Controls.Add(btn_cusSelect);
+            roundedPanel2.Controls.Add(btn_back);
+            roundedPanel2.Controls.Add(btn_allDelete);
+            roundedPanel2.Controls.Add(btn_receive);
+            roundedPanel2.Controls.Add(label4);
+            roundedPanel2.Controls.Add(label1);
+            roundedPanel2.Controls.Add(btn_PhoneSelect);
+            roundedPanel2.Controls.Add(label3);
+            roundedPanel2.Location = new Point(12, 12);
+            roundedPanel2.Name = "roundedPanel2";
+            roundedPanel2.RoundBottomLeft = true;
+            roundedPanel2.RoundBottomRight = true;
+            roundedPanel2.RoundTopLeft = true;
+            roundedPanel2.RoundTopRight = true;
+            roundedPanel2.ShadowColor = Color.FromArgb(60, 0, 0, 0);
+            roundedPanel2.ShadowDepth = 8;
+            roundedPanel2.ShowShadow = true;
+            roundedPanel2.Size = new Size(704, 478);
+            roundedPanel2.TabIndex = 23;
+            // 
             // Pop_MemberNum
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1032,14 +1061,7 @@ namespace Kiosk
             ClientSize = new Size(1219, 700);
             Controls.Add(pnl_Pop_Membership);
             Controls.Add(pnlStamp);
-            Controls.Add(label4);
-            Controls.Add(btn_cusSelect);
-            Controls.Add(label3);
-            Controls.Add(btn_PhoneSelect);
-            Controls.Add(label1);
-            Controls.Add(btn_receive);
-            Controls.Add(btn_allDelete);
-            Controls.Add(btn_back);
+            Controls.Add(roundedPanel2);
             Name = "Pop_MemberNum";
             Text = "Payment";
             Load += Membership_Load;
@@ -1053,8 +1075,9 @@ namespace Kiosk
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            roundedPanel2.ResumeLayout(false);
+            roundedPanel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -1130,7 +1153,7 @@ namespace Kiosk
         private Label label2;
         private Panel panel3;
         private Label ln_point;
-        private Label lb_cusId;
+        private Label lb_cusid;
         private Button btn_del1;
         private Button btn_del2;
         private Label lb_cusId1;
@@ -1139,5 +1162,8 @@ namespace Kiosk
         private Label lb_cusName1;
         private Button btn_save;
         private Button btn_savepoint;
+        private RoundedPanel roundedPanel2;
+        private Label lb_cusid1;
+        private ColorDialog colorDialog1;
     }
 }

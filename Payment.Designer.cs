@@ -40,13 +40,15 @@
             btn_SamsungPay = new Button();
             label3 = new Label();
             btn_coupon = new Button();
+            roundedPanel1 = new Kiosk.Controls.RoundedPanel();
+            roundedPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // btn_back
             // 
             btn_back.BackColor = SystemColors.ActiveBorder;
             btn_back.FlatStyle = FlatStyle.Flat;
-            btn_back.Location = new Point(331, 426);
+            btn_back.Location = new Point(224, 454);
             btn_back.Name = "btn_back";
             btn_back.Size = new Size(200, 68);
             btn_back.TabIndex = 20;
@@ -57,7 +59,7 @@
             // 
             btn_allDelete.BackColor = Color.FromArgb(211, 47, 47);
             btn_allDelete.FlatStyle = FlatStyle.Flat;
-            btn_allDelete.Location = new Point(155, 426);
+            btn_allDelete.Location = new Point(48, 454);
             btn_allDelete.Name = "btn_allDelete";
             btn_allDelete.Size = new Size(103, 68);
             btn_allDelete.TabIndex = 19;
@@ -68,7 +70,7 @@
             // 
             btn_KakaoPay.BackColor = SystemColors.ControlLightLight;
             btn_KakaoPay.FlatStyle = FlatStyle.Flat;
-            btn_KakaoPay.Location = new Point(345, 98);
+            btn_KakaoPay.Location = new Point(238, 126);
             btn_KakaoPay.Name = "btn_KakaoPay";
             btn_KakaoPay.Size = new Size(186, 91);
             btn_KakaoPay.TabIndex = 18;
@@ -79,7 +81,7 @@
             // 
             btn_naverPay.BackColor = SystemColors.ControlLightLight;
             btn_naverPay.FlatStyle = FlatStyle.Flat;
-            btn_naverPay.Location = new Point(250, 98);
+            btn_naverPay.Location = new Point(143, 126);
             btn_naverPay.Name = "btn_naverPay";
             btn_naverPay.Size = new Size(89, 91);
             btn_naverPay.TabIndex = 16;
@@ -90,7 +92,7 @@
             // 
             btn_card.BackColor = SystemColors.ControlLightLight;
             btn_card.FlatStyle = FlatStyle.Flat;
-            btn_card.Location = new Point(153, 98);
+            btn_card.Location = new Point(46, 126);
             btn_card.Name = "btn_card";
             btn_card.Size = new Size(89, 91);
             btn_card.TabIndex = 15;
@@ -100,7 +102,7 @@
             // label2
             // 
             label2.BackColor = SystemColors.GradientActiveCaption;
-            label2.Location = new Point(153, 67);
+            label2.Location = new Point(46, 95);
             label2.Name = "label2";
             label2.Size = new Size(378, 28);
             label2.TabIndex = 14;
@@ -112,7 +114,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(135, 17);
+            label1.Location = new Point(35, 41);
             label1.Name = "label1";
             label1.Size = new Size(0, 15);
             label1.TabIndex = 13;
@@ -120,7 +122,7 @@
             // label4
             // 
             label4.Font = new Font("맑은 고딕", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(135, 32);
+            label4.Location = new Point(28, 60);
             label4.Name = "label4";
             label4.Size = new Size(249, 23);
             label4.TabIndex = 22;
@@ -131,7 +133,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.MenuHighlight;
-            label5.Location = new Point(135, 17);
+            label5.Location = new Point(28, 45);
             label5.Name = "label5";
             label5.Size = new Size(44, 15);
             label5.TabIndex = 21;
@@ -141,7 +143,7 @@
             // 
             btn_SamsungPay.BackColor = SystemColors.ControlLightLight;
             btn_SamsungPay.FlatStyle = FlatStyle.Flat;
-            btn_SamsungPay.Location = new Point(153, 195);
+            btn_SamsungPay.Location = new Point(46, 223);
             btn_SamsungPay.Name = "btn_SamsungPay";
             btn_SamsungPay.Size = new Size(186, 91);
             btn_SamsungPay.TabIndex = 23;
@@ -151,7 +153,7 @@
             // label3
             // 
             label3.BackColor = SystemColors.GradientActiveCaption;
-            label3.Location = new Point(153, 298);
+            label3.Location = new Point(46, 326);
             label3.Name = "label3";
             label3.Size = new Size(378, 28);
             label3.TabIndex = 24;
@@ -162,7 +164,7 @@
             // 
             btn_coupon.BackColor = SystemColors.ControlLightLight;
             btn_coupon.FlatStyle = FlatStyle.Flat;
-            btn_coupon.Location = new Point(155, 329);
+            btn_coupon.Location = new Point(48, 357);
             btn_coupon.Name = "btn_coupon";
             btn_coupon.Size = new Size(186, 91);
             btn_coupon.TabIndex = 25;
@@ -170,26 +172,47 @@
             btn_coupon.UseVisualStyleBackColor = false;
             btn_coupon.Click += button8_Click;
             // 
+            // roundedPanel1
+            // 
+            roundedPanel1.BorderColor = Color.Black;
+            roundedPanel1.BorderRadius = 90;
+            roundedPanel1.BorderSize = 1F;
+            roundedPanel1.BottomBorderRadius = 40;
+            roundedPanel1.Controls.Add(label4);
+            roundedPanel1.Controls.Add(btn_coupon);
+            roundedPanel1.Controls.Add(label2);
+            roundedPanel1.Controls.Add(btn_KakaoPay);
+            roundedPanel1.Controls.Add(btn_card);
+            roundedPanel1.Controls.Add(label3);
+            roundedPanel1.Controls.Add(btn_naverPay);
+            roundedPanel1.Controls.Add(btn_SamsungPay);
+            roundedPanel1.Controls.Add(btn_allDelete);
+            roundedPanel1.Controls.Add(btn_back);
+            roundedPanel1.Controls.Add(label5);
+            roundedPanel1.Location = new Point(140, 41);
+            roundedPanel1.Name = "roundedPanel1";
+            roundedPanel1.RoundBottomLeft = true;
+            roundedPanel1.RoundBottomRight = true;
+            roundedPanel1.RoundTopLeft = true;
+            roundedPanel1.RoundTopRight = true;
+            roundedPanel1.ShadowColor = Color.FromArgb(60, 0, 0, 0);
+            roundedPanel1.ShadowDepth = 8;
+            roundedPanel1.ShowShadow = true;
+            roundedPanel1.Size = new Size(470, 572);
+            roundedPanel1.TabIndex = 26;
+            // 
             // Payment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1219, 700);
-            Controls.Add(btn_coupon);
-            Controls.Add(btn_KakaoPay);
-            Controls.Add(label3);
-            Controls.Add(btn_SamsungPay);
-            Controls.Add(label4);
-            Controls.Add(label5);
-            Controls.Add(btn_back);
-            Controls.Add(btn_allDelete);
-            Controls.Add(btn_naverPay);
-            Controls.Add(btn_card);
-            Controls.Add(label2);
+            Controls.Add(roundedPanel1);
             Controls.Add(label1);
             Name = "Payment";
             Text = "Payment";
             Load += Payment_Load;
+            roundedPanel1.ResumeLayout(false);
+            roundedPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -208,5 +231,6 @@
         private Button btn_SamsungPay;
         private Label label3;
         private Button btn_coupon;
+        private Controls.RoundedPanel roundedPanel1;
     }
 }

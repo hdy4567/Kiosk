@@ -34,6 +34,11 @@ namespace Kiosk
         private void lb_herein_Click(object sender, EventArgs e)
         {
 
-        }   
+        }
+
+        private void btn_JapCh_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -12,10 +12,39 @@ namespace Kiosk
 {
     public partial class Payment : Form
     {
-        // 결제 방식 선택 안내 문구 열거형 배열 (0: 영어, 1: 일본어, 2: 한국어)
-        private readonly string[] label4Texts = {
-            "Please select a payment method!", "お支払い方法を選択してください！", "결제 방식을 선택해주세요 !"
-        };
+        // 다국어 텍스트 정의 (0: 영어, 1: 일본어, 2: 한국어)
+        private readonly string[] label4Texts = { "Please select a payment method!", "お支払い方法を選択してください！", "결제 방식을 선택해주세요 !" };
+        private readonly string[] label2Texts = { "Payment Method", "お支払い方法", "결제 방식" };
+        private readonly string[] label3Texts = { "Voucher Payment", "商品券決済", "상품권 결제" };
+        private readonly string[] cardTexts = { "Card Payment", "カード決済", "카드 결제" };
+        private readonly string[] naverTexts = { "Naver Pay", "ネイバーペイ", "네이버 페이" };
+        private readonly string[] kakaoTexts = { "Kakao Pay", "カカオペイ", "카카오 페이" };
+        private readonly string[] samsungTexts = { "Samsung Pay", "サムスンペイ", "삼성페이" };
+        private readonly string[] couponTexts = { "Coupon / Voucher", "クーポン・商品券", "쿠폰 / 상품권 복합 결제" };
+        private readonly string[] allDeleteTexts = { "Cancel All", "すべて取消", "전체 취소" };
+        private readonly string[] backTexts = { "Back", "戻る", "이전" };
+
+        // 회원 및 적립 관련 다국어 텍스트 정의 (0: 영어, 1: 일본어, 2: 한국어)
+        private readonly string[] cusIdTexts = { "Member ID", "会員番号", "회원번호" };
+        private readonly string[] phonenumTexts = { "Phone Number", "携帯電話番号", "휴대폰 번호" };
+        private readonly string[] sumTexts = { "Total Amount", "対象金額", "대상금액" };
+        private readonly string[] cusNameTexts = { "Member Name", "会員名", "회원명" };
+        private readonly string[] savePointTexts = { "Remaining Points", "残高ポイント", "잔여 포인트" };
+        private readonly string[] del2Texts = { "Delete", "削除", "삭제" };
+        private readonly string[] button32Texts = { "Cancel", "キャンセル", "취소" };
+        private readonly string[] savepointTexts = { "Earn Points", "ポイント積立", "포인트 적립" };
+        private readonly string[] receiveTexts = { "Earn Complete", "積立完了", "적립 완료" };
+
+        // 동적으로 추가될 수 있는 회원/적립 관련 예비 컨트롤 필드 선언 (컴파일 오류 방지)
+        private Label lb_cusId;
+        private Label lb_phonenum;
+        private Label lb_sum;
+        private Label lb_cusName;
+        private Label lb_savePoint;
+        private Button btn_del2;
+        private Button button32;
+        private Button btn_savepoint;
+        private Button btn_receive;
 
         public Payment()
         {
@@ -36,9 +65,28 @@ namespace Kiosk
         private void ApplyLanguage()
         {
             int langIndex = LanguageManager.CurrentLanguageIndex;
-                label4.Text = label4Texts[langIndex];
-
             
+            if (label4 != null) label4.Text = label4Texts[langIndex];
+            if (label2 != null) label2.Text = label2Texts[langIndex];
+            if (label3 != null) label3.Text = label3Texts[langIndex];
+            if (btn_card != null) btn_card.Text = cardTexts[langIndex];
+            if (btn_naverPay != null) btn_naverPay.Text = naverTexts[langIndex];
+            if (btn_KakaoPay != null) btn_KakaoPay.Text = kakaoTexts[langIndex];
+            if (btn_SamsungPay != null) btn_SamsungPay.Text = samsungTexts[langIndex];
+            if (btn_coupon != null) btn_coupon.Text = couponTexts[langIndex];
+            if (btn_allDelete != null) btn_allDelete.Text = allDeleteTexts[langIndex];
+            if (btn_back != null) btn_back.Text = backTexts[langIndex];
+
+            // 회원 및 적립 관련 컨트롤 다국어 바인딩 (직접 조건문 검사)
+            if (lb_cusId != null) lb_cusId.Text = cusIdTexts[langIndex];
+            if (lb_phonenum != null) lb_phonenum.Text = phonenumTexts[langIndex];
+            if (lb_sum != null) lb_sum.Text = sumTexts[langIndex];
+            if (lb_cusName != null) lb_cusName.Text = cusNameTexts[langIndex];
+            if (lb_savePoint != null) lb_savePoint.Text = savePointTexts[langIndex];
+            if (btn_del2 != null) btn_del2.Text = del2Texts[langIndex];
+            if (button32 != null) button32.Text = button32Texts[langIndex];
+            if (btn_savepoint != null) btn_savepoint.Text = savepointTexts[langIndex];
+            if (btn_receive != null) btn_receive.Text = receiveTexts[langIndex];
         }
 
         private void Payment_Load(object sender, EventArgs e)
