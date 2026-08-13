@@ -54,7 +54,8 @@ namespace Kiosk
             LanguageManager.LanguageChanged += ApplyLanguage;
 
             // 폼이 닫힐 때 이벤트 구독 해제 (메모리 누수 방지)
-            this.FormClosed += (s, e) => {
+            this.FormClosed += (s, e) =>
+            {
                 LanguageManager.LanguageChanged -= ApplyLanguage;
             };
 
@@ -65,7 +66,7 @@ namespace Kiosk
         private void ApplyLanguage()
         {
             int langIndex = LanguageManager.CurrentLanguageIndex;
-            
+
             if (label4 != null) label4.Text = label4Texts[langIndex];
             if (label2 != null) label2.Text = label2Texts[langIndex];
             if (label3 != null) label3.Text = label3Texts[langIndex];
@@ -97,6 +98,13 @@ namespace Kiosk
         private void button8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            Pop_MemberNum memeber = new Pop_MemberNum();
+            memeber.Show();
+            this.Hide();
         }
     }
 }

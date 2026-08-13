@@ -200,6 +200,7 @@ namespace Kiosk
             btn_back.TabIndex = 21;
             btn_back.Text = "이전";
             btn_back.UseVisualStyleBackColor = false;
+            btn_back.Click += btn_back_Click;
             // 
             // label22
             // 
@@ -355,7 +356,7 @@ namespace Kiosk
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
-            pnl_Pop_Membership.Location = new Point(12, 4);
+            pnl_Pop_Membership.Location = new Point(441, 20);
             pnl_Pop_Membership.Name = "pnl_Pop_Membership";
             pnl_Pop_Membership.RoundBottomLeft = true;
             pnl_Pop_Membership.RoundBottomRight = true;
@@ -645,7 +646,7 @@ namespace Kiosk
             pnlStamp.Controls.Add(label14);
             pnlStamp.Controls.Add(label19);
             pnlStamp.Controls.Add(label21);
-            pnlStamp.Location = new Point(15, 4);
+            pnlStamp.Location = new Point(444, 20);
             pnlStamp.Name = "pnlStamp";
             pnlStamp.RoundBottomLeft = true;
             pnlStamp.RoundBottomRight = true;
@@ -1033,6 +1034,8 @@ namespace Kiosk
             roundedPanel2.BorderRadius = 90;
             roundedPanel2.BorderSize = 1F;
             roundedPanel2.BottomBorderRadius = 40;
+            roundedPanel2.Controls.Add(pnl_Pop_Membership);
+            roundedPanel2.Controls.Add(pnlStamp);
             roundedPanel2.Controls.Add(btn_cusSelect);
             roundedPanel2.Controls.Add(btn_back);
             roundedPanel2.Controls.Add(btn_allDelete);
@@ -1059,8 +1062,6 @@ namespace Kiosk
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1219, 700);
-            Controls.Add(pnl_Pop_Membership);
-            Controls.Add(pnlStamp);
             Controls.Add(roundedPanel2);
             Name = "Pop_MemberNum";
             Text = "Payment";

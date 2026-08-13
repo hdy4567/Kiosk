@@ -1,3 +1,4 @@
+using sushikiosk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace Kiosk
             payform.Show();
             this.Hide();
         }
-        
+
         // 포인트 적립 다국어 메시지 템플릿 (0: 영어, 1: 일본어, 2: 한국어)
         private readonly string[] pointAskMessages = { "Would you like to earn points?", "ポイントを積立しますか？", "포인트를 적립하시겠습니까?" };
         private readonly string[] pointAskTitles = { "Earn Points", "ポイント積立", "포인트 적립" };
@@ -338,7 +339,7 @@ namespace Kiosk
             lb_savePoint.Text = savePointTexts[langIndex];
             roundedToplabel1.Text = roundTop1Texts[langIndex];
 
-            
+
             if (lb_cusid != null) lb_cusid.Text = lb_cusidTexts[langIndex];
             if (lb_cusid1 != null) lb_cusid1.Text = lb_cusid1Texts[langIndex];
             if (lb_sum1 != null) lb_sum1.Text = sumTexts[langIndex];
@@ -387,6 +388,13 @@ namespace Kiosk
 
             MessageBox.Show("적립되었습니다  !");
 
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            MenuForm mf= new MenuForm();
+            mf.Show();
+            this.Hide();
         }
     }
 }

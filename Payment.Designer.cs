@@ -54,6 +54,7 @@
             btn_back.TabIndex = 20;
             btn_back.Text = "이전";
             btn_back.UseVisualStyleBackColor = false;
+            btn_back.Click += btn_back_Click;
             // 
             // btn_allDelete
             // 

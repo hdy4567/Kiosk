@@ -28,10 +28,16 @@ namespace sushikiosk
 
             foreach (MenuForm.OrderItem item in orderList)
             {
-                int itemTotal = item.Price * item.Quantity;
+                int itemTotal =
+                    item.IsFree ? 0 : item.Price * item.Quantity;
+
+                string itemName =
+                    item.IsFree
+                    ? item.Name + " (당첨!)"
+                    : item.Name;
 
                 receipt +=
-                    item.Name + "    " +
+                    itemName + "    " +
                     item.Quantity + "개    " +
                     itemTotal.ToString("N0") + "원" +
                     Environment.NewLine +

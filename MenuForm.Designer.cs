@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
@@ -38,6 +38,7 @@
             toolStripMenuItem5 = new ToolStripMenuItem();
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem6 = new ToolStripMenuItem();
+            menuStaff = new ToolStripMenuItem();
             flpMenu = new FlowLayoutPanel();
             panelMenu1 = new Panel();
             btnAdd1 = new Button();
@@ -93,7 +94,7 @@
             colPrice = new DataGridViewTextBoxColumn();
             label1 = new Label();
             btnOrderHistory = new Button();
-            btnCallStaff = new Button();
+            btn_next = new Button();
             menuStrip1.SuspendLayout();
             flpMenu.SuspendLayout();
             panelMenu1.SuspendLayout();
@@ -121,10 +122,11 @@
             menuStrip1.AutoSize = false;
             menuStrip1.BackgroundImageLayout = ImageLayout.Stretch;
             menuStrip1.Font = new Font("맑은 고딕", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem5, toolStripMenuItem4, toolStripMenuItem6 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem5, toolStripMenuItem4, toolStripMenuItem6, menuStaff });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1219, 36);
+            menuStrip1.Padding = new Padding(6, 3, 0, 3);
+            menuStrip1.Size = new Size(1282, 41);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -133,7 +135,7 @@
             toolStripMenuItem1.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem1.ForeColor = Color.Black;
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(113, 32);
+            toolStripMenuItem1.Size = new Size(113, 35);
             toolStripMenuItem1.Text = "활어/참치";
             toolStripMenuItem1.Click += Category_Click;
             // 
@@ -142,7 +144,7 @@
             toolStripMenuItem2.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem2.ForeColor = Color.Black;
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(84, 32);
+            toolStripMenuItem2.Size = new Size(84, 35);
             toolStripMenuItem2.Text = "해산물";
             toolStripMenuItem2.Click += Category_Click;
             // 
@@ -151,7 +153,7 @@
             toolStripMenuItem3.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem3.ForeColor = Color.Black;
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(93, 32);
+            toolStripMenuItem3.Size = new Size(93, 35);
             toolStripMenuItem3.Text = "롤/마끼";
             toolStripMenuItem3.Click += Category_Click;
             // 
@@ -160,7 +162,7 @@
             toolStripMenuItem5.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem5.ForeColor = Color.Black;
             toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new Size(153, 32);
+            toolStripMenuItem5.Size = new Size(153, 35);
             toolStripMenuItem5.Text = "단품/기타초밥";
             toolStripMenuItem5.Click += Category_Click;
             // 
@@ -169,7 +171,7 @@
             toolStripMenuItem4.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem4.ForeColor = Color.Black;
             toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(182, 32);
+            toolStripMenuItem4.Size = new Size(182, 35);
             toolStripMenuItem4.Text = "사이드/면/디저트";
             toolStripMenuItem4.Click += Category_Click;
             // 
@@ -178,9 +180,20 @@
             toolStripMenuItem6.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
             toolStripMenuItem6.ForeColor = Color.Black;
             toolStripMenuItem6.Name = "toolStripMenuItem6";
-            toolStripMenuItem6.Size = new Size(64, 32);
+            toolStripMenuItem6.Padding = new Padding(6, 3, 0, 3);
+            toolStripMenuItem6.Size = new Size(62, 35);
             toolStripMenuItem6.Text = "음료";
             toolStripMenuItem6.Click += Category_Click;
+            // 
+            // menuStaff
+            // 
+            menuStaff.AutoSize = false;
+            menuStaff.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            menuStaff.Name = "menuStaff";
+            menuStaff.Padding = new Padding(6, 3, 0, 3);
+            menuStaff.Size = new Size(110, 35);
+            menuStaff.Text = "직원 호출";
+            menuStaff.Click += Category_Click;
             // 
             // flpMenu
             // 
@@ -192,401 +205,481 @@
             flpMenu.Controls.Add(panelMenu6);
             flpMenu.Controls.Add(panelMenu7);
             flpMenu.Controls.Add(panelMenu8);
-            flpMenu.Location = new Point(12, 39);
+            flpMenu.Location = new Point(12, 44);
             flpMenu.Name = "flpMenu";
-            flpMenu.Size = new Size(774, 571);
+            flpMenu.Size = new Size(840, 647);
             flpMenu.TabIndex = 1;
             // 
             // panelMenu1
             // 
+            panelMenu1.BackColor = Color.White;
+            panelMenu1.BorderStyle = BorderStyle.FixedSingle;
             panelMenu1.Controls.Add(btnAdd1);
             panelMenu1.Controls.Add(lblMenuPrice1);
             panelMenu1.Controls.Add(lblMenuName1);
             panelMenu1.Controls.Add(picMenu1);
-            panelMenu1.Location = new Point(3, 3);
+            panelMenu1.Location = new Point(5, 5);
+            panelMenu1.Margin = new Padding(5);
             panelMenu1.Name = "panelMenu1";
-            panelMenu1.Size = new Size(187, 276);
+            panelMenu1.Padding = new Padding(8);
+            panelMenu1.Size = new Size(200, 313);
             panelMenu1.TabIndex = 0;
             // 
             // btnAdd1
             // 
-            btnAdd1.Location = new Point(58, 208);
+            btnAdd1.Location = new Point(47, 227);
             btnAdd1.Name = "btnAdd1";
-            btnAdd1.Size = new Size(75, 23);
+            btnAdd1.Size = new Size(110, 45);
             btnAdd1.TabIndex = 2;
             btnAdd1.Text = "담기";
             btnAdd1.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice1
             // 
-            lblMenuPrice1.AutoSize = true;
-            lblMenuPrice1.Location = new Point(58, 158);
+            lblMenuPrice1.BackColor = Color.Transparent;
+            lblMenuPrice1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice1.ForeColor = Color.Firebrick;
+            lblMenuPrice1.Location = new Point(57, 187);
             lblMenuPrice1.Name = "lblMenuPrice1";
-            lblMenuPrice1.Size = new Size(39, 15);
+            lblMenuPrice1.Size = new Size(100, 20);
             lblMenuPrice1.TabIndex = 1;
             lblMenuPrice1.Text = "label1";
+            lblMenuPrice1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName1
             // 
-            lblMenuName1.AutoSize = true;
-            lblMenuName1.Location = new Point(58, 132);
+            lblMenuName1.BackColor = Color.Transparent;
+            lblMenuName1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName1.ForeColor = Color.Black;
+            lblMenuName1.Location = new Point(22, 158);
             lblMenuName1.Name = "lblMenuName1";
-            lblMenuName1.Size = new Size(39, 15);
+            lblMenuName1.Size = new Size(165, 20);
             lblMenuName1.TabIndex = 1;
             lblMenuName1.Text = "label1";
+            lblMenuName1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu1
             // 
             picMenu1.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu1.Location = new Point(3, 3);
+            picMenu1.Location = new Point(-1, 3);
             picMenu1.Name = "picMenu1";
-            picMenu1.Size = new Size(181, 115);
-            picMenu1.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu1.Size = new Size(200, 130);
+            picMenu1.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu1.TabIndex = 0;
             picMenu1.TabStop = false;
             // 
             // panelMenu2
             // 
+            panelMenu2.BackColor = Color.White;
+            panelMenu2.BorderStyle = BorderStyle.FixedSingle;
             panelMenu2.Controls.Add(btnAdd2);
             panelMenu2.Controls.Add(lblMenuPrice2);
             panelMenu2.Controls.Add(lblMenuName2);
             panelMenu2.Controls.Add(picMenu2);
-            panelMenu2.Location = new Point(196, 3);
+            panelMenu2.Location = new Point(215, 5);
+            panelMenu2.Margin = new Padding(5);
             panelMenu2.Name = "panelMenu2";
-            panelMenu2.Size = new Size(187, 276);
+            panelMenu2.Padding = new Padding(8);
+            panelMenu2.Size = new Size(200, 313);
             panelMenu2.TabIndex = 0;
             // 
             // btnAdd2
             // 
-            btnAdd2.Location = new Point(58, 208);
+            btnAdd2.Location = new Point(44, 227);
             btnAdd2.Name = "btnAdd2";
-            btnAdd2.Size = new Size(75, 23);
+            btnAdd2.Size = new Size(110, 45);
             btnAdd2.TabIndex = 2;
             btnAdd2.Text = "담기";
             btnAdd2.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice2
             // 
-            lblMenuPrice2.AutoSize = true;
-            lblMenuPrice2.Location = new Point(58, 158);
+            lblMenuPrice2.BackColor = Color.Transparent;
+            lblMenuPrice2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice2.ForeColor = Color.Firebrick;
+            lblMenuPrice2.Location = new Point(52, 187);
             lblMenuPrice2.Name = "lblMenuPrice2";
-            lblMenuPrice2.Size = new Size(39, 15);
+            lblMenuPrice2.Size = new Size(100, 20);
             lblMenuPrice2.TabIndex = 1;
             lblMenuPrice2.Text = "label1";
+            lblMenuPrice2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName2
             // 
-            lblMenuName2.AutoSize = true;
-            lblMenuName2.Location = new Point(58, 132);
+            lblMenuName2.BackColor = Color.Transparent;
+            lblMenuName2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName2.ForeColor = Color.Black;
+            lblMenuName2.Location = new Point(18, 158);
             lblMenuName2.Name = "lblMenuName2";
-            lblMenuName2.Size = new Size(39, 15);
+            lblMenuName2.Size = new Size(165, 20);
             lblMenuName2.TabIndex = 1;
             lblMenuName2.Text = "label1";
+            lblMenuName2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu2
             // 
             picMenu2.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu2.Location = new Point(3, 3);
+            picMenu2.Location = new Point(-1, 3);
             picMenu2.Name = "picMenu2";
-            picMenu2.Size = new Size(184, 115);
-            picMenu2.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu2.Size = new Size(200, 130);
+            picMenu2.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu2.TabIndex = 0;
             picMenu2.TabStop = false;
             // 
             // panelMenu3
             // 
+            panelMenu3.BackColor = Color.White;
+            panelMenu3.BorderStyle = BorderStyle.FixedSingle;
             panelMenu3.Controls.Add(btnAdd3);
             panelMenu3.Controls.Add(lblMenuPrice3);
             panelMenu3.Controls.Add(lblMenuName3);
             panelMenu3.Controls.Add(picMenu3);
-            panelMenu3.Location = new Point(389, 3);
+            panelMenu3.Location = new Point(425, 5);
+            panelMenu3.Margin = new Padding(5);
             panelMenu3.Name = "panelMenu3";
-            panelMenu3.Size = new Size(187, 276);
+            panelMenu3.Padding = new Padding(8);
+            panelMenu3.Size = new Size(200, 313);
             panelMenu3.TabIndex = 0;
             // 
             // btnAdd3
             // 
-            btnAdd3.Location = new Point(58, 208);
+            btnAdd3.Location = new Point(44, 227);
             btnAdd3.Name = "btnAdd3";
-            btnAdd3.Size = new Size(75, 23);
+            btnAdd3.Size = new Size(110, 45);
             btnAdd3.TabIndex = 2;
             btnAdd3.Text = "담기";
             btnAdd3.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice3
             // 
-            lblMenuPrice3.AutoSize = true;
-            lblMenuPrice3.Location = new Point(58, 158);
+            lblMenuPrice3.BackColor = Color.Transparent;
+            lblMenuPrice3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice3.ForeColor = Color.Firebrick;
+            lblMenuPrice3.Location = new Point(50, 187);
             lblMenuPrice3.Name = "lblMenuPrice3";
-            lblMenuPrice3.Size = new Size(39, 15);
+            lblMenuPrice3.Size = new Size(100, 20);
             lblMenuPrice3.TabIndex = 1;
             lblMenuPrice3.Text = "label1";
+            lblMenuPrice3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName3
             // 
-            lblMenuName3.AutoSize = true;
-            lblMenuName3.Location = new Point(58, 132);
+            lblMenuName3.BackColor = Color.Transparent;
+            lblMenuName3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName3.ForeColor = Color.Black;
+            lblMenuName3.Location = new Point(18, 158);
             lblMenuName3.Name = "lblMenuName3";
-            lblMenuName3.Size = new Size(39, 15);
+            lblMenuName3.Size = new Size(165, 20);
             lblMenuName3.TabIndex = 1;
             lblMenuName3.Text = "label1";
+            lblMenuName3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu3
             // 
             picMenu3.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu3.Location = new Point(3, 3);
+            picMenu3.Location = new Point(-1, 3);
             picMenu3.Name = "picMenu3";
-            picMenu3.Size = new Size(184, 115);
-            picMenu3.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu3.Size = new Size(200, 130);
+            picMenu3.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu3.TabIndex = 0;
             picMenu3.TabStop = false;
             // 
             // panelMenu4
             // 
+            panelMenu4.BackColor = Color.White;
+            panelMenu4.BorderStyle = BorderStyle.FixedSingle;
             panelMenu4.Controls.Add(btnAdd4);
             panelMenu4.Controls.Add(lblMenuPrice4);
             panelMenu4.Controls.Add(lblMenuName4);
             panelMenu4.Controls.Add(picMenu4);
-            panelMenu4.Location = new Point(582, 3);
+            panelMenu4.Location = new Point(635, 5);
+            panelMenu4.Margin = new Padding(5);
             panelMenu4.Name = "panelMenu4";
-            panelMenu4.Size = new Size(187, 276);
+            panelMenu4.Padding = new Padding(8);
+            panelMenu4.Size = new Size(200, 313);
             panelMenu4.TabIndex = 0;
             // 
             // btnAdd4
             // 
-            btnAdd4.Location = new Point(58, 208);
+            btnAdd4.Location = new Point(43, 227);
             btnAdd4.Name = "btnAdd4";
-            btnAdd4.Size = new Size(75, 23);
+            btnAdd4.Size = new Size(110, 45);
             btnAdd4.TabIndex = 2;
             btnAdd4.Text = "담기";
             btnAdd4.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice4
             // 
-            lblMenuPrice4.AutoSize = true;
-            lblMenuPrice4.Location = new Point(58, 158);
+            lblMenuPrice4.BackColor = Color.Transparent;
+            lblMenuPrice4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice4.ForeColor = Color.Firebrick;
+            lblMenuPrice4.Location = new Point(51, 187);
             lblMenuPrice4.Name = "lblMenuPrice4";
-            lblMenuPrice4.Size = new Size(39, 15);
+            lblMenuPrice4.Size = new Size(100, 20);
             lblMenuPrice4.TabIndex = 1;
             lblMenuPrice4.Text = "label1";
+            lblMenuPrice4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName4
             // 
-            lblMenuName4.AutoSize = true;
-            lblMenuName4.Location = new Point(58, 132);
+            lblMenuName4.BackColor = Color.Transparent;
+            lblMenuName4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName4.ForeColor = Color.Black;
+            lblMenuName4.Location = new Point(18, 158);
             lblMenuName4.Name = "lblMenuName4";
-            lblMenuName4.Size = new Size(39, 15);
+            lblMenuName4.Size = new Size(165, 20);
             lblMenuName4.TabIndex = 1;
             lblMenuName4.Text = "label1";
+            lblMenuName4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu4
             // 
             picMenu4.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu4.Location = new Point(3, 3);
+            picMenu4.Location = new Point(-1, 3);
             picMenu4.Name = "picMenu4";
-            picMenu4.Size = new Size(184, 115);
-            picMenu4.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu4.Size = new Size(200, 130);
+            picMenu4.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu4.TabIndex = 0;
             picMenu4.TabStop = false;
             // 
             // panelMenu5
             // 
+            panelMenu5.BackColor = Color.White;
+            panelMenu5.BorderStyle = BorderStyle.FixedSingle;
             panelMenu5.Controls.Add(btnAdd5);
             panelMenu5.Controls.Add(lblMenuPrice5);
             panelMenu5.Controls.Add(lblMenuName5);
             panelMenu5.Controls.Add(picMenu5);
-            panelMenu5.Location = new Point(3, 285);
+            panelMenu5.Location = new Point(5, 328);
+            panelMenu5.Margin = new Padding(5);
             panelMenu5.Name = "panelMenu5";
-            panelMenu5.Size = new Size(187, 276);
+            panelMenu5.Padding = new Padding(8);
+            panelMenu5.Size = new Size(200, 313);
             panelMenu5.TabIndex = 0;
             // 
             // btnAdd5
             // 
-            btnAdd5.Location = new Point(58, 208);
+            btnAdd5.Location = new Point(47, 236);
             btnAdd5.Name = "btnAdd5";
-            btnAdd5.Size = new Size(75, 23);
+            btnAdd5.Size = new Size(110, 45);
             btnAdd5.TabIndex = 2;
             btnAdd5.Text = "담기";
             btnAdd5.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice5
             // 
-            lblMenuPrice5.AutoSize = true;
-            lblMenuPrice5.Location = new Point(58, 158);
+            lblMenuPrice5.BackColor = Color.Transparent;
+            lblMenuPrice5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice5.ForeColor = Color.Firebrick;
+            lblMenuPrice5.Location = new Point(57, 187);
             lblMenuPrice5.Name = "lblMenuPrice5";
-            lblMenuPrice5.Size = new Size(39, 15);
+            lblMenuPrice5.Size = new Size(100, 20);
             lblMenuPrice5.TabIndex = 1;
             lblMenuPrice5.Text = "label1";
+            lblMenuPrice5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName5
             // 
-            lblMenuName5.AutoSize = true;
-            lblMenuName5.Location = new Point(58, 132);
+            lblMenuName5.BackColor = Color.Transparent;
+            lblMenuName5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName5.ForeColor = Color.Black;
+            lblMenuName5.Location = new Point(22, 158);
             lblMenuName5.Name = "lblMenuName5";
-            lblMenuName5.Size = new Size(39, 15);
+            lblMenuName5.Size = new Size(165, 20);
             lblMenuName5.TabIndex = 1;
             lblMenuName5.Text = "label1";
+            lblMenuName5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu5
             // 
             picMenu5.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu5.Location = new Point(3, 3);
+            picMenu5.Location = new Point(-1, 3);
             picMenu5.Name = "picMenu5";
-            picMenu5.Size = new Size(184, 115);
-            picMenu5.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu5.Size = new Size(200, 130);
+            picMenu5.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu5.TabIndex = 0;
             picMenu5.TabStop = false;
             // 
             // panelMenu6
             // 
+            panelMenu6.BackColor = Color.White;
+            panelMenu6.BorderStyle = BorderStyle.FixedSingle;
             panelMenu6.Controls.Add(btnAdd6);
             panelMenu6.Controls.Add(lblMenuPrice6);
             panelMenu6.Controls.Add(lblMenuName6);
             panelMenu6.Controls.Add(picMenu6);
-            panelMenu6.Location = new Point(196, 285);
+            panelMenu6.Location = new Point(215, 328);
+            panelMenu6.Margin = new Padding(5);
             panelMenu6.Name = "panelMenu6";
-            panelMenu6.Size = new Size(187, 276);
+            panelMenu6.Padding = new Padding(8);
+            panelMenu6.Size = new Size(200, 313);
             panelMenu6.TabIndex = 0;
             // 
             // btnAdd6
             // 
-            btnAdd6.Location = new Point(58, 208);
+            btnAdd6.Location = new Point(44, 236);
             btnAdd6.Name = "btnAdd6";
-            btnAdd6.Size = new Size(75, 23);
+            btnAdd6.Size = new Size(110, 45);
             btnAdd6.TabIndex = 2;
             btnAdd6.Text = "담기";
             btnAdd6.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice6
             // 
-            lblMenuPrice6.AutoSize = true;
-            lblMenuPrice6.Location = new Point(58, 158);
+            lblMenuPrice6.BackColor = Color.Transparent;
+            lblMenuPrice6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice6.ForeColor = Color.Firebrick;
+            lblMenuPrice6.Location = new Point(52, 187);
             lblMenuPrice6.Name = "lblMenuPrice6";
-            lblMenuPrice6.Size = new Size(39, 15);
+            lblMenuPrice6.Size = new Size(100, 20);
             lblMenuPrice6.TabIndex = 1;
             lblMenuPrice6.Text = "label1";
+            lblMenuPrice6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName6
             // 
-            lblMenuName6.AutoSize = true;
-            lblMenuName6.Location = new Point(58, 132);
+            lblMenuName6.BackColor = Color.Transparent;
+            lblMenuName6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName6.ForeColor = Color.Black;
+            lblMenuName6.Location = new Point(18, 158);
             lblMenuName6.Name = "lblMenuName6";
-            lblMenuName6.Size = new Size(39, 15);
+            lblMenuName6.Size = new Size(165, 20);
             lblMenuName6.TabIndex = 1;
             lblMenuName6.Text = "label1";
+            lblMenuName6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu6
             // 
             picMenu6.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu6.Location = new Point(3, 3);
+            picMenu6.Location = new Point(-1, 3);
             picMenu6.Name = "picMenu6";
-            picMenu6.Size = new Size(184, 115);
-            picMenu6.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu6.Size = new Size(200, 130);
+            picMenu6.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu6.TabIndex = 0;
             picMenu6.TabStop = false;
             // 
             // panelMenu7
             // 
+            panelMenu7.BackColor = Color.White;
+            panelMenu7.BorderStyle = BorderStyle.FixedSingle;
             panelMenu7.Controls.Add(btnAdd7);
             panelMenu7.Controls.Add(lblMenuPrice7);
             panelMenu7.Controls.Add(lblMenuName7);
             panelMenu7.Controls.Add(picMenu7);
-            panelMenu7.Location = new Point(389, 285);
+            panelMenu7.Location = new Point(425, 328);
+            panelMenu7.Margin = new Padding(5);
             panelMenu7.Name = "panelMenu7";
-            panelMenu7.Size = new Size(187, 276);
+            panelMenu7.Padding = new Padding(8);
+            panelMenu7.Size = new Size(200, 313);
             panelMenu7.TabIndex = 0;
             // 
             // btnAdd7
             // 
-            btnAdd7.Location = new Point(58, 208);
+            btnAdd7.Location = new Point(44, 236);
             btnAdd7.Name = "btnAdd7";
-            btnAdd7.Size = new Size(75, 23);
+            btnAdd7.Size = new Size(110, 45);
             btnAdd7.TabIndex = 2;
             btnAdd7.Text = "담기";
             btnAdd7.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice7
             // 
-            lblMenuPrice7.AutoSize = true;
-            lblMenuPrice7.Location = new Point(58, 158);
+            lblMenuPrice7.BackColor = Color.Transparent;
+            lblMenuPrice7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice7.ForeColor = Color.Firebrick;
+            lblMenuPrice7.Location = new Point(52, 187);
             lblMenuPrice7.Name = "lblMenuPrice7";
-            lblMenuPrice7.Size = new Size(39, 15);
+            lblMenuPrice7.Size = new Size(100, 20);
             lblMenuPrice7.TabIndex = 1;
             lblMenuPrice7.Text = "label1";
+            lblMenuPrice7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName7
             // 
-            lblMenuName7.AutoSize = true;
-            lblMenuName7.Location = new Point(58, 132);
+            lblMenuName7.BackColor = Color.Transparent;
+            lblMenuName7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName7.ForeColor = Color.Black;
+            lblMenuName7.Location = new Point(18, 158);
             lblMenuName7.Name = "lblMenuName7";
-            lblMenuName7.Size = new Size(39, 15);
+            lblMenuName7.Size = new Size(165, 20);
             lblMenuName7.TabIndex = 1;
             lblMenuName7.Text = "label1";
+            lblMenuName7.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu7
             // 
             picMenu7.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu7.Location = new Point(3, 3);
+            picMenu7.Location = new Point(-1, 3);
             picMenu7.Name = "picMenu7";
-            picMenu7.Size = new Size(184, 115);
-            picMenu7.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu7.Size = new Size(200, 130);
+            picMenu7.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu7.TabIndex = 0;
             picMenu7.TabStop = false;
             // 
             // panelMenu8
             // 
+            panelMenu8.BackColor = Color.White;
+            panelMenu8.BorderStyle = BorderStyle.FixedSingle;
             panelMenu8.Controls.Add(btnAdd8);
             panelMenu8.Controls.Add(lblMenuPrice8);
             panelMenu8.Controls.Add(lblMenuName8);
             panelMenu8.Controls.Add(picMenu8);
-            panelMenu8.Location = new Point(582, 285);
+            panelMenu8.Location = new Point(635, 328);
+            panelMenu8.Margin = new Padding(5);
             panelMenu8.Name = "panelMenu8";
-            panelMenu8.Size = new Size(187, 276);
+            panelMenu8.Padding = new Padding(8);
+            panelMenu8.Size = new Size(200, 313);
             panelMenu8.TabIndex = 0;
             // 
             // btnAdd8
             // 
-            btnAdd8.Location = new Point(58, 208);
+            btnAdd8.Location = new Point(43, 236);
             btnAdd8.Name = "btnAdd8";
-            btnAdd8.Size = new Size(75, 23);
+            btnAdd8.Size = new Size(110, 45);
             btnAdd8.TabIndex = 2;
             btnAdd8.Text = "담기";
             btnAdd8.UseVisualStyleBackColor = true;
             // 
             // lblMenuPrice8
             // 
-            lblMenuPrice8.AutoSize = true;
-            lblMenuPrice8.Location = new Point(58, 158);
+            lblMenuPrice8.BackColor = Color.Transparent;
+            lblMenuPrice8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuPrice8.ForeColor = Color.Firebrick;
+            lblMenuPrice8.Location = new Point(51, 187);
             lblMenuPrice8.Name = "lblMenuPrice8";
-            lblMenuPrice8.Size = new Size(39, 15);
+            lblMenuPrice8.Size = new Size(100, 20);
             lblMenuPrice8.TabIndex = 1;
             lblMenuPrice8.Text = "label1";
+            lblMenuPrice8.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMenuName8
             // 
-            lblMenuName8.AutoSize = true;
-            lblMenuName8.Location = new Point(58, 132);
+            lblMenuName8.BackColor = Color.Transparent;
+            lblMenuName8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMenuName8.ForeColor = Color.Black;
+            lblMenuName8.Location = new Point(18, 158);
             lblMenuName8.Name = "lblMenuName8";
-            lblMenuName8.Size = new Size(39, 15);
+            lblMenuName8.Size = new Size(165, 20);
             lblMenuName8.TabIndex = 1;
             lblMenuName8.Text = "label1";
+            lblMenuName8.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picMenu8
             // 
             picMenu8.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu8.Location = new Point(3, 3);
+            picMenu8.Location = new Point(-1, 3);
             picMenu8.Name = "picMenu8";
-            picMenu8.Size = new Size(184, 115);
-            picMenu8.SizeMode = PictureBoxSizeMode.Zoom;
+            picMenu8.Size = new Size(200, 130);
+            picMenu8.SizeMode = PictureBoxSizeMode.StretchImage;
             picMenu8.TabIndex = 0;
             picMenu8.TabStop = false;
             // 
             // btnPrevious
             // 
             btnPrevious.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnPrevious.Location = new Point(208, 635);
+            btnPrevious.Location = new Point(208, 720);
             btnPrevious.Name = "btnPrevious";
-            btnPrevious.Size = new Size(90, 40);
+            btnPrevious.Size = new Size(90, 45);
             btnPrevious.TabIndex = 3;
             btnPrevious.Text = "이전";
             btnPrevious.UseVisualStyleBackColor = true;
@@ -595,9 +688,9 @@
             // btnNext
             // 
             btnNext.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnNext.Location = new Point(498, 635);
+            btnNext.Location = new Point(498, 720);
             btnNext.Name = "btnNext";
-            btnNext.Size = new Size(90, 40);
+            btnNext.Size = new Size(90, 45);
             btnNext.TabIndex = 3;
             btnNext.Text = "다음";
             btnNext.UseVisualStyleBackColor = true;
@@ -607,7 +700,7 @@
             // 
             lblPage.AutoSize = true;
             lblPage.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPage.Location = new Point(366, 639);
+            lblPage.Location = new Point(366, 724);
             lblPage.Name = "lblPage";
             lblPage.Size = new Size(63, 25);
             lblPage.TabIndex = 4;
@@ -615,21 +708,22 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(btn_next);
             panel1.Controls.Add(btnOrder);
             panel1.Controls.Add(lblTotalPrice);
             panel1.Controls.Add(dgvOrder);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(792, 39);
+            panel1.Location = new Point(858, 44);
             panel1.Name = "panel1";
-            panel1.Size = new Size(419, 571);
+            panel1.Size = new Size(419, 647);
             panel1.TabIndex = 5;
             // 
             // btnOrder
             // 
             btnOrder.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnOrder.Location = new Point(156, 511);
+            btnOrder.Location = new Point(156, 579);
             btnOrder.Name = "btnOrder";
-            btnOrder.Size = new Size(100, 40);
+            btnOrder.Size = new Size(100, 45);
             btnOrder.TabIndex = 3;
             btnOrder.Text = "주문하기";
             btnOrder.UseVisualStyleBackColor = true;
@@ -639,7 +733,7 @@
             // 
             lblTotalPrice.AutoSize = true;
             lblTotalPrice.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotalPrice.Location = new Point(140, 443);
+            lblTotalPrice.Location = new Point(140, 502);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(116, 25);
             lblTotalPrice.TabIndex = 2;
@@ -651,20 +745,20 @@
             dgvOrder.BackgroundColor = Color.White;
             dgvOrder.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvOrder.Columns.AddRange(new DataGridViewColumn[] { colMenuName, colMinus, colQuantity, colPlus, colPrice });
-            dgvOrder.Location = new Point(3, 69);
+            dgvOrder.Location = new Point(3, 78);
             dgvOrder.MultiSelect = false;
             dgvOrder.Name = "dgvOrder";
             dgvOrder.ReadOnly = true;
             dgvOrder.RowTemplate.Height = 25;
             dgvOrder.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvOrder.Size = new Size(413, 319);
+            dgvOrder.Size = new Size(413, 362);
             dgvOrder.TabIndex = 1;
             dgvOrder.CellContentClick += dgvOrder_CellContentClick;
             // 
             // colMenuName
             // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colMenuName.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colMenuName.DefaultCellStyle = dataGridViewCellStyle7;
             colMenuName.HeaderText = "메뉴";
             colMenuName.Name = "colMenuName";
             colMenuName.ReadOnly = true;
@@ -679,8 +773,8 @@
             // 
             // colQuantity
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colQuantity.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colQuantity.DefaultCellStyle = dataGridViewCellStyle8;
             colQuantity.HeaderText = "수량";
             colQuantity.Name = "colQuantity";
             colQuantity.ReadOnly = true;
@@ -695,8 +789,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colPrice.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPrice.DefaultCellStyle = dataGridViewCellStyle9;
             colPrice.HeaderText = "금액";
             colPrice.Name = "colPrice";
             colPrice.ReadOnly = true;
@@ -706,7 +800,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(164, 27);
+            label1.Location = new Point(164, 31);
             label1.Name = "label1";
             label1.Size = new Size(92, 25);
             label1.TabIndex = 0;
@@ -715,31 +809,32 @@
             // btnOrderHistory
             // 
             btnOrderHistory.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnOrderHistory.Location = new Point(1111, 635);
+            btnOrderHistory.Location = new Point(1177, 720);
             btnOrderHistory.Name = "btnOrderHistory";
-            btnOrderHistory.Size = new Size(100, 40);
+            btnOrderHistory.Size = new Size(100, 45);
             btnOrderHistory.TabIndex = 4;
             btnOrderHistory.Text = "주문 내역";
             btnOrderHistory.UseVisualStyleBackColor = true;
             btnOrderHistory.Click += btnOrderHistory_Click;
             // 
-            // btnCallStaff
+            // btn_next
             // 
-            btnCallStaff.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCallStaff.Location = new Point(792, 635);
-            btnCallStaff.Name = "btnCallStaff";
-            btnCallStaff.Size = new Size(100, 40);
-            btnCallStaff.TabIndex = 6;
-            btnCallStaff.Text = "직원 호출";
-            btnCallStaff.UseVisualStyleBackColor = true;
-            btnCallStaff.Click += btnCallStaff_Click;
+            btn_next.BackColor = Color.Crimson;
+            btn_next.FlatStyle = FlatStyle.Flat;
+            btn_next.Location = new Point(279, 579);
+            btn_next.Name = "btn_next";
+            btn_next.Size = new Size(108, 45);
+            btn_next.TabIndex = 6;
+            btn_next.Text = "결제하러 가기";
+            btn_next.UseVisualStyleBackColor = false;
+            btn_next.Click += btn_next_Click;
             // 
             // MenuForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1219, 700);
-            Controls.Add(btnCallStaff);
+            BackColor = Color.FloralWhite;
+            ClientSize = new Size(1282, 793);
             Controls.Add(btnOrderHistory);
             Controls.Add(panel1);
             Controls.Add(lblPage);
@@ -747,6 +842,9 @@
             Controls.Add(btnPrevious);
             Controls.Add(flpMenu);
             Controls.Add(menuStrip1);
+            Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "MenuForm";
             Text = "메뉴 조회/주문";
             Load += MenuForm_Load;
@@ -754,28 +852,20 @@
             menuStrip1.PerformLayout();
             flpMenu.ResumeLayout(false);
             panelMenu1.ResumeLayout(false);
-            panelMenu1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu1).EndInit();
             panelMenu2.ResumeLayout(false);
-            panelMenu2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu2).EndInit();
             panelMenu3.ResumeLayout(false);
-            panelMenu3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu3).EndInit();
             panelMenu4.ResumeLayout(false);
-            panelMenu4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu4).EndInit();
             panelMenu5.ResumeLayout(false);
-            panelMenu5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu5).EndInit();
             panelMenu6.ResumeLayout(false);
-            panelMenu6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu6).EndInit();
             panelMenu7.ResumeLayout(false);
-            panelMenu7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu7).EndInit();
             panelMenu8.ResumeLayout(false);
-            panelMenu8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picMenu8).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -848,6 +938,7 @@
         private DataGridViewButtonColumn colPlus;
         private DataGridViewTextBoxColumn colPrice;
         private Button btnOrderHistory;
-        private Button btnCallStaff;
+        private ToolStripMenuItem menuStaff;
+        private Button btn_next;
     }
 }
