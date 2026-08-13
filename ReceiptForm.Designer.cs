@@ -64,7 +64,7 @@
             txtReceipt.Multiline = true;
             txtReceipt.Name = "txtReceipt";
             txtReceipt.ReadOnly = true;
-            txtReceipt.Size = new Size(394, 163);
+            txtReceipt.Size = new Size(404, 163);
             txtReceipt.TabIndex = 1;
             txtReceipt.TabStop = false;
             // 
@@ -105,7 +105,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(390, 508);
+            ClientSize = new Size(400, 508);
             Controls.Add(label1);
             Controls.Add(btnClose);
             Controls.Add(txtReceipt);

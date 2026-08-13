@@ -1,4 +1,3 @@
-﻿using Kiosk;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,9 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
+using Kiosk;
+
 namespace sushikiosk
 {
-    public partial class MenuForm : Form
+    public partial class MenuForm : BaseLanguageForm
     {
         public class SushiMenu
         {
@@ -18,7 +19,7 @@ namespace sushikiosk
             public string ImageFile { get; set; }
         }
 
-        public class OrderItem
+        public class OrderItem          // 나중에 관리자랑 연동할 때 OrderItem.cs파일로 빼는
         {
             public string Name { get; set; }
             public int Price { get; set; }
@@ -187,7 +188,83 @@ namespace sushikiosk
 
                 SushiMenu menu = filteredMenu[menuIndex];
 
-                nameLabels[i].Text = menu.Name;
+                // 다국어 메뉴 이름 매핑 딕셔너리
+                var menuTranslations = new Dictionary<string, string[]>
+                {
+                    { "점성어초밥", new[] { "Red Drum Sushi", "ニ베寿司", "점성어초밥" } },
+                    { "숭어초밥", new[] { "Mullet Sushi", "ボラ寿司", "숭어초밥" } },
+                    { "묵은지숭어초밥", new[] { "Aged Kimchi Mullet Sushi", "古漬けキムチボラ寿司", "묵은지숭어초밥" } },
+                    { "연어파인초밥", new[] { "Salmon Pineapple Sushi", "サーモンパイン寿司", "연어파인초밥" } },
+                    { "광어초밥", new[] { "Flatfish Sushi", "ヒラメ寿司", "광어초밥" } },
+                    { "묵은지광어초밥", new[] { "Aged Kimchi Flatfish Sushi", "古漬けキムチヒラメ寿司", "묵은지광어초밥" } },
+                    { "광어지느러미초밥", new[] { "Flatfish Fin Sushi", "エンガワ寿司", "광어지느러미초밥" } },
+                    { "연어초밥", new[] { "Salmon Sushi", "サーモン寿司", "연어초밥" } },
+                    { "연어뱃살초밥", new[] { "Salmon Belly Sushi", "サーモンハラス寿司", "연어뱃살초밥" } },
+                    { "토핑연어초밥", new[] { "Topped Salmon Sushi", "トッピングサーモン寿司", "토핑연어초밥" } },
+                    { "구운연어초밥", new[] { "Seared Salmon Sushi", "炙りサーモン寿司", "구운연어초밥" } },
+                    { "묵은지활어초밥", new[] { "Aged Kimchi Fresh Fish Sushi", "古漬けキムチ白身魚寿司", "묵은지활어초밥" } },
+                    { "눈다랑어초밥", new[] { "Bigeye Tuna Sushi", "メバチマグロ寿司", "눈다랑어초밥" } },
+                    { "구운참치초밥", new[] { "Seared Tuna Sushi", "炙りマグロ寿司", "구운참치초밥" } },
+                    { "참치대뱃살초밥", new[] { "Fatty Tuna Sushi", "本マグロ大トロ寿司", "참치대뱃살초밥" } },
+                    { "황새치뱃살초밥", new[] { "Swordfish Belly Sushi", "メカジキトロ寿司", "황새치뱃살초밥" } },
+                    { "도미뱃살조림초밥", new[] { "Simmered Sea Bream Belly Sushi", "鯛腹身煮付け寿司", "도미뱃살조림초밥" } },
+                    { "오징어초밥", new[] { "Squid Sushi", "イカ寿司", "오징어초밥" } },
+                    { "게살초밥", new[] { "Crab Meat Sushi", "カニカマ寿司", "게살초밥" } },
+                    { "소라초밥", new[] { "Whelk Sushi", "ツブ貝寿司", "소라초밥" } },
+                    { "날치알군함", new[] { "Flying Fish Roe Gunkan", " tobiko軍艦", "날치알군함" } },
+                    { "초새우초밥", new[] { "Cooked Shrimp Sushi", "蒸しエビ寿司", "초새우초밥" } },
+                    { "갑오징어초밥", new[] { "Cuttlefish Sushi", "コウイカ寿司", "갑오징어초밥" } },
+                    { "치즈소라초밥", new[] { "Cheese Whelk Sushi", "チーズツブ貝寿司", "치즈소라초밥" } },
+                    { "한치초밥", new[] { "Spear Squid Sushi", "ヤリイカ寿司", "한치초밥" } },
+                    { "생새우초밥", new[] { "Raw Shrimp Sushi", "生エビ寿司", "생새우초밥" } },
+                    { "계란새우초밥", new[] { "Egg Shrimp Sushi", "卵エビ寿司", "계란새우초밥" } },
+                    { "구운소라초밥", new[] { "Seared Whelk Sushi", "炙りツブ貝寿司", "구운소라초밥" } },
+                    { "가지소라초밥", new[] { "Eggplant Whelk Sushi", "ナスツブ貝寿司", "가지소라초밥" } },
+                    { "타코와사비초밥", new[] { "Octopus Wasabi Sushi", "たこわさび軍艦", "타코와사비초밥" } },
+                    { "간장새우초밥", new[] { "Soy-marinated Shrimp Sushi", "醤油エビ寿司", "간장새우초밥" } },
+                    { "가리비치즈초밥", new[] { "Cheese Scallop Sushi", "ホタテチーズ寿司", "가리비치즈초밥" } },
+                    { "가리비초밥", new[] { "Scallop Sushi", "ホタテ寿司", "가리비초밥" } },
+                    { "마늘가리비초밥", new[] { "Garlic Scallop Sushi", "ガーリックホタテ寿司", "마늘가리비초밥" } },
+                    { "생새우마늘구이초밥", new[] { "Garlic Grilled Shrimp Sushi", "生エビニンニク炙り寿司", "생새우마늘구이초밥" } },
+                    { "계란장어초밥", new[] { "Egg Eel Sushi", "卵うなぎ寿司", "계란장어초밥" } },
+                    { "아귀간군함", new[] { "Monkfish Liver Gunkan", "あんき모軍艦", "아귀간군함" } },
+                    { "성게알군함", new[] { "Sea Urchin Gunkan", "ウニ軍艦", "성게알군함" } },
+                    { "구운관자초밥", new[] { "Seared Scallop Sushi", "炙りホタテ貝柱寿司", "구운관자초밥" } },
+                    { "후톳마끼", new[] { "Futomaki", "太巻き", "후톳마끼" } },
+                    { "치즈새우롤", new[] { "Cheese Shrimp Roll", "チーズエビロール", "치즈새우롤" } },
+                    { "구운연어롤", new[] { "Seared Salmon Roll", "炙りサーモンロール", "구운연어롤" } },
+                    { "고구마롤", new[] { "Sweet Potato Roll", "さつまいもロール", "고구마롤" } },
+                    { "새우튀김롤", new[] { "Shrimp Tempura Roll", "エビフライロール", "새우튀김롤" } },
+                    { "김마끼", new[] { "Seaweed Roll", "手巻き", "김마끼" } },
+                    { "유부초밥", new[] { "Inari Sushi", "いなり寿司", "유부초밥" } },
+                    { "계란초밥", new[] { "Egg Sushi", "玉子寿司", "계란초밥" } },
+                    { "우삼겹초밥", new[] { "Beef Belly Sushi", "牛バラ寿司", "우삼겹초밥" } },
+                    { "육사시미초밥", new[] { "Raw Beef Sushi", "牛刺身寿司", "육사시미초밥" } },
+                    { "스테이크초밥", new[] { "Steak Sushi", "ステーキ寿司", "스테이크초밥" } },
+                    { "육회초밥", new[] { "Beef Tartare Sushi", "ユッケ寿司", "육회초밥" } },
+                    { "파인애플", new[] { "Pineapple", "パイナップル", "파인애플" } },
+                    { "가라아게", new[] { "Karaage", "唐揚げ", "가라아게" } },
+                    { "새우튀김", new[] { "Fried Shrimp", "エビフライ", "새우튀김" } },
+                    { "미니 모밀", new[] { "Mini Soba", "ミニそば", "미니 모밀" } },
+                    { "미니 우동", new[] { "Mini Udon", "ミニうどん", "미니 우동" } },
+                    { "사이다", new[] { "Sprite", "サイダー", "사이다" } },
+                    { "콜라", new[] { "Coke", "コーラ", "콜라" } },
+                    { "제로콜라", new[] { "Coke Zero", "ゼロコーラ", "제로콜라" } },
+                    { "물 리필해주세요", new[] { "Refill Water", "お水のおかわり", "물 리필해주세요" } },
+                    { "컵 주세요", new[] { "Give me a cup", "コップをください", "컵 주세요" } },
+                    { "직원만 호출", new[] { "Call Staff", "呼び出し", "직원만 호출" } }
+                };
+
+                int lang = LanguageManager.CurrentLanguageIndex;
+                if (menuTranslations.ContainsKey(menu.Name))
+                {
+                    nameLabels[i].Text = menuTranslations[menu.Name][lang];
+                }
+                else
+                {
+                    nameLabels[i].Text = menu.Name;
+                }
+
                 addButtons[i].Tag = menu;
 
                 if (menu.Category == "직원 호출")
@@ -196,15 +273,18 @@ namespace sushikiosk
                     priceLabels[i].Visible = false;
 
                     // 담기 대신 요청
-                    addButtons[i].Text = "요청";
+                    string[] requestTexts = { "Request", "要求", "요청" };
+                    addButtons[i].Text = requestTexts[lang];
                 }
                 else
                 {
                     // 일반 음식 메뉴
                     priceLabels[i].Visible = true;
-                    priceLabels[i].Text = menu.Price.ToString("N0") + "원";
+                    string[] wonTexts = { " KRW", "ウォン", "원" };
+                    priceLabels[i].Text = menu.Price.ToString("N0") + wonTexts[lang];
 
-                    addButtons[i].Text = "담기";
+                    string[] addTexts = { "Add", "入れる", "담기" };
+                    addButtons[i].Text = addTexts[lang];
                 }
 
                 if (!string.IsNullOrEmpty(menu.ImageFile))
@@ -271,7 +351,7 @@ namespace sushikiosk
 
         private void ShowStaffRequest(SushiMenu menu)
         {
-            string message = "";
+            string message;
 
             switch (menu.Name)
             {
@@ -286,6 +366,9 @@ namespace sushikiosk
                 case "직원만 호출":
                     message = "직원을 호출했습니다.";
                     break;
+
+                default:
+                    return;
             }
 
             MessageBox.Show(
@@ -347,8 +430,8 @@ namespace sushikiosk
 
         private void dgvOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)      // 장바구니의 +, - 버튼을 처리하여 
         {                                                                                       // 주문 수량을 변경.
-                if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                    return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
 
             int index = e.RowIndex;
 
@@ -375,8 +458,8 @@ namespace sushikiosk
         {
             // 음료와 사이드 메뉴를 제외한 초밥만 이벤트 대상
             var plates = currentOrderList
-                .Where(item => item.Category != "음료" &&
-                               item.Category != "사이드/면/디저트")
+                .Where(item => item.Category == "활어/참치" || item.Category == "해산물" ||
+                               item.Category == "롤/마끼" || item.Category == "단품/기타초밥")
                 .SelectMany(item => Enumerable.Repeat(item, item.Quantity))
                 .ToList();
 
@@ -399,7 +482,7 @@ namespace sushikiosk
 
                 // 기존 주문 내역에 같은 무료 메뉴가 있는지 확인
                 OrderItem freeItem =
-                    orderList.FirstOrDefault(item => item.Name == winnerName && item.IsFree == true);
+                    orderList.FirstOrDefault(item => item.Name == winnerName && item.IsFree);
 
                 if (freeItem != null)
                 {
@@ -425,7 +508,7 @@ namespace sushikiosk
             foreach (OrderItem currentItem in currentOrderList)
             {
                 OrderItem orderedItem =           // 같은 이름의 일반 주문만 찾음
-                    orderList.FirstOrDefault(item => item.Name == currentItem.Name && item.IsFree == false);
+                    orderList.FirstOrDefault(item => item.Name == currentItem.Name && !item.IsFree);
 
                 if (orderedItem != null)
                 {
@@ -450,11 +533,22 @@ namespace sushikiosk
 
         private void Category_Click(object sender, EventArgs e)     // 클릭한 메뉴스트립 항목에 맞게 
         {                                                           // 카테고리를 변경하고 첫 페이지를 표시.
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (!(sender is ToolStripMenuItem item))
+                return;
 
-            currentCategory = item.Text;
+            string txt = item.Text;
+
+            // 다국어 텍스트 매치 -> 한국어 카테고리로 매핑 변환
+            if (txt == "Fresh Fish/Tuna" || txt == "活魚/マグロ") currentCategory = "활어/참치";
+            else if (txt == "Seafood" || txt == "海鮮") currentCategory = "해산물";
+            else if (txt == "Roll/Maki" || txt == "ロール/手巻き") currentCategory = "롤/마끼";
+            else if (txt == "Single/Other Sushi" || txt == "単品/その他寿司") currentCategory = "단품/기타초밥";
+            else if (txt == "Side/Noodle/Dessert" || txt == "サイド/麺/デザート") currentCategory = "사이드/면/디저트";
+            else if (txt == "Beverage" || txt == "飲料") currentCategory = "음료";
+            else if (txt == "Staff Call" || txt == "呼び出し") currentCategory = "직원 호출";
+            else currentCategory = txt;
+
             currentPage = 0;
-
             ShowPage();
         }
 
@@ -477,16 +571,69 @@ namespace sushikiosk
                 return;
             }
             CheckWinningEvent();        // 당첨 여부를 먼저 확인
-            MessageBox.Show("주문이 완료되었습니다.");
 
             SaveCurrentOrder();     // 이벤트 처리 후 남은 정상 결제 메뉴 저장
 
             MessageBox.Show("주문이 완료되었습니다.");
         }
 
-        private void btn_next_Click(object sender, EventArgs e)
+        protected override void ApplyLanguage()
         {
-            Pop_MemberNum  member = new Pop_MemberNum();
+            base.ApplyLanguage();
+            int lang = LanguageManager.CurrentLanguageIndex;
+
+            // ToolStripMenuItem은 Control이 아니기 때문에 개별적으로 텍스트를 대입해 줍니다.
+            if (toolStripMenuItem1 != null) toolStripMenuItem1.Text = new[] { "Fresh Fish/Tuna", "活魚/マグロ", "활어/참치" }[lang];
+            if (toolStripMenuItem2 != null) toolStripMenuItem2.Text = new[] { "Seafood", "海鮮", "해산물" }[lang];
+            if (toolStripMenuItem3 != null) toolStripMenuItem3.Text = new[] { "Roll/Maki", "ロール/手巻き", "롤/마끼" }[lang];
+            if (toolStripMenuItem5 != null) toolStripMenuItem5.Text = new[] { "Single/Other Sushi", "単品/その他寿司", "단품/기타초밥" }[lang];
+            if (toolStripMenuItem4 != null) toolStripMenuItem4.Text = new[] { "Side/Noodle/Dessert", "サイド/麺/デザート", "사이드/면/디저트" }[lang];
+            if (toolStripMenuItem6 != null) toolStripMenuItem6.Text = new[] { "Beverage", "飲料", "음료" }[lang];
+            if (menuStaff != null) menuStaff.Text = new[] { "Staff Call", "呼び出し", "직원 호출" }[lang];
+
+            // 일반 Control에 속하는 버튼들의 다국어 텍스트 대입
+            if (btnPrevious != null) btnPrevious.Text = new[] { "Previous", "以前", "이전" }[lang];
+            if (btnNext != null) btnNext.Text = new[] { "Next", "次へ", "다음" }[lang];
+            if (btnOrderHistory != null) btnOrderHistory.Text = new[] { "Order History", "注文履歴", "주문 내역" }[lang];
+            if (btnOrder != null) btnOrder.Text = new[] { "Order Confirm", "注文確認", "주문 확인" }[lang];
+
+            // 현재 카테고리 매칭을 위해 매핑 데이터 사용
+            var categoryTranslations = new Dictionary<string, string[]>
+            {
+                { "Fresh Fish/Tuna", new[] { "Fresh Fish/Tuna", "活魚/マグロ", "활어/참치" } },
+                { "Seafood", new[] { "Seafood", "海鮮", "해산물" } },
+                { "Roll/Maki", new[] { "Roll/Maki", "ロール/手巻き", "롤/마끼" } },
+                { "Single/Other Sushi", new[] { "Single/Other Sushi", "単品/その他寿司", "단품/기타초밥" } },
+                { "Side/Noodle/Dessert", new[] { "Side/Noodle/Dessert", "サイド/麺/デザート", "사이드/면/디저트" } },
+                { "Beverage", new[] { "Beverage", "飲料", "음료" } },
+                { "Staff Call", new[] { "Staff Call", "呼び出し", "직원 호출" } }
+            };
+
+            var matchedCategory = categoryTranslations
+                .FirstOrDefault(kvp => kvp.Value.Contains(currentCategory));
+
+            if (matchedCategory.Key != null)
+            {
+                // 실제 내부 데이터 처리 기준(한국어)으로 고정하기 위한 매핑 목록
+                var rawCategories = new Dictionary<string, string>
+                {
+                    { "Fresh Fish/Tuna", "활어/참치" },
+                    { "Seafood", "해산물" },
+                    { "Roll/Maki", "롤/마끼" },
+                    { "Single/Other Sushi", "단품/기타초밥" },
+                    { "Side/Noodle/Dessert", "사이드/면/디저트" },
+                    { "Beverage", "음료" },
+                    { "Staff Call", "직원 호출" }
+                };
+                currentCategory = rawCategories[matchedCategory.Key];
+            }
+
+            ShowPage();
+        }
+
+        private void btn_receive_Click(object sender, EventArgs e)
+        {
+            Pop_MemberNum member = new Pop_MemberNum();
             member.Show();
             this.Hide();
         }

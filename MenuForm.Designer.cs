@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
@@ -94,7 +94,7 @@
             colPrice = new DataGridViewTextBoxColumn();
             label1 = new Label();
             btnOrderHistory = new Button();
-            btn_next = new Button();
+            btn_receive = new Button();
             menuStrip1.SuspendLayout();
             flpMenu.SuspendLayout();
             panelMenu1.SuspendLayout();
@@ -261,7 +261,7 @@
             // picMenu1
             // 
             picMenu1.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu1.Location = new Point(-1, 3);
+            picMenu1.Location = new Point(-1, -1);
             picMenu1.Name = "picMenu1";
             picMenu1.Size = new Size(200, 130);
             picMenu1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -319,7 +319,7 @@
             // picMenu2
             // 
             picMenu2.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu2.Location = new Point(-1, 3);
+            picMenu2.Location = new Point(-1, -1);
             picMenu2.Name = "picMenu2";
             picMenu2.Size = new Size(200, 130);
             picMenu2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -377,7 +377,7 @@
             // picMenu3
             // 
             picMenu3.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu3.Location = new Point(-1, 3);
+            picMenu3.Location = new Point(-1, -1);
             picMenu3.Name = "picMenu3";
             picMenu3.Size = new Size(200, 130);
             picMenu3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -435,7 +435,7 @@
             // picMenu4
             // 
             picMenu4.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu4.Location = new Point(-1, 3);
+            picMenu4.Location = new Point(-1, -1);
             picMenu4.Name = "picMenu4";
             picMenu4.Size = new Size(200, 130);
             picMenu4.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -493,7 +493,7 @@
             // picMenu5
             // 
             picMenu5.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu5.Location = new Point(-1, 3);
+            picMenu5.Location = new Point(-1, -1);
             picMenu5.Name = "picMenu5";
             picMenu5.Size = new Size(200, 130);
             picMenu5.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -551,7 +551,7 @@
             // picMenu6
             // 
             picMenu6.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu6.Location = new Point(-1, 3);
+            picMenu6.Location = new Point(-1, -1);
             picMenu6.Name = "picMenu6";
             picMenu6.Size = new Size(200, 130);
             picMenu6.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -609,7 +609,7 @@
             // picMenu7
             // 
             picMenu7.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu7.Location = new Point(-1, 3);
+            picMenu7.Location = new Point(-1, -1);
             picMenu7.Name = "picMenu7";
             picMenu7.Size = new Size(200, 130);
             picMenu7.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -667,7 +667,7 @@
             // picMenu8
             // 
             picMenu8.BackgroundImageLayout = ImageLayout.Stretch;
-            picMenu8.Location = new Point(-1, 3);
+            picMenu8.Location = new Point(-1, -1);
             picMenu8.Name = "picMenu8";
             picMenu8.Size = new Size(200, 130);
             picMenu8.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -708,7 +708,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(btn_next);
+            panel1.Controls.Add(btn_receive);
             panel1.Controls.Add(btnOrder);
             panel1.Controls.Add(lblTotalPrice);
             panel1.Controls.Add(dgvOrder);
@@ -757,8 +757,8 @@
             // 
             // colMenuName
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colMenuName.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colMenuName.DefaultCellStyle = dataGridViewCellStyle4;
             colMenuName.HeaderText = "메뉴";
             colMenuName.Name = "colMenuName";
             colMenuName.ReadOnly = true;
@@ -773,8 +773,8 @@
             // 
             // colQuantity
             // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colQuantity.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colQuantity.DefaultCellStyle = dataGridViewCellStyle5;
             colQuantity.HeaderText = "수량";
             colQuantity.Name = "colQuantity";
             colQuantity.ReadOnly = true;
@@ -789,8 +789,8 @@
             // 
             // colPrice
             // 
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            colPrice.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colPrice.DefaultCellStyle = dataGridViewCellStyle6;
             colPrice.HeaderText = "금액";
             colPrice.Name = "colPrice";
             colPrice.ReadOnly = true;
@@ -817,17 +817,18 @@
             btnOrderHistory.UseVisualStyleBackColor = true;
             btnOrderHistory.Click += btnOrderHistory_Click;
             // 
-            // btn_next
+            // btn_receive
             // 
-            btn_next.BackColor = Color.Crimson;
-            btn_next.FlatStyle = FlatStyle.Flat;
-            btn_next.Location = new Point(279, 579);
-            btn_next.Name = "btn_next";
-            btn_next.Size = new Size(108, 45);
-            btn_next.TabIndex = 6;
-            btn_next.Text = "결제하러 가기";
-            btn_next.UseVisualStyleBackColor = false;
-            btn_next.Click += btn_next_Click;
+            btn_receive.BackColor = Color.Red;
+            btn_receive.FlatStyle = FlatStyle.Flat;
+            btn_receive.Font = new Font("맑은 고딕", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_receive.Location = new Point(272, 579);
+            btn_receive.Name = "btn_receive";
+            btn_receive.Size = new Size(105, 45);
+            btn_receive.TabIndex = 4;
+            btn_receive.Text = "결제하기";
+            btn_receive.UseVisualStyleBackColor = false;
+            btn_receive.Click += btn_receive_Click;
             // 
             // MenuForm
             // 
@@ -939,6 +940,6 @@
         private DataGridViewTextBoxColumn colPrice;
         private Button btnOrderHistory;
         private ToolStripMenuItem menuStaff;
-        private Button btn_next;
+        private Button btn_receive;
     }
 }

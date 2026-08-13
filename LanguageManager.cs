@@ -16,6 +16,7 @@ namespace Kiosk
             CurrentLanguageIndex = index;
             LanguageChanged?.Invoke();
         }
+
     }
 
     public class BaseLanguageForm : Form

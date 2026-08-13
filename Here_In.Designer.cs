@@ -302,7 +302,7 @@
             // 
             // button33
             // 
-            button33.Location = new Point(675, 259);
+            button33.Location = new Point(675, 265);
             button33.Name = "button33";
             button33.Size = new Size(83, 59);
             button33.TabIndex = 60;
@@ -311,7 +311,7 @@
             // 
             // button32
             // 
-            button32.Location = new Point(675, 194);
+            button32.Location = new Point(675, 200);
             button32.Name = "button32";
             button32.Size = new Size(83, 59);
             button32.TabIndex = 59;
@@ -356,7 +356,7 @@
             // 
             // button34
             // 
-            button34.Location = new Point(676, 332);
+            button34.Location = new Point(675, 330);
             button34.Name = "button34";
             button34.Size = new Size(83, 59);
             button34.TabIndex = 72;
@@ -530,7 +530,7 @@
             // btn_choice
             // 
             btn_choice.Font = new Font("맑은 고딕", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_choice.Location = new Point(321, 519);
+            btn_choice.Location = new Point(320, 519);
             btn_choice.Margin = new Padding(2);
             btn_choice.Name = "btn_choice";
             btn_choice.Size = new Size(173, 76);
@@ -550,7 +550,7 @@
             // label18
             // 
             label18.BackColor = Color.Brown;
-            label18.Location = new Point(515, 1);
+            label18.Location = new Point(519, 1);
             label18.Name = "label18";
             label18.Size = new Size(41, 446);
             label18.TabIndex = 96;

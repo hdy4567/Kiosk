@@ -43,6 +43,7 @@ namespace sushikiosk
                     Environment.NewLine +
                     Environment.NewLine;
 
+
                 totalPrice += itemTotal;
             }
 
