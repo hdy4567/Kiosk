@@ -1,0 +1,49 @@
+﻿Cilent
+namespace ClientApp { public partial class Form1 : Form { private TcpClient client; private NetworkStream stream;
+    public Form1()
+    {
+        InitializeComponent();
+    }
+
+    private void btnConnect_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            client = new TcpClient();
+            client.Connect("127.0.0.1", 9000); // 루프백 IP로 접속
+
+            // ★ 중요: 이 줄에서 stream을 반드시 할당해줘야 함!
+            stream = client.GetStream();
+
+            MessageBox.Show("서버 연결 성공!");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"연결 실패: {ex.Message}");
+        }
+
+    }
+
+    private void btnSend_Click(object sender, EventArgs e)
+    {
+        // stream이 생성되지 않았으면 예외를 내지 않고 안전하게 처리
+        if (client == null || !client.Connected || stream == null)
+        {
+            MessageBox.Show("먼저 서버에 연결해 주세요!");
+            return;
+        }
+
+        try
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(txtMessage.Text);
+            stream.Write(buffer, 0, buffer.Length);
+            txtMessage.Clear();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"전송 실패: {ex.Message}");
+        }
+
+    }
+}
+}

@@ -19,7 +19,7 @@ namespace sushikiosk
             public string ImageFile { get; set; }
         }
 
-        public class OrderItem          // 나중에 관리자랑 연동할 때 OrderItem.cs파일로 빼는
+        public class OrderItem          // 나중에 관리자랑 연동할 때 OrderItem.cs파일로 빼는, MenuForm, Pay
         {
             public string Name { get; set; }
             public int Price { get; set; }
@@ -28,11 +28,11 @@ namespace sushikiosk
             public bool IsFree { get; set; }   // 이벤트 당첨 여부
         }
 
+
         List<SushiMenu> menuList = new List<SushiMenu>();   // 메뉴 목록
 
         List<OrderItem> orderList = new List<OrderItem>();          // 전체 주문 목록
         List<OrderItem> currentOrderList = new List<OrderItem>();   // 이번에 새로 담은 주문 목록
-
         Random random = new Random();
 
         string currentCategory = "활어/참치";
@@ -40,11 +40,11 @@ namespace sushikiosk
         int pageSize = 8;           // 한 페이지에 8개를 띄워라
 
         Button[] addButtons;
-
         Label[] nameLabels;
         Label[] priceLabels;
         Panel[] menuPanels;
         PictureBox[] menuPictures;
+
 
         public MenuForm()
         {
@@ -149,13 +149,14 @@ namespace sushikiosk
 
             foreach (Button button in addButtons)
             {
-                button.Click += AddButton_Click;
+                button.Click += AddButton_Click; // 
             }
 
             ShowPage();
         }
 
-        // 다국어 메뉴 이름 매핑 딕셔너리
+
+        // 다국어 메뉴 이름 매핑 딕셔너리 -> 갯수 많아지는 경우, 배열보다 성능 향상됀다고 함.
         private static readonly Dictionary<string, string[]> menuTranslations = new Dictionary<string, string[]>
                 {
                     { "점성어초밥", new[] { "Red Drum Sushi", "ニ베寿司", "점성어초밥" } },
@@ -226,9 +227,6 @@ namespace sushikiosk
 
 
 
-
-
-
         private void AddMenu(string name, int price, string category, string imageFile)     // 메뉴하나의 이름, 가격, 카테고리,
         {                                                                                   // 이미지 정보를 메뉴 목록에 추가
             menuList.Add(new SushiMenu
@@ -278,19 +276,15 @@ namespace sushikiosk
                     // 직원 호출에는 가격이 필요 없음
                     priceLabels[i].Visible = false;
 
-                    // 담기 대신 요청
-                    string[] requestTexts = { "Request", "要求", "요청" };
-                    addButtons[i].Text = requestTexts[lang];
+                    // 번역
+                    string[] requestTexts = { "Request", "要求", "요청" }; addButtons[i].Text = requestTexts[lang];
                 }
                 else
                 {
                     // 일반 음식 메뉴
                     priceLabels[i].Visible = true;
-                    string[] wonTexts = { " KRW", "ウォン", "원" };
-                    priceLabels[i].Text = menu.Price.ToString("N0") + wonTexts[lang];
-
-                    string[] addTexts = { "Add", "入れる", "담기" };
-                    addButtons[i].Text = addTexts[lang];
+                    string[] wonTexts = { " KRW", "ウォン", "원" }; priceLabels[i].Text = menu.Price.ToString("N0") + wonTexts[lang];
+                    string[] addTexts = { "Add", "入れる", "담기" }; addButtons[i].Text = addTexts[lang];
                 }
 
                 if (!string.IsNullOrEmpty(menu.ImageFile))
@@ -311,7 +305,6 @@ namespace sushikiosk
 
                 menuPanels[i].Visible = true;
             }
-
             int totalPages =
                 (int)Math.Ceiling((double)filteredMenu.Count / pageSize);
 
@@ -475,6 +468,8 @@ namespace sushikiosk
 
                 List<string> winningMessages = new List<string>();  // 당첨 결과 메시지를 저장
 
+
+
                 foreach (OrderItem item in eventItems)      // 이벤트 대상 메뉴를 하나씩 검사
                 {
                     int winningCount = 0;
@@ -528,6 +523,9 @@ namespace sushikiosk
             }
         }
 
+
+
+
         private void SaveCurrentOrder()
         {
             foreach (OrderItem currentItem in currentOrderList)
@@ -556,26 +554,7 @@ namespace sushikiosk
             ShowOrder();
         }
 
-        private void Category_Click(object sender, EventArgs e)     // 클릭한 메뉴스트립 항목에 맞게 
-        {                                                           // 카테고리를 변경하고 첫 페이지를 표시.
-            if (!(sender is ToolStripMenuItem item))
-                return;
 
-            string txt = item.Text;
-
-            // 다국어 텍스트 매치 -> 한국어 카테고리로 매핑 변환
-            if (txt == "Fresh Fish/Tuna" || txt == "活魚/マグロ") currentCategory = "활어/참치";
-            else if (txt == "Seafood" || txt == "海鮮") currentCategory = "해산물";
-            else if (txt == "Roll/Maki" || txt == "ロール/手巻き") currentCategory = "롤/마끼";
-            else if (txt == "Single/Other Sushi" || txt == "単品/その他寿司") currentCategory = "단품/기타초밥";
-            else if (txt == "Side/Noodle/Dessert" || txt == "サイド/麺/デザート") currentCategory = "사이드/면/디저트";
-            else if (txt == "Beverage" || txt == "飲料") currentCategory = "음료";
-            else if (txt == "Staff Call" || txt == "呼び出し") currentCategory = "직원 호출";
-            else currentCategory = txt;
-
-            currentPage = 0;
-            ShowPage();
-        }
 
         private void btnOrderHistory_Click(object sender, EventArgs e)      // 현재 담긴 주문 내용을 ReceiptForm으로 표시
         {
@@ -602,6 +581,30 @@ namespace sushikiosk
             MessageBox.Show("주문이 완료되었습니다.");
         }
 
+
+        /// <summary>
+        /// 단어 배열 인덱스 기반으로 번역 변경 
+        /// </summary>
+        private void Category_Click(object sender, EventArgs e)     // 클릭한 메뉴스트립 항목에 맞게 
+        {                                                           // 카테고리를 변경하고 첫 페이지를 표시.
+            if (!(sender is ToolStripMenuItem item))
+                return;
+
+            string txt = item.Text;
+
+            // 다국어 텍스트 매치 -> 한국어 카테고리로 매핑 변환
+            if (txt == "Fresh Fish/Tuna" || txt == "活魚/マグロ") currentCategory = "활어/참치";
+            else if (txt == "Seafood" || txt == "海鮮") currentCategory = "해산물";
+            else if (txt == "Roll/Maki" || txt == "ロール/手巻き") currentCategory = "롤/마끼";
+            else if (txt == "Single/Other Sushi" || txt == "単品/その他寿司") currentCategory = "단품/기타초밥";
+            else if (txt == "Side/Noodle/Dessert" || txt == "サイド/麺/デザート") currentCategory = "사이드/면/디저트";
+            else if (txt == "Beverage" || txt == "飲料") currentCategory = "음료";
+            else if (txt == "Staff Call" || txt == "呼び出し") currentCategory = "직원 호출";
+            else currentCategory = txt;
+
+            currentPage = 0;
+            ShowPage();
+        }
         protected override void ApplyLanguage()
         {
             base.ApplyLanguage();
@@ -654,13 +657,17 @@ namespace sushikiosk
                 currentCategory = rawCategories[matchedCategory.Key];
             }
 
+
+
+
+
             ShowPage();
             ShowOrder();
         }
 
         private void btn_receive_Click(object sender, EventArgs e)
         {
-            Pop_MemberNum member = new Pop_MemberNum();
+            Pop_MemberNum member = new Pop_MemberNum(this.orderList);
             member.Show();
             this.Hide();
         }

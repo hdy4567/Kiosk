@@ -50,27 +50,9 @@ namespace Kiosk
             button32 = new Button();
             lb_roundTop1 = new RoundedToplabel();
             pnl_Pop_Membership = new RoundedPanel();
-            btn_savepoint = new Button();
-            btn_del2 = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            btn_pClear = new Button();
-            btn_pDel = new Button();
-            btn_p1 = new Button();
-            btn_p2 = new Button();
-            btn_p3 = new Button();
-            btn_p4 = new Button();
-            btn_p5 = new Button();
-            btn_p6 = new Button();
-            btn_p000 = new Button();
-            btn_p9 = new Button();
-            btn_p8 = new Button();
-            btn_p7 = new Button();
-            btn_p0 = new Button();
-            btn_p010 = new Button();
-            panel3 = new Panel();
-            ln_point = new Label();
-            lb_cusid = new Label();
             pnlStamp = new RoundedPanel();
+            lb_used_point = new Label();
+            label6 = new Label();
             btn_save = new Button();
             btn_del1 = new Button();
             roundedToplabel1 = new RoundedToplabel();
@@ -94,22 +76,40 @@ namespace Kiosk
             lb_cusid1 = new Label();
             button29 = new Button();
             panel2 = new Panel();
-            textBox2 = new TextBox();
+            tb_OriginalAmount = new TextBox();
             label2 = new Label();
-            label13 = new Label();
-            label14 = new Label();
+            lb_UsedPoint = new Label();
             label19 = new Label();
-            label21 = new Label();
+            btn_savepoint = new Button();
+            btn_del2 = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            btn_pClear = new Button();
+            btn_pDel = new Button();
+            btn_p1 = new Button();
+            btn_p2 = new Button();
+            btn_p3 = new Button();
+            btn_p4 = new Button();
+            btn_p5 = new Button();
+            btn_p6 = new Button();
+            btn_p000 = new Button();
+            btn_p9 = new Button();
+            btn_p8 = new Button();
+            btn_p7 = new Button();
+            btn_p0 = new Button();
+            btn_p010 = new Button();
+            panel3 = new Panel();
+            ln_point = new Label();
+            lb_cusid = new Label();
             roundedPanel2 = new RoundedPanel();
             colorDialog1 = new ColorDialog();
             panel4.SuspendLayout();
             pnl_Pop_Membership.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            panel3.SuspendLayout();
             pnlStamp.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
             roundedPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -356,7 +356,7 @@ namespace Kiosk
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
-            pnl_Pop_Membership.Location = new Point(734, 60);
+            pnl_Pop_Membership.Location = new Point(12, 15);
             pnl_Pop_Membership.Name = "pnl_Pop_Membership";
             pnl_Pop_Membership.RoundBottomLeft = true;
             pnl_Pop_Membership.RoundBottomRight = true;
@@ -368,273 +368,14 @@ namespace Kiosk
             pnl_Pop_Membership.Size = new Size(772, 509);
             pnl_Pop_Membership.TabIndex = 16;
             // 
-            // btn_savepoint
-            // 
-            btn_savepoint.BackColor = Color.FromArgb(255, 128, 0);
-            btn_savepoint.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_savepoint.Location = new Point(376, 350);
-            btn_savepoint.Name = "btn_savepoint";
-            btn_savepoint.Size = new Size(200, 38);
-            btn_savepoint.TabIndex = 34;
-            btn_savepoint.Text = "2. 적립";
-            btn_savepoint.UseVisualStyleBackColor = false;
-            btn_savepoint.Click += btn_savepoint_Click;
-            // 
-            // btn_del2
-            // 
-            btn_del2.BackColor = Color.FromArgb(211, 47, 47);
-            btn_del2.FlatStyle = FlatStyle.Flat;
-            btn_del2.Location = new Point(29, 345);
-            btn_del2.Name = "btn_del2";
-            btn_del2.Size = new Size(81, 37);
-            btn_del2.TabIndex = 33;
-            btn_del2.Text = "취소";
-            btn_del2.UseVisualStyleBackColor = false;
-            btn_del2.Click += btn_del2_Click;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.BackColor = SystemColors.ActiveCaptionText;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel1.Controls.Add(btn_pClear, 0, 0);
-            tableLayoutPanel1.Controls.Add(btn_pDel, 2, 0);
-            tableLayoutPanel1.Controls.Add(btn_p1, 0, 1);
-            tableLayoutPanel1.Controls.Add(btn_p2, 1, 1);
-            tableLayoutPanel1.Controls.Add(btn_p3, 2, 1);
-            tableLayoutPanel1.Controls.Add(btn_p4, 0, 2);
-            tableLayoutPanel1.Controls.Add(btn_p5, 1, 2);
-            tableLayoutPanel1.Controls.Add(btn_p6, 2, 2);
-            tableLayoutPanel1.Controls.Add(btn_p000, 2, 4);
-            tableLayoutPanel1.Controls.Add(btn_p9, 2, 3);
-            tableLayoutPanel1.Controls.Add(btn_p8, 1, 3);
-            tableLayoutPanel1.Controls.Add(btn_p7, 0, 3);
-            tableLayoutPanel1.Controls.Add(btn_p0, 1, 4);
-            tableLayoutPanel1.Controls.Add(btn_p010, 0, 4);
-            tableLayoutPanel1.Location = new Point(419, 31);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 5;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.Size = new Size(198, 313);
-            tableLayoutPanel1.TabIndex = 0;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
-            // 
-            // btn_pClear
-            // 
-            btn_pClear.BackColor = SystemColors.ActiveCaptionText;
-            tableLayoutPanel1.SetColumnSpan(btn_pClear, 2);
-            btn_pClear.Dock = DockStyle.Fill;
-            btn_pClear.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_pClear.ForeColor = Color.Goldenrod;
-            btn_pClear.Location = new Point(3, 3);
-            btn_pClear.Name = "btn_pClear";
-            btn_pClear.Size = new Size(125, 56);
-            btn_pClear.TabIndex = 6;
-            btn_pClear.Text = "Clear ";
-            btn_pClear.UseVisualStyleBackColor = false;
-            // 
-            // btn_pDel
-            // 
-            btn_pDel.BackColor = Color.Goldenrod;
-            btn_pDel.Font = new Font("맑은 고딕", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_pDel.ForeColor = SystemColors.ActiveCaptionText;
-            btn_pDel.Location = new Point(134, 3);
-            btn_pDel.Name = "btn_pDel";
-            btn_pDel.Size = new Size(61, 56);
-            btn_pDel.TabIndex = 16;
-            btn_pDel.Text = "<-";
-            btn_pDel.UseVisualStyleBackColor = false;
-            // 
-            // btn_p1
-            // 
-            btn_p1.BackColor = Color.Goldenrod;
-            btn_p1.Dock = DockStyle.Fill;
-            btn_p1.FlatStyle = FlatStyle.Flat;
-            btn_p1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p1.Location = new Point(3, 65);
-            btn_p1.Name = "btn_p1";
-            btn_p1.Size = new Size(59, 56);
-            btn_p1.TabIndex = 21;
-            btn_p1.Text = "1";
-            btn_p1.UseVisualStyleBackColor = false;
-            // 
-            // btn_p2
-            // 
-            btn_p2.BackColor = Color.Goldenrod;
-            btn_p2.Dock = DockStyle.Fill;
-            btn_p2.FlatStyle = FlatStyle.Flat;
-            btn_p2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p2.Location = new Point(68, 65);
-            btn_p2.Name = "btn_p2";
-            btn_p2.Size = new Size(60, 56);
-            btn_p2.TabIndex = 18;
-            btn_p2.Text = "2";
-            btn_p2.UseVisualStyleBackColor = false;
-            // 
-            // btn_p3
-            // 
-            btn_p3.BackColor = Color.Goldenrod;
-            btn_p3.FlatStyle = FlatStyle.Flat;
-            btn_p3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p3.Location = new Point(134, 65);
-            btn_p3.Name = "btn_p3";
-            btn_p3.Size = new Size(61, 56);
-            btn_p3.TabIndex = 19;
-            btn_p3.Text = "3";
-            btn_p3.UseVisualStyleBackColor = false;
-            // 
-            // btn_p4
-            // 
-            btn_p4.BackColor = Color.Goldenrod;
-            btn_p4.FlatStyle = FlatStyle.Flat;
-            btn_p4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p4.Location = new Point(3, 127);
-            btn_p4.Name = "btn_p4";
-            btn_p4.Size = new Size(59, 56);
-            btn_p4.TabIndex = 20;
-            btn_p4.Text = "4";
-            btn_p4.UseVisualStyleBackColor = false;
-            // 
-            // btn_p5
-            // 
-            btn_p5.BackColor = Color.Goldenrod;
-            btn_p5.FlatStyle = FlatStyle.Flat;
-            btn_p5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p5.Location = new Point(68, 127);
-            btn_p5.Name = "btn_p5";
-            btn_p5.Size = new Size(60, 56);
-            btn_p5.TabIndex = 25;
-            btn_p5.Text = "5";
-            btn_p5.UseVisualStyleBackColor = false;
-            // 
-            // btn_p6
-            // 
-            btn_p6.BackColor = Color.Goldenrod;
-            btn_p6.FlatStyle = FlatStyle.Flat;
-            btn_p6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p6.Location = new Point(134, 127);
-            btn_p6.Name = "btn_p6";
-            btn_p6.Size = new Size(61, 56);
-            btn_p6.TabIndex = 24;
-            btn_p6.Text = "6";
-            btn_p6.UseVisualStyleBackColor = false;
-            // 
-            // btn_p000
-            // 
-            btn_p000.BackColor = Color.Goldenrod;
-            btn_p000.FlatStyle = FlatStyle.Flat;
-            btn_p000.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p000.Location = new Point(134, 251);
-            btn_p000.Name = "btn_p000";
-            btn_p000.Size = new Size(61, 59);
-            btn_p000.TabIndex = 35;
-            btn_p000.Text = "000";
-            btn_p000.UseVisualStyleBackColor = false;
-            // 
-            // btn_p9
-            // 
-            btn_p9.BackColor = Color.Goldenrod;
-            btn_p9.FlatStyle = FlatStyle.Flat;
-            btn_p9.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p9.Location = new Point(134, 189);
-            btn_p9.Name = "btn_p9";
-            btn_p9.Size = new Size(61, 56);
-            btn_p9.TabIndex = 26;
-            btn_p9.Text = "9";
-            btn_p9.UseVisualStyleBackColor = false;
-            // 
-            // btn_p8
-            // 
-            btn_p8.BackColor = Color.Goldenrod;
-            btn_p8.FlatStyle = FlatStyle.Flat;
-            btn_p8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p8.Location = new Point(68, 189);
-            btn_p8.Name = "btn_p8";
-            btn_p8.Size = new Size(60, 56);
-            btn_p8.TabIndex = 22;
-            btn_p8.Text = "8";
-            btn_p8.UseVisualStyleBackColor = false;
-            // 
-            // btn_p7
-            // 
-            btn_p7.BackColor = Color.Goldenrod;
-            btn_p7.FlatStyle = FlatStyle.Flat;
-            btn_p7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p7.Location = new Point(3, 189);
-            btn_p7.Name = "btn_p7";
-            btn_p7.Size = new Size(59, 56);
-            btn_p7.TabIndex = 23;
-            btn_p7.Text = "7";
-            btn_p7.UseVisualStyleBackColor = false;
-            // 
-            // btn_p0
-            // 
-            btn_p0.BackColor = Color.Goldenrod;
-            btn_p0.FlatStyle = FlatStyle.Flat;
-            btn_p0.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p0.Location = new Point(68, 251);
-            btn_p0.Name = "btn_p0";
-            btn_p0.Size = new Size(60, 59);
-            btn_p0.TabIndex = 33;
-            btn_p0.Text = "0";
-            btn_p0.UseVisualStyleBackColor = false;
-            // 
-            // btn_p010
-            // 
-            btn_p010.BackColor = Color.Goldenrod;
-            btn_p010.FlatStyle = FlatStyle.Flat;
-            btn_p010.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p010.Location = new Point(3, 251);
-            btn_p010.Name = "btn_p010";
-            btn_p010.Size = new Size(59, 59);
-            btn_p010.TabIndex = 34;
-            btn_p010.Text = "010";
-            btn_p010.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(ln_point);
-            panel3.Controls.Add(lb_cusid);
-            panel3.Location = new Point(29, 81);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(387, 41);
-            panel3.TabIndex = 19;
-            // 
-            // ln_point
-            // 
-            ln_point.BackColor = Color.Transparent;
-            ln_point.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            ln_point.Location = new Point(208, 0);
-            ln_point.Name = "ln_point";
-            ln_point.Size = new Size(179, 41);
-            ln_point.TabIndex = 20;
-            ln_point.Click += label15_Click;
-            // 
-            // lb_cusid
-            // 
-            lb_cusid.BackColor = SystemColors.ActiveBorder;
-            lb_cusid.FlatStyle = FlatStyle.System;
-            lb_cusid.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_cusid.ImageAlign = ContentAlignment.TopLeft;
-            lb_cusid.Location = new Point(0, 0);
-            lb_cusid.Name = "lb_cusid";
-            lb_cusid.Size = new Size(387, 41);
-            lb_cusid.TabIndex = 0;
-            lb_cusid.Text = "회원번호";
-            lb_cusid.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // pnlStamp
             // 
             pnlStamp.BorderColor = Color.Black;
             pnlStamp.BorderRadius = 90;
             pnlStamp.BorderSize = 1F;
             pnlStamp.BottomBorderRadius = 40;
+            pnlStamp.Controls.Add(lb_used_point);
+            pnlStamp.Controls.Add(label6);
             pnlStamp.Controls.Add(btn_save);
             pnlStamp.Controls.Add(btn_del1);
             pnlStamp.Controls.Add(roundedToplabel1);
@@ -642,11 +383,9 @@ namespace Kiosk
             pnlStamp.Controls.Add(panel1);
             pnlStamp.Controls.Add(button29);
             pnlStamp.Controls.Add(panel2);
-            pnlStamp.Controls.Add(label13);
-            pnlStamp.Controls.Add(label14);
+            pnlStamp.Controls.Add(lb_UsedPoint);
             pnlStamp.Controls.Add(label19);
-            pnlStamp.Controls.Add(label21);
-            pnlStamp.Location = new Point(734, 57);
+            pnlStamp.Location = new Point(15, 12);
             pnlStamp.Name = "pnlStamp";
             pnlStamp.RoundBottomLeft = true;
             pnlStamp.RoundBottomRight = true;
@@ -658,11 +397,33 @@ namespace Kiosk
             pnlStamp.Size = new Size(772, 509);
             pnlStamp.TabIndex = 22;
             // 
+            // lb_used_point
+            // 
+            lb_used_point.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_used_point.Location = new Point(316, 207);
+            lb_used_point.Name = "lb_used_point";
+            lb_used_point.Size = new Size(100, 41);
+            lb_used_point.TabIndex = 34;
+            lb_used_point.Text = "label6";
+            // 
+            // label6
+            // 
+            label6.BackColor = SystemColors.ControlLightLight;
+            label6.FlatStyle = FlatStyle.System;
+            label6.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ImageAlign = ContentAlignment.TopLeft;
+            label6.Location = new Point(29, 207);
+            label6.Name = "label6";
+            label6.Size = new Size(387, 41);
+            label6.TabIndex = 35;
+            label6.Text = "사용할 포인트";
+            label6.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // btn_save
             // 
             btn_save.BackColor = Color.FromArgb(255, 128, 0);
             btn_save.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_save.Location = new Point(388, 344);
+            btn_save.Location = new Point(389, 345);
             btn_save.Name = "btn_save";
             btn_save.Size = new Size(200, 38);
             btn_save.TabIndex = 32;
@@ -944,7 +705,7 @@ namespace Kiosk
             // 
             button29.BackColor = Color.White;
             button29.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button29.Location = new Point(129, 344);
+            button29.Location = new Point(183, 344);
             button29.Name = "button29";
             button29.Size = new Size(200, 38);
             button29.TabIndex = 25;
@@ -953,21 +714,21 @@ namespace Kiosk
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(tb_OriginalAmount);
             panel2.Controls.Add(label2);
             panel2.Location = new Point(29, 125);
             panel2.Name = "panel2";
             panel2.Size = new Size(387, 41);
             panel2.TabIndex = 19;
             // 
-            // textBox2
+            // tb_OriginalAmount
             // 
-            textBox2.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox2.Location = new Point(287, -5);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(103, 46);
-            textBox2.TabIndex = 14;
+            tb_OriginalAmount.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            tb_OriginalAmount.Location = new Point(287, -2);
+            tb_OriginalAmount.Multiline = true;
+            tb_OriginalAmount.Name = "tb_OriginalAmount";
+            tb_OriginalAmount.Size = new Size(103, 46);
+            tb_OriginalAmount.TabIndex = 14;
             // 
             // label2
             // 
@@ -979,31 +740,18 @@ namespace Kiosk
             label2.Name = "label2";
             label2.Size = new Size(387, 41);
             label2.TabIndex = 1;
-            label2.Text = "대상금액";
+            label2.Text = "원금";
             label2.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label13
+            // lb_UsedPoint
             // 
-            label13.BackColor = Color.Transparent;
-            label13.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.Location = new Point(316, 165);
-            label13.Name = "label13";
-            label13.Size = new Size(100, 41);
-            label13.TabIndex = 23;
-            label13.Text = "label13";
-            // 
-            // label14
-            // 
-            label14.BackColor = SystemColors.ControlLightLight;
-            label14.FlatStyle = FlatStyle.System;
-            label14.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.ImageAlign = ContentAlignment.TopLeft;
-            label14.Location = new Point(29, 206);
-            label14.Name = "label14";
-            label14.Size = new Size(387, 41);
-            label14.TabIndex = 3;
-            label14.Text = "회원명";
-            label14.TextAlign = ContentAlignment.MiddleLeft;
+            lb_UsedPoint.BackColor = Color.Transparent;
+            lb_UsedPoint.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_UsedPoint.Location = new Point(316, 165);
+            lb_UsedPoint.Name = "lb_UsedPoint";
+            lb_UsedPoint.Size = new Size(100, 41);
+            lb_UsedPoint.TabIndex = 23;
+            lb_UsedPoint.Text = "label13";
             // 
             // label19
             // 
@@ -1018,15 +766,266 @@ namespace Kiosk
             label19.Text = "잔여 포인트";
             label19.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label21
+            // btn_savepoint
             // 
-            label21.BackColor = Color.Transparent;
-            label21.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(316, 206);
-            label21.Name = "label21";
-            label21.Size = new Size(100, 41);
-            label21.TabIndex = 22;
-            label21.Text = "label12";
+            btn_savepoint.BackColor = Color.FromArgb(255, 128, 0);
+            btn_savepoint.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_savepoint.Location = new Point(376, 350);
+            btn_savepoint.Name = "btn_savepoint";
+            btn_savepoint.Size = new Size(200, 38);
+            btn_savepoint.TabIndex = 34;
+            btn_savepoint.Text = "2. 적립";
+            btn_savepoint.UseVisualStyleBackColor = false;
+            btn_savepoint.Click += btn_savepoint_Click;
+            // 
+            // btn_del2
+            // 
+            btn_del2.BackColor = Color.FromArgb(211, 47, 47);
+            btn_del2.FlatStyle = FlatStyle.Flat;
+            btn_del2.Location = new Point(29, 345);
+            btn_del2.Name = "btn_del2";
+            btn_del2.Size = new Size(81, 37);
+            btn_del2.TabIndex = 33;
+            btn_del2.Text = "취소";
+            btn_del2.UseVisualStyleBackColor = false;
+            btn_del2.Click += btn_del2_Click;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.BackColor = SystemColors.ActiveCaptionText;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel1.Controls.Add(btn_pClear, 0, 0);
+            tableLayoutPanel1.Controls.Add(btn_pDel, 2, 0);
+            tableLayoutPanel1.Controls.Add(btn_p1, 0, 1);
+            tableLayoutPanel1.Controls.Add(btn_p2, 1, 1);
+            tableLayoutPanel1.Controls.Add(btn_p3, 2, 1);
+            tableLayoutPanel1.Controls.Add(btn_p4, 0, 2);
+            tableLayoutPanel1.Controls.Add(btn_p5, 1, 2);
+            tableLayoutPanel1.Controls.Add(btn_p6, 2, 2);
+            tableLayoutPanel1.Controls.Add(btn_p000, 2, 4);
+            tableLayoutPanel1.Controls.Add(btn_p9, 2, 3);
+            tableLayoutPanel1.Controls.Add(btn_p8, 1, 3);
+            tableLayoutPanel1.Controls.Add(btn_p7, 0, 3);
+            tableLayoutPanel1.Controls.Add(btn_p0, 1, 4);
+            tableLayoutPanel1.Controls.Add(btn_p010, 0, 4);
+            tableLayoutPanel1.Location = new Point(419, 31);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new Size(198, 313);
+            tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
+            // 
+            // btn_pClear
+            // 
+            btn_pClear.BackColor = SystemColors.ActiveCaptionText;
+            tableLayoutPanel1.SetColumnSpan(btn_pClear, 2);
+            btn_pClear.Dock = DockStyle.Fill;
+            btn_pClear.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_pClear.ForeColor = Color.Goldenrod;
+            btn_pClear.Location = new Point(3, 3);
+            btn_pClear.Name = "btn_pClear";
+            btn_pClear.Size = new Size(125, 56);
+            btn_pClear.TabIndex = 6;
+            btn_pClear.Text = "Clear ";
+            btn_pClear.UseVisualStyleBackColor = false;
+            // 
+            // btn_pDel
+            // 
+            btn_pDel.BackColor = Color.Goldenrod;
+            btn_pDel.Font = new Font("맑은 고딕", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_pDel.ForeColor = SystemColors.ActiveCaptionText;
+            btn_pDel.Location = new Point(134, 3);
+            btn_pDel.Name = "btn_pDel";
+            btn_pDel.Size = new Size(61, 56);
+            btn_pDel.TabIndex = 16;
+            btn_pDel.Text = "<-";
+            btn_pDel.UseVisualStyleBackColor = false;
+            // 
+            // btn_p1
+            // 
+            btn_p1.BackColor = Color.Goldenrod;
+            btn_p1.Dock = DockStyle.Fill;
+            btn_p1.FlatStyle = FlatStyle.Flat;
+            btn_p1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p1.Location = new Point(3, 65);
+            btn_p1.Name = "btn_p1";
+            btn_p1.Size = new Size(59, 56);
+            btn_p1.TabIndex = 21;
+            btn_p1.Text = "1";
+            btn_p1.UseVisualStyleBackColor = false;
+            // 
+            // btn_p2
+            // 
+            btn_p2.BackColor = Color.Goldenrod;
+            btn_p2.Dock = DockStyle.Fill;
+            btn_p2.FlatStyle = FlatStyle.Flat;
+            btn_p2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p2.Location = new Point(68, 65);
+            btn_p2.Name = "btn_p2";
+            btn_p2.Size = new Size(60, 56);
+            btn_p2.TabIndex = 18;
+            btn_p2.Text = "2";
+            btn_p2.UseVisualStyleBackColor = false;
+            // 
+            // btn_p3
+            // 
+            btn_p3.BackColor = Color.Goldenrod;
+            btn_p3.FlatStyle = FlatStyle.Flat;
+            btn_p3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p3.Location = new Point(134, 65);
+            btn_p3.Name = "btn_p3";
+            btn_p3.Size = new Size(61, 56);
+            btn_p3.TabIndex = 19;
+            btn_p3.Text = "3";
+            btn_p3.UseVisualStyleBackColor = false;
+            // 
+            // btn_p4
+            // 
+            btn_p4.BackColor = Color.Goldenrod;
+            btn_p4.FlatStyle = FlatStyle.Flat;
+            btn_p4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p4.Location = new Point(3, 127);
+            btn_p4.Name = "btn_p4";
+            btn_p4.Size = new Size(59, 56);
+            btn_p4.TabIndex = 20;
+            btn_p4.Text = "4";
+            btn_p4.UseVisualStyleBackColor = false;
+            // 
+            // btn_p5
+            // 
+            btn_p5.BackColor = Color.Goldenrod;
+            btn_p5.FlatStyle = FlatStyle.Flat;
+            btn_p5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p5.Location = new Point(68, 127);
+            btn_p5.Name = "btn_p5";
+            btn_p5.Size = new Size(60, 56);
+            btn_p5.TabIndex = 25;
+            btn_p5.Text = "5";
+            btn_p5.UseVisualStyleBackColor = false;
+            // 
+            // btn_p6
+            // 
+            btn_p6.BackColor = Color.Goldenrod;
+            btn_p6.FlatStyle = FlatStyle.Flat;
+            btn_p6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p6.Location = new Point(134, 127);
+            btn_p6.Name = "btn_p6";
+            btn_p6.Size = new Size(61, 56);
+            btn_p6.TabIndex = 24;
+            btn_p6.Text = "6";
+            btn_p6.UseVisualStyleBackColor = false;
+            // 
+            // btn_p000
+            // 
+            btn_p000.BackColor = Color.Goldenrod;
+            btn_p000.FlatStyle = FlatStyle.Flat;
+            btn_p000.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p000.Location = new Point(134, 251);
+            btn_p000.Name = "btn_p000";
+            btn_p000.Size = new Size(61, 59);
+            btn_p000.TabIndex = 35;
+            btn_p000.Text = "000";
+            btn_p000.UseVisualStyleBackColor = false;
+            // 
+            // btn_p9
+            // 
+            btn_p9.BackColor = Color.Goldenrod;
+            btn_p9.FlatStyle = FlatStyle.Flat;
+            btn_p9.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p9.Location = new Point(134, 189);
+            btn_p9.Name = "btn_p9";
+            btn_p9.Size = new Size(61, 56);
+            btn_p9.TabIndex = 26;
+            btn_p9.Text = "9";
+            btn_p9.UseVisualStyleBackColor = false;
+            // 
+            // btn_p8
+            // 
+            btn_p8.BackColor = Color.Goldenrod;
+            btn_p8.FlatStyle = FlatStyle.Flat;
+            btn_p8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p8.Location = new Point(68, 189);
+            btn_p8.Name = "btn_p8";
+            btn_p8.Size = new Size(60, 56);
+            btn_p8.TabIndex = 22;
+            btn_p8.Text = "8";
+            btn_p8.UseVisualStyleBackColor = false;
+            // 
+            // btn_p7
+            // 
+            btn_p7.BackColor = Color.Goldenrod;
+            btn_p7.FlatStyle = FlatStyle.Flat;
+            btn_p7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p7.Location = new Point(3, 189);
+            btn_p7.Name = "btn_p7";
+            btn_p7.Size = new Size(59, 56);
+            btn_p7.TabIndex = 23;
+            btn_p7.Text = "7";
+            btn_p7.UseVisualStyleBackColor = false;
+            // 
+            // btn_p0
+            // 
+            btn_p0.BackColor = Color.Goldenrod;
+            btn_p0.FlatStyle = FlatStyle.Flat;
+            btn_p0.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p0.Location = new Point(68, 251);
+            btn_p0.Name = "btn_p0";
+            btn_p0.Size = new Size(60, 59);
+            btn_p0.TabIndex = 33;
+            btn_p0.Text = "0";
+            btn_p0.UseVisualStyleBackColor = false;
+            // 
+            // btn_p010
+            // 
+            btn_p010.BackColor = Color.Goldenrod;
+            btn_p010.FlatStyle = FlatStyle.Flat;
+            btn_p010.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p010.Location = new Point(3, 251);
+            btn_p010.Name = "btn_p010";
+            btn_p010.Size = new Size(59, 59);
+            btn_p010.TabIndex = 34;
+            btn_p010.Text = "010";
+            btn_p010.UseVisualStyleBackColor = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(ln_point);
+            panel3.Controls.Add(lb_cusid);
+            panel3.Location = new Point(29, 81);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(387, 41);
+            panel3.TabIndex = 19;
+            // 
+            // ln_point
+            // 
+            ln_point.BackColor = Color.Transparent;
+            ln_point.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            ln_point.Location = new Point(208, 0);
+            ln_point.Name = "ln_point";
+            ln_point.Size = new Size(179, 41);
+            ln_point.TabIndex = 20;
+            ln_point.Click += label15_Click;
+            // 
+            // lb_cusid
+            // 
+            lb_cusid.BackColor = SystemColors.ActiveBorder;
+            lb_cusid.FlatStyle = FlatStyle.System;
+            lb_cusid.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_cusid.ImageAlign = ContentAlignment.TopLeft;
+            lb_cusid.Location = new Point(0, 0);
+            lb_cusid.Name = "lb_cusid";
+            lb_cusid.Size = new Size(387, 41);
+            lb_cusid.TabIndex = 0;
+            lb_cusid.Text = "회원번호";
+            lb_cusid.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // roundedPanel2
             // 
@@ -1069,13 +1068,13 @@ namespace Kiosk
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             pnl_Pop_Membership.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             pnlStamp.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             roundedPanel2.ResumeLayout(false);
             roundedPanel2.PerformLayout();
             ResumeLayout(false);
@@ -1123,14 +1122,12 @@ namespace Kiosk
         private Button btn_p7;
         private Button btn_p0;
         private Button btn_p010;
-        private Label label21;
         private Label label19;
-        private Label label14;
-        private Label label13;
+        private Label lb_UsedPoint;
         private Button button29;
         private Panel panel1;
         private Label lb_point;
-        private Label label6;
+        private Label lb_used_point;
         private TableLayoutPanel tableLayoutPanel2;
         private Button btn_plClear;
         private Button btn_plDel;
@@ -1150,7 +1147,7 @@ namespace Kiosk
         private RoundedPanel pnlStamp;
         private Panel panel2;
         private Label label7;
-        private TextBox textBox2;
+        private TextBox tb_OriginalAmount;
         private Label label2;
         private Panel panel3;
         private Label ln_point;
@@ -1166,5 +1163,6 @@ namespace Kiosk
         private RoundedPanel roundedPanel2;
         private Label lb_cusid1;
         private ColorDialog colorDialog1;
+        private Label label6;
     }
 }

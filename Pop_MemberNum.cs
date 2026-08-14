@@ -13,6 +13,13 @@ namespace Kiosk
 {
     public partial class Pop_MemberNum : BaseLanguageForm
     {
+        // MenuForm.cs 주문 데이터를 넘겨받을 리스트 필드 추가
+        private List<sushikiosk.MenuForm.OrderItem> orderList = new List<sushikiosk.MenuForm.OrderItem>();
+
+        
+        //EarnedPoint: 이번 결제로 적립한 포인트
+        //추가 MemberId: 회원번호(비회원은 0)
+        //PaymentMethod: 결제 수단(신용카드, 앱선결제 등)
         public Pop_MemberNum()
         {
             InitializeComponent();
@@ -20,9 +27,15 @@ namespace Kiosk
             pnl_Pop_Membership.Hide();
         }
 
+        // MenuForm에서 넘어올 때 사용할 생성자 오버로드
+        public Pop_MemberNum(List<sushikiosk.MenuForm.OrderItem> orders) : this()
+        {
+            this.orderList = orders;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Payment payform = new Payment();
+            Payment payform = new Payment(this.orderList);
             payform.Show();
             this.Hide();
         }
@@ -84,6 +97,7 @@ namespace Kiosk
                 //pnl_Pop_Membership.Focus();
             }
         }
+
 
         private void Membership_Load(object sender, EventArgs e)
         {
@@ -200,11 +214,21 @@ namespace Kiosk
                     }
                     else
                     {
-                        lb_point.Text += btn.Text;
+                        // 회원번호 자릿수를 최대 4자리로 제한
+                        if (lb_point.Text.Length < 4)
+                        {
+                            lb_point.Text += btn.Text;
+                        }
                     }
                 }
             }
         }
+
+
+
+
+
+
 
         // 특정 컨트롤이 특정 부모 컨트롤(패널 등)의 하위에 포함되어 있는지 확인하는 헬퍼 메서드
         private bool IsChildOf(Control child, Control parent)
@@ -259,7 +283,6 @@ namespace Kiosk
 
         }
 
-        public Graphics Graphics => this.CreateGraphics();
 
         private void label15_Click(object sender, EventArgs e)
         {
@@ -296,10 +319,15 @@ namespace Kiosk
 
         }
 
-        //private void tableLayoutPanel1(object sender, EventArgs e)
-        //{
-        //    tableLayoutPanel1.SetColumnSpan(btn_pClear, 2);
-        //}
+
+        /// <summary>
+        /// MenuForm.cs에서 받은 주문테이블 정보(orderList)를 반환합니다.
+        /// </summary>
+        public List<sushikiosk.MenuForm.OrderItem> Get_orderList(){
+            return this.orderList;
+        }
+
+
 
 
         private void btn_del1_Click(object sender, EventArgs e)
@@ -352,7 +380,6 @@ namespace Kiosk
             if (btn_savepoint != null) btn_savepoint.Text = savepointTexts[langIndex];
             if (label2 != null) label2.Text = label2Texts[langIndex];
             if (label19 != null) label19.Text = label19Texts[langIndex];
-            if (label14 != null) label14.Text = label14Texts[langIndex];
             if (btn_del1 != null) btn_del1.Text = del1Texts[langIndex];
             if (button29 != null) button29.Text = searchTexts[langIndex];
             if (btn_save != null) btn_save.Text = saveTexts[langIndex];
@@ -369,28 +396,142 @@ namespace Kiosk
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+           
 
-            Payment pay_form = new Payment();
+            // 1. 원금 계산 (주문 정보 바탕)
+            int originalAmount = 0;
+
+            if (this.orderList != null && this.orderList.Count > 0)
+            {
+                originalAmount = this.orderList.Sum(item => item.Price * item.Quantity);
+            }
+
+            // 포인트 계산 (예: 결제 총액의 10%를 적립)
+            int EarnedPoint = (int)(originalAmount * 0.1);
+
+            // 2. 입력된 회원 번호 및 포인트 바인딩 정보 파싱
+            string memberIdStr = lb_point.Text;
+            int memberId = 0;
+            int usedPoint = 0;
+
+            // 디자이너의 텍스트 필드에서 가져옴 (숫자 판을 통해 입력된 값)
+            if (!string.IsNullOrEmpty(memberIdStr))
+            {
+                int.TryParse(memberIdStr, out memberId);
+            }
+
+            // 디버그용 샘플 회원 DB 매칭 시뮬레이션
+            int dbMemberId = 1001;      // 시뮬레이션 타겟 회원 ID
+            int dbRemainingPoints = 5000; // 시뮬레이션 타겟 잔여 포인트
+            //int 5000 = 
+            string dbMemberName = "홍길동";
+
+            // 만약 입력된 회원번호가 매칭된다면
+            if (memberId == dbMemberId)
+            {
+                // 사용할 포인트 계산 (원금 한도 내에서 1000포인트 단위 단위 사용 예시)
+                usedPoint = Math.Min(originalAmount, 2000); 
+                
+                // UI 바인딩
+                if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
+                if (lb_UsedPoint != null) lb_UsedPoint.Text = usedPoint.ToString();
+                if (lb_cusName1 != null) lb_cusName1.Text = dbMemberName;
+                if (lb_savePoint1 != null) lb_savePoint1.Text = (dbRemainingPoints - usedPoint).ToString();
+            }
+            else
+            {
+                // 비회원 혹은 불일치 시
+                usedPoint = 0;
+                if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
+                if (lb_UsedPoint != null) lb_UsedPoint.Text = "0";
+            }
 
 
+
+
+            
+
+            // 3. 결제 창(Payment) 객체를 생성하고 데이터 연동
+            // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
+            Payment pay_form = new Payment(this.orderList);
+            
+            // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
+            // (Payment 클래스에 public 변수나 Property가 정의되어 있다면 반영)
+            // pay_form.SetPaymentDetails(memberId, originalAmount, usedPoint); 
 
             pay_form.Show();
             this.Hide();
 
-            MessageBox.Show("적립되었습니다 ! ");
-
-
+            MessageBox.Show($"{EarnedPoint} 포인트 적립 완료되었습니다 !");
         }
 
         private void btn_savepoint_Click(object sender, EventArgs e)
         {
-            Payment pay_form = new Payment();
+            // 1. 원금 계산 (주문 정보 바탕)
+            int originalAmount = 0;
+
+            if (this.orderList != null && this.orderList.Count > 0)
+            {
+                originalAmount = this.orderList.Sum(item => item.Price * item.Quantity);
+            }
+
+            // 포인트 계산 (예: 결제 총액의 10%를 적립)
+            int EarnedPoint = (int)(originalAmount * 0.1);
+
+            // 2. 입력된 회원 번호 및 포인트 바인딩 정보 파싱
+            string memberIdStr = lb_point.Text;
+            int memberId = 0;
+            int usedPoint = 0;
+
+            // 디자이너의 텍스트 필드에서 가져옴 (숫자 판을 통해 입력된 값)
+            if (!string.IsNullOrEmpty(memberIdStr))
+            {
+                int.TryParse(memberIdStr, out memberId);
+            }
+
+            // 디버그용 샘플 회원 DB 매칭 시뮬레이션
+            int dbMemberId = 1001;      // 시뮬레이션 타겟 회원 ID
+            int dbRemainingPoints = 5000; // 시뮬레이션 타겟 잔여 포인트
+            //int 5000 = 
+            string dbMemberName = "홍길동";
+
+            // 만약 입력된 회원번호가 매칭된다면
+            if (memberId == dbMemberId)
+            {
+                // 사용할 포인트 계산 (원금 한도 내에서 1000포인트 단위 단위 사용 예시)
+                usedPoint = Math.Min(originalAmount, 2000);
+
+                // UI 바인딩
+                if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
+                if (lb_UsedPoint != null) lb_UsedPoint.Text = usedPoint.ToString();
+                if (lb_cusName1 != null) lb_cusName1.Text = dbMemberName;
+                if (lb_savePoint1 != null) lb_savePoint1.Text = (dbRemainingPoints - usedPoint).ToString();
+            }
+            else
+            {
+                // 비회원 혹은 불일치 시
+                usedPoint = 0;
+                if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
+                if (lb_UsedPoint != null) lb_UsedPoint.Text = "0";
+            }
+
+
+
+
+
+
+            // 3. 결제 창(Payment) 객체를 생성하고 데이터 연동
+            // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
+            Payment pay_form = new Payment(this.orderList);
+
+            // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
+            // (Payment 클래스에 public 변수나 Property가 정의되어 있다면 반영)
+            // pay_form.SetPaymentDetails(memberId, originalAmount, usedPoint); 
 
             pay_form.Show();
             this.Hide();
 
-            MessageBox.Show("적립되었습니다  !");
-
+            MessageBox.Show($"{EarnedPoint} 포인트 적립 완료되었습니다 !");
         }
 
         private void btn_back_Click(object sender, EventArgs e)

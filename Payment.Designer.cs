@@ -41,7 +41,10 @@
             label3 = new Label();
             btn_coupon = new Button();
             roundedPanel1 = new Kiosk.Controls.RoundedPanel();
+            roundedPanel2 = new Kiosk.Controls.RoundedPanel();
+            richTextBox1 = new RichTextBox();
             roundedPanel1.SuspendLayout();
+            roundedPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // btn_back
@@ -77,6 +80,7 @@
             btn_KakaoPay.TabIndex = 18;
             btn_KakaoPay.Text = "카카오 페이";
             btn_KakaoPay.UseVisualStyleBackColor = false;
+            btn_KakaoPay.Click += btn_KakaoPay_Click_1;
             // 
             // btn_naverPay
             // 
@@ -88,6 +92,7 @@
             btn_naverPay.TabIndex = 16;
             btn_naverPay.Text = "네이버 페이";
             btn_naverPay.UseVisualStyleBackColor = false;
+            btn_naverPay.Click += btn_naverPay_Click_1;
             // 
             // btn_card
             // 
@@ -99,6 +104,7 @@
             btn_card.TabIndex = 15;
             btn_card.Text = "카드 결제";
             btn_card.UseVisualStyleBackColor = false;
+            btn_card.Click += btn_card_Click_1;
             // 
             // label2
             // 
@@ -150,6 +156,7 @@
             btn_SamsungPay.TabIndex = 23;
             btn_SamsungPay.Text = "삼성페이";
             btn_SamsungPay.UseVisualStyleBackColor = false;
+            btn_SamsungPay.Click += btn_SamsungPay_Click_1;
             // 
             // label3
             // 
@@ -202,11 +209,45 @@
             roundedPanel1.Size = new Size(470, 572);
             roundedPanel1.TabIndex = 26;
             // 
+            // roundedPanel2
+            // 
+            roundedPanel2.BorderColor = Color.Black;
+            roundedPanel2.BorderRadius = 90;
+            roundedPanel2.BorderSize = 1F;
+            roundedPanel2.BottomBorderRadius = 40;
+            roundedPanel2.Controls.Add(richTextBox1);
+            roundedPanel2.Location = new Point(140, 31);
+            roundedPanel2.Name = "roundedPanel2";
+            roundedPanel2.RoundBottomLeft = true;
+            roundedPanel2.RoundBottomRight = true;
+            roundedPanel2.RoundTopLeft = true;
+            roundedPanel2.RoundTopRight = true;
+            roundedPanel2.ShadowColor = Color.FromArgb(60, 0, 0, 0);
+            roundedPanel2.ShadowDepth = 8;
+            roundedPanel2.ShowShadow = true;
+            roundedPanel2.Size = new Size(478, 591);
+            roundedPanel2.TabIndex = 27;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.BackColor = Color.White;
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            richTextBox1.Location = new Point(28, 60);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richTextBox1.Size = new Size(420, 480);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.TabStop = false;
+            richTextBox1.Text = "";
+            // 
             // Payment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1219, 700);
+            Controls.Add(roundedPanel2);
             Controls.Add(roundedPanel1);
             Controls.Add(label1);
             Name = "Payment";
@@ -214,6 +255,7 @@
             Load += Payment_Load;
             roundedPanel1.ResumeLayout(false);
             roundedPanel1.PerformLayout();
+            roundedPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,5 +275,7 @@
         private Label label3;
         private Button btn_coupon;
         private Controls.RoundedPanel roundedPanel1;
+        private RichTextBox richTextBox1;
+        private Controls.RoundedPanel roundedPanel2;
     }
 }
