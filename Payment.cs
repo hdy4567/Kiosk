@@ -112,6 +112,7 @@ namespace Kiosk
         public int memberId = 0;
         public int usedPoint = 0;
         public string customerPhoneNumber = "";
+        public string tableCode = "T0";
 
         // Pop_MemberNum 또는 외부에서 주문 내역을 함께 넘겨받는 생성자 오버로드
         public Payment(List<sushikiosk.MenuForm.OrderItem> orders) : this()
@@ -119,11 +120,17 @@ namespace Kiosk
             this.receivedOrderList = orders;
         }
 
-        public void SetPaymentDetails(int memberId, int usedPoint, string phoneNumber, int originalAmount)
+        public Payment(List<sushikiosk.MenuForm.OrderItem> orders, string tableCode) : this(orders)
+        {
+            this.tableCode = tableCode;
+        }
+
+        public void SetPaymentDetails(int memberId, int usedPoint, string phoneNumber, int originalAmount, string tableCode = "T02")
         {
             this.memberId = memberId;
             this.usedPoint = usedPoint;
             this.customerPhoneNumber = phoneNumber;
+            this.tableCode = tableCode;
         }
 
 
@@ -166,15 +173,16 @@ namespace Kiosk
             //if (btn_SamsungPay != null) btn_SamsungPay.Click += (s, ev) => SendPaymentRequest("SamsungPay");
 
             roundedPanel2.Hide();
-
-            // 영수증 패널 배경
             roundedPanel2.BackColor = Color.White;
 
             // 영수증 내용 영역 배경
             richTextBox1.BackColor = Color.White;
-
-            richTextBox1.BorderStyle = BorderStyle.None;
+            //richTextBox1.BorderStyle = BorderStyle.None;
         }
+
+        // string requestJson = $"{{\"Action\": \"GET_MEMBER\", \"MemberId\": {memberId}}}";
+        // string responseJson = SendRequestToAdmin(requestJson);
+
 
         /// <summary>
         /// MenuForm에서 받은 주문테이블 정보 (orderList)를 받아서,
@@ -186,7 +194,6 @@ namespace Kiosk
         {
             try
             {
-
                 //MessageBox.Show(statusMessages[langIndex], "Payment Request", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // [디버깅 용영역]: 전달된 데이터가 잘 매핑되었는지 로그 및 메시지박스로 검증
                 int totalAmount = 0;
@@ -207,7 +214,7 @@ namespace Kiosk
                 var debugOrderData = new
                 {
                     Action = "NEW_ORDER",
-                    Identifier = "T02-01",
+                    Identifier = $"{this.tableCode}-01",
                     Source = "키오스크",
                     OrderType = "매장",
                     OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
@@ -222,20 +229,17 @@ namespace Kiosk
                         SubTotal = i.Price * i.Quantity
                     }).ToList()
                 };
-
-                // 2단계 결제 데이터(PAYMENT_COMPLETE) 규격 디버깅용 JSON 생성 시뮬레이션
                 // 회원번호나 포인트 사용량이 연계되어 있을 경우를 가정하여 작성합니다.
-                int debugMemberId = 1001;
-                int usedPoint = 0;
-                int finalTotalAmount = totalAmount - usedPoint;
+                int finalTotalAmount = totalAmount - this.usedPoint;
 
                 var debugPaymentData = new
                 {
                     Action = "PAYMENT_COMPLETE",
-                    Identifier = "T02-01",
-                    MemberId = debugMemberId,
+                    Identifier = $"{this.tableCode}-01",
+                    MemberId = this.memberId,
+                    PhoneNumber = this.customerPhoneNumber,
                     OriginalAmount = totalAmount,
-                    UsedPoint = usedPoint,
+                    UsedPoint = this.usedPoint,
                     TotalAmount = finalTotalAmount,
                     PaymentMethod = paymentMethod == "Card" ? "신용카드" :
                                     paymentMethod == "NaverPay" ? "네이버페이" :
@@ -298,6 +302,11 @@ namespace Kiosk
         }
 
 
+
+
+
+
+
         private ReceiptData CreateReceipt(string paymentMethod)
         {
             List<ReceiptItem> items = new List<ReceiptItem>();
@@ -356,7 +365,7 @@ namespace Kiosk
             sb.AppendLine("영수증번호 : " + receipt.ReceiptNo);
             sb.AppendLine(
                 "결제일시   : " +
-                receipt.PaymentTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            receipt.PaymentTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
             sb.AppendLine(
                 "주문유형   : [키오스크] - " +

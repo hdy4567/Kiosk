@@ -1,4 +1,4 @@
-﻿Server
+Server
 namespace WinForms { public partial class Form1 : Form { private TcpListener server;
     public Form1()
     {
@@ -31,6 +31,18 @@ namespace WinForms { public partial class Form1 : Form { private TcpListener ser
             {
                 string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 AddLog($"[수신]: {message}");
+
+                // 만약 키오스크로부터 결제 완료(PAYMENT_COMPLETE) 요청이 도달했다면
+                if (message.Contains("PAYMENT_COMPLETE"))
+                {
+                    // 수신받은 JSON 파싱 시뮬레이션 및 성공 응답 반환
+                    // (실제 데이터에 따라 사용/적립 포인트를 추출해 담아서 반환할 수도 있음)
+                    string responseJson = "{\n  \"Status\": \"SUCCESS\",\n  \"ReceiptNo\": \"ORD-20260814-001\",\n  \"Message\": \"Payment processed successfully.\"\n}";
+                    byte[] responseBytes = Encoding.UTF8.GetBytes(responseJson);
+                    
+                    await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
+                    AddLog($"[송신]: 결제 승인 성공 응답 송신 완료.");
+                }
             }
         }
     }

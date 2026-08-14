@@ -133,10 +133,57 @@ namespace Kiosk
             if (btn_choice != null) btn_choice.Text = choiceBtnTexts[lang];
         }
 
+        private void SendTableSelectionToAdmin(string tableCode)
+        {
+            try
+            {
+                // 관리자 폼 소켓 포트(9000)로 TCP 연결 수립
+                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("192.168.0.62", 9000))
+                using (System.Net.Sockets.NetworkStream stream = client.GetStream())
+                {
+                    // 테이블 선택 액션 JSON 전송
+                    string message = $"{{\"Action\": \"TABLE_SELECTED\", \"TableCode\": \"{tableCode}\"}}";
+                    byte[] data = System.Text.Encoding.UTF8.GetBytes(message);
+
+                    stream.Write(data, 0, data.Length);
+                    stream.Flush();
+
+                    // 전송이 끝났음을 서버에 명시적으로 전달 (Shutdown Send)
+                    client.Client.Shutdown(System.Net.Sockets.SocketShutdown.Send);
+
+                    System.Diagnostics.Debug.WriteLine($"[Here_In 디버그] 관리자로 테이블 선택 전송 완료: {message}");
+                    MessageBox.Show($"관리자 전송 완료: {tableCode}번 테이블 선택", "디버그 통신 체크", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[Here_In 디버그] 관리자 테이블 통신 중 오류 발생: {ex.Message}");
+                MessageBox.Show($"관리자 테이블 전송 실패 ({ex.Message})", "디버그 통신 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void btn_choice_Click_1(object sender, EventArgs e)
         {
+            // 선택된 테이블 번호 찾기 (배열에서 true이거나 backcolor가 변한 것)
+            int selectedTableIndex = 1; // 기본값 2번 테이블
+
+            for (int i = 1; i <= 34; i++)
+            {
+                if (table_state[i])
+                {
+                    selectedTableIndex = i;
+                    break;
+                }
+            }
+
             // 테이블 선택 완료 후 메뉴 주문 화면(MenuForm) 표시 및 현재 창 숨김
-            MenuForm menuForm = new MenuForm();
+            // 선택한 테이블 식별 정보 전달 (예: T01, T02, T10 등)
+            string tableCode = $"T{selectedTableIndex:D2}";
+
+            // 관리자에게 선택된 테이블 전송
+            SendTableSelectionToAdmin(tableCode);
+
+            MenuForm menuForm = new MenuForm(tableCode);
             menuForm.Show();
             this.Hide();
         }

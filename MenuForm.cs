@@ -35,9 +35,15 @@ namespace sushikiosk
         List<OrderItem> currentOrderList = new List<OrderItem>();   // 이번에 새로 담은 주문 목록
         Random random = new Random();
 
+        // 테이블 주문 일련번호 증가 카운터 (예: T02-01, T02-02, ...)
+        private static int orderSequenceCounter = 1;
+
         string currentCategory = "활어/참치";
         int currentPage = 0;        // 현재 페이지
         int pageSize = 8;           // 한 페이지에 8개를 띄워라
+
+        // 선택된 테이블 코드 (예: "T02")
+        public string tableCode = "T02";
 
         Button[] addButtons;
         Label[] nameLabels;
@@ -74,6 +80,12 @@ namespace sushikiosk
             {
                 picMenu1, picMenu2, picMenu3, picMenu4,
                 picMenu5, picMenu6, picMenu7, picMenu8};
+        }
+
+        // 테이블 코드를 받는 생성자 오버로드
+        public MenuForm(string tableCode) : this()
+        {
+            this.tableCode = tableCode;
         }
 
         private void MenuForm_Load(object sender, EventArgs e)      // 메뉴폼이 실행될 때 메뉴를 등록하고 담기 버튼 이벤트를 연결
@@ -667,7 +679,110 @@ namespace sushikiosk
 
         private void btn_receive_Click(object sender, EventArgs e)
         {
-            Pop_MemberNum member = new Pop_MemberNum(this.orderList);
+            if (this.orderList == null || this.orderList.Count == 0)
+            {
+                MessageBox.Show("주문할 메뉴를 선택해 주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 1. 주문 데이터 생성 및 JSON 직렬화 (NEW_ORDER)
+            int totalAmount = this.orderList.Sum(item => item.Price * item.Quantity);
+            
+            // tableCode가 T02라면 T02-01, T02-02 형태의 주문 식별자 생성
+            string orderIdentifier = $"{this.tableCode}-{orderSequenceCounter:D2}";
+
+            var orderJsonData = new
+            {
+                Action = "NEW_ORDER",
+                Identifier = orderIdentifier,
+                Source = "키오스크",
+                OrderType = "매장",
+                OrderTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                TotalAmount = totalAmount,
+                Status = "조리 중",
+                Items = this.orderList.Select(i => new
+                {
+                    MenuName = i.Name,
+                    Price = i.Price,
+                    Quantity = i.Quantity,
+                    DiscountQty = i.IsFree ? i.Quantity : 0,
+                    SubTotal = i.Price * i.Quantity
+                }).ToList()
+            };
+
+            string requestJson = System.Text.Json.JsonSerializer.Serialize(orderJsonData, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+            // 2. 관리자 서버로 UTF-8 전송 (Port: 9000)
+            bool isSuccess = false;
+            string responseMessage = "";
+
+            try
+            {
+                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("192.168.0.62", 9000))
+                {
+                    // 1.5초 타임아웃
+                    var asyncResult = client.BeginConnect("192.168.0.62", 9000, null, null);
+                    var connectSuccess = asyncResult.AsyncWaitHandle.WaitOne(1500);
+
+                    if (connectSuccess && client.Connected)
+                    {
+                        client.EndConnect(asyncResult);
+                        using (System.Net.Sockets.NetworkStream stream = client.GetStream())
+                        {
+                            // UTF-8 변환 전송
+                            byte[] requestBytes = System.Text.Encoding.UTF8.GetBytes(requestJson);
+                            stream.Write(requestBytes, 0, requestBytes.Length);
+
+                            // 응답 수신
+                            byte[] responseBuffer = new byte[4096];
+                            int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
+                            if (bytesRead > 0)
+                            {
+                                string responseJson = System.Text.Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
+                                using (System.Text.Json.JsonDocument doc = System.Text.Json.JsonDocument.Parse(responseJson))
+                                {
+                                    string status = doc.RootElement.GetProperty("Status").GetString();
+                                    responseMessage = doc.RootElement.GetProperty("Message").GetString();
+                                    
+                                    if (status == "SUCCESS")
+                                    {
+                                        isSuccess = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[서버 연결 실패]: {ex.Message}");
+            }
+
+            //// [디버깅 영역]: 송신될 JSON 내용과 통신 연결 상태를 메시지 박스로 로깅
+            //string debugMsg = $"[1단계 주문 전송 디버그 (NEW_ORDER)]\n\n" +
+            //                  $"식별자(ID): {orderIdentifier}\n" +
+            //                  $"송신 서버: 127.0.0.1:9000 (UTF-8 JSON)\n" +
+            //                  $"연결 상태: {(isSuccess ? "연결 성공 (SUCCESS)" : "서버 미연결 (오프라인 모드 진행)")}\n\n" +
+            //                  $"[전송 JSON 내용]:\n{requestJson}";
+            
+            //MessageBox.Show(debugMsg, "주문 데이터 송신 검증", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (isSuccess)
+            {
+                // 주문 접수 완료 시 일련번호 1 증가
+                orderSequenceCounter++;
+                MessageBox.Show($"주문이 성공적으로 접수되었습니다.\n메시지: {responseMessage}", "주문 성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // 통신 실패 시 시뮬레이션용 성공 처리로 진행 (개발용 Fallback)
+                orderSequenceCounter++;
+                MessageBox.Show($"[오프라인 작동] 주문이 접수되었습니다. (서버 미동작)\n식별자: {orderIdentifier}", "주문 접수 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // 3. 적립/결제 화면으로 이동하면서 장바구니 전달 (테이블 ID 함께 전송)
+            Pop_MemberNum member = new Pop_MemberNum(this.orderList, this.tableCode);
             member.Show();
             this.Hide();
         }

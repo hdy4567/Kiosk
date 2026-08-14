@@ -27,15 +27,50 @@ namespace Kiosk
             pnl_Pop_Membership.Hide();
         }
 
+        private string SendRequestToAdmin(string jsonMessage)
+        {
+            try
+            {
+                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("192.168.0.62", 9000))
+                using (System.Net.Sockets.NetworkStream stream = client.GetStream())
+                {
+                    byte[] data = System.Text.Encoding.UTF8.GetBytes(jsonMessage);
+                    stream.Write(data, 0, data.Length);
+                    stream.Flush();
+
+                    byte[] responseBuffer = new byte[4096];
+                    int bytesRead = stream.Read(responseBuffer, 0, responseBuffer.Length);
+                    if (bytesRead > 0)
+                    {
+                        return System.Text.Encoding.UTF8.GetString(responseBuffer, 0, bytesRead);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[통신 오류] {ex.Message}");
+            }
+            return null;
+        }
+
+        // 선택된 테이블 식별자 코드 (예: "T02")
+        public string tableCode = "T02";
+
         // MenuForm에서 넘어올 때 사용할 생성자 오버로드
         public Pop_MemberNum(List<sushikiosk.MenuForm.OrderItem> orders) : this()
         {
             this.orderList = orders;
         }
 
+        // 테이블 코드를 함께 받는 오버로드
+        public Pop_MemberNum(List<sushikiosk.MenuForm.OrderItem> orders, string tableCode) : this(orders)
+        {
+            this.tableCode = tableCode;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Payment payform = new Payment(this.orderList);
+            Payment payform = new Payment(this.orderList, this.tableCode);
             payform.Show();
             this.Hide();
         }
@@ -378,7 +413,6 @@ namespace Kiosk
             lb_savePoint.Text = savePointTexts[langIndex];
             roundedToplabel1.Text = roundTop1Texts[langIndex];
 
-
             if (lb_cusid != null) lb_cusid.Text = lb_cusidTexts[langIndex];
             if (lb_cusid1 != null) lb_cusid1.Text = lb_cusid1Texts[langIndex];
             if (lb_sum1 != null) lb_sum1.Text = sumTexts[langIndex];
@@ -398,18 +432,8 @@ namespace Kiosk
             if (btn_receive != null) btn_receive.Text = receiveTexts[langIndex];
         }
 
-
-
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_save_Click(object sender, EventArgs e)
         {
-           
-
             // 1. 원금 계산 (주문 정보 바탕)
             int originalAmount = 0;
 
@@ -426,25 +450,52 @@ namespace Kiosk
             int memberId = 0;
             int usedPoint = 0;
 
-            // 디자이너의 텍스트 필드에서 가져옴 (숫자 판을 통해 입력된 값)
             if (!string.IsNullOrEmpty(memberIdStr))
             {
                 int.TryParse(memberIdStr, out memberId);
             }
 
-            // 디버그용 샘플 회원 DB 매칭 시뮬레이션
-            int dbMemberId = 1001;      // 시뮬레이션 타겟 회원 ID
-            int dbRemainingPoints = 5000; // 시뮬레이션 타겟 잔여 포인트
-            //int 5000 = 
-            string dbMemberName = "홍길동";
+            int dbRemainingPoints = 0;
+            string dbMemberName = "";
+            bool isMemberFound = false;
 
-            // 만약 입력된 회원번호가 매칭된다면
-            if (memberId == dbMemberId)
+            // 관리자 TCP 소켓 서버에 조회 요청 전송
+            string requestJson = $"{{\"Action\": \"GET_MEMBER\", \"MemberId\": {memberId}}}";
+            string responseJson = SendRequestToAdmin(requestJson);
+
+            if (!string.IsNullOrEmpty(responseJson))
             {
-                // 사용할 포인트 계산 (원금 한도 내에서 1000포인트 단위 단위 사용 예시)
+                try
+                {
+                    using (System.Text.Json.JsonDocument doc = System.Text.Json.JsonDocument.Parse(responseJson))
+                    {
+                        var root = doc.RootElement;
+                        if (root.TryGetProperty("Status", out var statusProp) && statusProp.GetString() == "SUCCESS")
+                        {
+                            isMemberFound = true;
+                            if (root.TryGetProperty("Name", out var nameProp))
+                                dbMemberName = nameProp.GetString();
+                            else if (root.TryGetProperty("MemberName", out nameProp))
+                                dbMemberName = nameProp.GetString();
+
+                            if (root.TryGetProperty("Points", out var pointsProp))
+                                dbRemainingPoints = pointsProp.GetInt32();
+                            else if (root.TryGetProperty("RemainingPoints", out pointsProp))
+                                dbRemainingPoints = pointsProp.GetInt32();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[JSON 파싱 오류] {ex.Message}");
+                }
+            }
+
+            // 만약 조회 성공했다면
+            if (isMemberFound)
+            {
                 usedPoint = Math.Min(originalAmount, 2000); 
                 
-                // UI 바인딩
                 if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
                 if (lb_UsedPoint != null) lb_UsedPoint.Text = usedPoint.ToString();
                 if (lb_cusName1 != null) lb_cusName1.Text = dbMemberName;
@@ -452,26 +503,16 @@ namespace Kiosk
             }
             else
             {
-                // 비회원 혹은 불일치 시
                 usedPoint = 0;
                 if (tb_OriginalAmount != null) tb_OriginalAmount.Text = originalAmount.ToString();
                 if (lb_UsedPoint != null) lb_UsedPoint.Text = "0";
+                MessageBox.Show("존재하지 않는 회원 정보이거나 통신 오류가 발생했습니다.");
             }
 
-
-
-
-            
-
             // 3. 결제 창(Payment) 객체를 생성하고 데이터 연동
-            // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
-            Payment pay_form = new Payment(this.orderList);
-            
-            // 휴대폰 번호 추출
+            Payment pay_form = new Payment(this.orderList, this.tableCode);
             string phoneNumber = lb_cusNum != null ? lb_cusNum.Text : "";
-
-            // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
-            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount);
+            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount, this.tableCode);
 
             pay_form.Show();
             this.Hide();
@@ -489,7 +530,6 @@ namespace Kiosk
                 originalAmount = this.orderList.Sum(item => item.Price * item.Quantity);
             }
 
-            // 포인트 계산 (예: 결제 총액의 10%를 적립)
             int EarnedPoint = (int)(originalAmount * 0.1);
 
             // 2. 입력된 회원 번호 및 포인트 바인딩 정보 파싱
@@ -497,22 +537,49 @@ namespace Kiosk
             int memberId = 0;
             int usedPoint = 0;
 
-            // 디자이너의 텍스트 필드에서 가져옴 (숫자 판을 통해 입력된 값)
             if (!string.IsNullOrEmpty(memberIdStr))
             {
                 int.TryParse(memberIdStr, out memberId);
             }
 
-            // 디버그용 샘플 회원 DB 매칭 시뮬레이션
-            int dbMemberId = 1001;      // 시뮬레이션 타겟 회원 ID
-            int dbRemainingPoints = 5000; // 시뮬레이션 타겟 잔여 포인트
-            //int 5000 = 
-            string dbMemberName = "홍길동";
+            int dbRemainingPoints = 0;
+            string dbMemberName = "";
+            bool isMemberFound = false;
 
-            // 만약 입력된 회원번호가 매칭된다면
-            if (memberId == dbMemberId)
+            // 관리자 TCP 소켓 서버에 조회 요청 전송
+            string requestJson = $"{{\"Action\": \"GET_MEMBER\", \"MemberId\": {memberId}}}";
+            string responseJson = SendRequestToAdmin(requestJson);
+
+            if (!string.IsNullOrEmpty(responseJson))
             {
-                // 사용할 포인트 계산 (원금 한도 내에서 1000포인트 단위 단위 사용 예시)
+                try
+                {
+                    using (System.Text.Json.JsonDocument doc = System.Text.Json.JsonDocument.Parse(responseJson))
+                    {
+                        var root = doc.RootElement;
+                        if (root.TryGetProperty("Status", out var statusProp) && statusProp.GetString() == "SUCCESS")
+                        {
+                            isMemberFound = true;
+                            if (root.TryGetProperty("Name", out var nameProp))
+                                dbMemberName = nameProp.GetString();
+                            else if (root.TryGetProperty("MemberName", out nameProp))
+                                dbMemberName = nameProp.GetString();
+
+                            if (root.TryGetProperty("Points", out var pointsProp))
+                                dbRemainingPoints = pointsProp.GetInt32();
+                            else if (root.TryGetProperty("RemainingPoints", out pointsProp))
+                                dbRemainingPoints = pointsProp.GetInt32();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[JSON 파싱 오류] {ex.Message}");
+                }
+            }
+
+            if (isMemberFound)
+            {
                 usedPoint = Math.Min(originalAmount, 2000);
 
                 // UI 바인딩
@@ -536,13 +603,13 @@ namespace Kiosk
 
             // 3. 결제 창(Payment) 객체를 생성하고 데이터 연동
             // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
-            Payment pay_form = new Payment(this.orderList);
+            Payment pay_form = new Payment(this.orderList, this.tableCode);
 
             // 휴대폰 번호 추출
             string phoneNumber = lb_cusNum != null ? lb_cusNum.Text : "";
 
             // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
-            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount);
+            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount, this.tableCode);
 
             pay_form.Show();
             this.Hide();
