@@ -75,7 +75,7 @@ namespace Kiosk
         private readonly string[] searchTexts = { "1. Search", "1. 照会", "1. 조회" };
         private readonly string[] savepointTexts = { "Earn Points", "ポイント積立", "포인트 적립" };
         private readonly string[] saveTexts = { "Earn", "積立", "적립" };
-
+        private readonly string[] label6Texts = { "Used Points", "使用ポイント", "사용할 포인트" };
 
 
         private void button2_Click(object sender, EventArgs e)
@@ -201,24 +201,39 @@ namespace Kiosk
                 // tableLayoutPanel2의 버튼인 경우 lb_point(회원번호)에 입력
                 else if (IsChildOf(btn, tableLayoutPanel2))
                 {
+                    // P만 안없어지도록 디자인 코드
+                    // " P" 접미사를 떼고 숫자만 추출
+                    string currentDigits = lb_point.Text.Replace("P", "").Trim();
+                    if (currentDigits == "0") currentDigits = "";
+
                     if (btn.Text == "Clear ")
                     {
-                        lb_point.Text = "";
+                        currentDigits = "";
                     }
                     else if (btn.Text == "<-")
                     {
-                        if (lb_point.Text.Length > 0)
+                        if (currentDigits.Length > 0)
                         {
-                            lb_point.Text = lb_point.Text.Substring(0, lb_point.Text.Length - 1);
+                            currentDigits = currentDigits.Substring(0, currentDigits.Length - 1);
                         }
                     }
                     else
                     {
-                        // 회원번호 자릿수를 최대 4자리로 제한
-                        if (lb_point.Text.Length < 4)
+                        // 회원번호 자릿수 최대 4자리 제한
+                        if (currentDigits.Length < 4)
                         {
-                            lb_point.Text += btn.Text;
+                            currentDigits += btn.Text;
                         }
+                    }
+
+                    // 최종 텍스트 적용 시 항상 " P" 접미사를 붙이고 비어 있으면 "0 P"로 출력
+                    if (string.IsNullOrEmpty(currentDigits))
+                    {
+                        lb_point.Text = "0 P";
+                    }
+                    else
+                    {
+                        lb_point.Text = currentDigits + " P";
                     }
                 }
             }
@@ -279,8 +294,6 @@ namespace Kiosk
             //    e.Graphics.FillPath(brush, path);
             //}
             //ctrl.Region = new Region(path);
-
-
         }
 
 
@@ -326,8 +339,6 @@ namespace Kiosk
         public List<sushikiosk.MenuForm.OrderItem> Get_orderList(){
             return this.orderList;
         }
-
-
 
 
         private void btn_del1_Click(object sender, EventArgs e)
@@ -380,6 +391,7 @@ namespace Kiosk
             if (btn_savepoint != null) btn_savepoint.Text = savepointTexts[langIndex];
             if (label2 != null) label2.Text = label2Texts[langIndex];
             if (label19 != null) label19.Text = label19Texts[langIndex];
+            if (label6 != null) label6.Text = label6Texts[langIndex];
             if (btn_del1 != null) btn_del1.Text = del1Texts[langIndex];
             if (button29 != null) button29.Text = searchTexts[langIndex];
             if (btn_save != null) btn_save.Text = saveTexts[langIndex];
@@ -410,7 +422,7 @@ namespace Kiosk
             int EarnedPoint = (int)(originalAmount * 0.1);
 
             // 2. 입력된 회원 번호 및 포인트 바인딩 정보 파싱
-            string memberIdStr = lb_point.Text;
+            string memberIdStr = lb_point.Text != null ? lb_point.Text.Replace("P ", "").Trim() : "";
             int memberId = 0;
             int usedPoint = 0;
 
@@ -455,9 +467,11 @@ namespace Kiosk
             // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
             Payment pay_form = new Payment(this.orderList);
             
+            // 휴대폰 번호 추출
+            string phoneNumber = lb_cusNum != null ? lb_cusNum.Text : "";
+
             // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
-            // (Payment 클래스에 public 변수나 Property가 정의되어 있다면 반영)
-            // pay_form.SetPaymentDetails(memberId, originalAmount, usedPoint); 
+            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount);
 
             pay_form.Show();
             this.Hide();
@@ -479,7 +493,7 @@ namespace Kiosk
             int EarnedPoint = (int)(originalAmount * 0.1);
 
             // 2. 입력된 회원 번호 및 포인트 바인딩 정보 파싱
-            string memberIdStr = lb_point.Text;
+            string memberIdStr = lb_point.Text != null ? lb_point.Text.Replace(" P", "").Trim() : "";
             int memberId = 0;
             int usedPoint = 0;
 
@@ -524,9 +538,11 @@ namespace Kiosk
             // Payment 생성자에 주문 목록과 전달할 회원/포인트 정보를 함께 파싱하여 넘겨줍니다.
             Payment pay_form = new Payment(this.orderList);
 
+            // 휴대폰 번호 추출
+            string phoneNumber = lb_cusNum != null ? lb_cusNum.Text : "";
+
             // Payment 폼 내부에 포인트 관련 필드가 있다면 연동해 줍니다.
-            // (Payment 클래스에 public 변수나 Property가 정의되어 있다면 반영)
-            // pay_form.SetPaymentDetails(memberId, originalAmount, usedPoint); 
+            pay_form.SetPaymentDetails(memberId, usedPoint, phoneNumber, originalAmount);
 
             pay_form.Show();
             this.Hide();

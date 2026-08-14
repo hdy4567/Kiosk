@@ -126,7 +126,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 3, 0, 3);
-            menuStrip1.Size = new Size(1282, 41);
+            menuStrip1.Size = new Size(1307, 41);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -815,9 +815,9 @@
             label1.Font = new Font("맑은 고딕", 13F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(164, 31);
             label1.Name = "label1";
-            label1.Size = new Size(92, 25);
+            label1.Size = new Size(84, 25);
             label1.TabIndex = 0;
-            label1.Text = "장바구니?";
+            label1.Text = "장바구니";
             // 
             // btnOrderHistory
             // 
@@ -835,7 +835,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
-            ClientSize = new Size(1282, 793);
+            ClientSize = new Size(1307, 793);
             Controls.Add(btnOrderHistory);
             Controls.Add(panel1);
             Controls.Add(lblPage);

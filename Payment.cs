@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace Kiosk
 {
@@ -69,6 +70,8 @@ namespace Kiosk
             public int Price { get; set; }
             public int Quantity { get; set; }
             public int DiscountQty { get; set; }
+            public string Category { get; set; }
+
             public int SubTotal
             {
                 get { return Price * (Quantity - DiscountQty); }
@@ -105,10 +108,22 @@ namespace Kiosk
         // MenuForm에서 누적되어 전달된 주문 항목 보관용 필드
         private List<sushikiosk.MenuForm.OrderItem> receivedOrderList = new List<sushikiosk.MenuForm.OrderItem>();
 
+        // 회원 정보 및 결제 연계 변수
+        public int memberId = 0;
+        public int usedPoint = 0;
+        public string customerPhoneNumber = "";
+
         // Pop_MemberNum 또는 외부에서 주문 내역을 함께 넘겨받는 생성자 오버로드
         public Payment(List<sushikiosk.MenuForm.OrderItem> orders) : this()
         {
             this.receivedOrderList = orders;
+        }
+
+        public void SetPaymentDetails(int memberId, int usedPoint, string phoneNumber, int originalAmount)
+        {
+            this.memberId = memberId;
+            this.usedPoint = usedPoint;
+            this.customerPhoneNumber = phoneNumber;
         }
 
 
@@ -145,14 +160,20 @@ namespace Kiosk
         private void Payment_Load(object sender, EventArgs e)
         {
             // 결제 버튼 이벤트 동적 연결
-            if (btn_card != null) btn_card.Click += (s, ev) => SendPaymentRequest("Card");
-            if (btn_naverPay != null) btn_naverPay.Click += (s, ev) => SendPaymentRequest("NaverPay");
-            if (btn_KakaoPay != null) btn_KakaoPay.Click += (s, ev) => SendPaymentRequest("KakaoPay");
-            if (btn_SamsungPay != null) btn_SamsungPay.Click += (s, ev) => SendPaymentRequest("SamsungPay");
+            //if (btn_card != null) btn_card.Click += (s, ev) => SendPaymentRequest("Card");
+            //if (btn_naverPay != null) btn_naverPay.Click += (s, ev) => SendPaymentRequest("NaverPay");
+            //if (btn_KakaoPay != null) btn_KakaoPay.Click += (s, ev) => SendPaymentRequest("KakaoPay");
+            //if (btn_SamsungPay != null) btn_SamsungPay.Click += (s, ev) => SendPaymentRequest("SamsungPay");
 
             roundedPanel2.Hide();
 
+            // 영수증 패널 배경
+            roundedPanel2.BackColor = Color.White;
 
+            // 영수증 내용 영역 배경
+            richTextBox1.BackColor = Color.White;
+
+            richTextBox1.BorderStyle = BorderStyle.None;
         }
 
         /// <summary>
@@ -277,47 +298,49 @@ namespace Kiosk
         }
 
 
-
-
-        private ReceiptData CreateTestReceipt(string paymentMethod)
+        private ReceiptData CreateReceipt(string paymentMethod)
         {
-            List<ReceiptItem> items = new List<ReceiptItem>
-    {
-        new ReceiptItem
-        {
-            MenuName = "광어초밥",
-            Price = 3000,
-            Quantity = 2,
-            DiscountQty = 0
-        },
+            List<ReceiptItem> items = new List<ReceiptItem>();
 
-        new ReceiptItem
-        {
-            MenuName = "연어초밥",
-            Price = 3000,
-            Quantity = 2,
-            DiscountQty = 0
-        },
+            foreach (sushikiosk.MenuForm.OrderItem order in receivedOrderList)
+            {
+                ReceiptItem receiptItem = new ReceiptItem
+                {
+                    // 당첨된 메뉴라면 이름 뒤에 표시
+                    MenuName = order.IsFree
+                        ? order.Name + " (당첨!)"
+                        : order.Name,
 
-        new ReceiptItem
-        {
-            MenuName = "콜라",
-            Price = 1000,
-            Quantity = 1,
-            DiscountQty = 0
-        }
-    };
+                    Price = order.Price,
+                    Quantity = order.Quantity,
+
+                    // 당첨 메뉴는 전체 수량을 무료 처리
+                    DiscountQty = order.IsFree
+                        ? order.Quantity
+                        : 0,
+
+                    Category = order.Category
+                };
+
+                items.Add(receiptItem);
+            }
 
             return new ReceiptData
             {
+                // 관리자 TCP 연결 전 임시값
                 ReceiptNo = "ORD-TEST-001",
                 PaymentTime = DateTime.Now,
                 OrderType = "매장",
                 PaymentMethod = paymentMethod,
+
+                // 무료 당첨 메뉴는 SubTotal이 0이므로 자동 제외
                 TotalAmount = items.Sum(item => item.SubTotal),
+
                 Items = items
             };
         }
+
+
 
         private void ShowReceipt(ReceiptData receipt)
         {
@@ -340,22 +363,35 @@ namespace Kiosk
                 receipt.OrderType);
 
             sb.AppendLine();
-            sb.AppendLine("------------------------------------------");
+            sb.AppendLine("==========================================");
             sb.AppendLine();
 
-            sb.AppendLine("상품명              수량        금액");
+            sb.AppendLine("상품명\t수량\t금액");
             sb.AppendLine();
 
             foreach (ReceiptItem item in receipt.Items)
             {
+                string unit;
+
+                if (item.Category == "활어/참치" ||
+                    item.Category == "해산물" ||
+                    item.Category == "롤/마끼" ||
+                    item.Category == "단품/기타초밥")
+                {
+                    unit = "접시";
+                }
+                else
+                {
+                    unit = "개";
+                }
+
                 sb.AppendLine(
-                    item.MenuName.PadRight(16) +
-                    item.Quantity.ToString().PadLeft(3) + "개" +
-                    item.SubTotal.ToString("N0").PadLeft(11) + "원");
+                    $"{item.MenuName}\t{item.Quantity}{unit}\t{item.SubTotal:N0}원"
+                );
             }
 
             sb.AppendLine();
-            sb.AppendLine("------------------------------------------");
+            sb.AppendLine("==========================================");
             sb.AppendLine();
 
             sb.AppendLine(
@@ -374,30 +410,60 @@ namespace Kiosk
 
             richTextBox1.Text = sb.ToString();
 
+            richTextBox1.SelectAll();
+
+            richTextBox1.SelectionTabs = new int[]
+            {
+                210,    // 수량 열 시작 위치
+                300     // 금액 열 시작 위치
+            };
+
+            richTextBox1.DeselectAll();
+
+        }
+
+        private void RoundRichTextBox()
+        {
+            int radius = 80;
+
+            Rectangle rect = new Rectangle(
+                0,
+                0,
+                richTextBox1.Width,
+                richTextBox1.Height
+            );
+
+            GraphicsPath path = new GraphicsPath();
+
+            int diameter = radius * 2;
+
+            path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90);
+            path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90);
+            path.AddArc(rect.Right - diameter, rect.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - diameter, diameter, diameter, 90, 90);
+
+            path.CloseFigure();
+
+            richTextBox1.Region = new Region(path);
         }
 
         private void CompletePayment(string paymentMethod)
         {
-            // 선택한 결제방식 저장
+            if (receivedOrderList == null || receivedOrderList.Count == 0)
+            {
+                MessageBox.Show("주문 내역이 없습니다.");
+                return;
+            }
+
             selectedPaymentMethod = paymentMethod;
 
-            // 지금은 TCP 연동 전이므로 테스트 영수증 생성
-            ReceiptData receipt = CreateTestReceipt(selectedPaymentMethod);
+            // 실제 주문내역으로 영수증 생성
+            ReceiptData receipt = CreateReceipt(selectedPaymentMethod);
 
-            // 영수증 내용 출력
             ShowReceipt(receipt);
 
-            // 영수증 패널 표시
             roundedPanel2.Show();
-
-            // 다른 컨트롤보다 가장 앞으로 가져오기
             roundedPanel2.BringToFront();
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btn_back_Click(object sender, EventArgs e)
@@ -405,25 +471,6 @@ namespace Kiosk
             Pop_MemberNum memeber = new Pop_MemberNum(this.receivedOrderList);
             memeber.Show();
             this.Hide();
-        }
-        private void btn_card_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_naverPay_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_KakaoPay_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_SamsungPay_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_coupon_Click(object sender, EventArgs e)
-        {
         }
 
         private void btn_card_Click_1(object sender, EventArgs e)
@@ -446,6 +493,12 @@ namespace Kiosk
         {
             CompletePayment("삼성페이");
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // 쿠폰 / 상품권 클릭 시 결제 처리
+            CompletePayment("쿠폰 / 상품권");
         }
     }
 }

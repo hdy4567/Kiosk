@@ -41,7 +41,7 @@ namespace Kiosk
             label22 = new Label();
             lb_savePoint = new Label();
             lb_cusName = new Label();
-            label24 = new Label();
+            lb_used_point1 = new Label();
             label20 = new Label();
             lb_sum = new Label();
             panel4 = new Panel();
@@ -50,6 +50,28 @@ namespace Kiosk
             button32 = new Button();
             lb_roundTop1 = new RoundedToplabel();
             pnl_Pop_Membership = new RoundedPanel();
+            textBox2 = new TextBox();
+            lb_MemberId = new Label();
+            btn_savepoint = new Button();
+            btn_del2 = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            btn_pClear = new Button();
+            btn_pDel = new Button();
+            btn_p1 = new Button();
+            btn_p2 = new Button();
+            btn_p3 = new Button();
+            btn_p4 = new Button();
+            btn_p5 = new Button();
+            btn_p6 = new Button();
+            btn_p000 = new Button();
+            btn_p9 = new Button();
+            btn_p8 = new Button();
+            btn_p7 = new Button();
+            btn_p0 = new Button();
+            btn_p010 = new Button();
+            panel3 = new Panel();
+            ln_MemberId = new Label();
+            lb_cusid = new Label();
             pnlStamp = new RoundedPanel();
             lb_used_point = new Label();
             label6 = new Label();
@@ -74,42 +96,23 @@ namespace Kiosk
             panel1 = new Panel();
             lb_point = new Label();
             lb_cusid1 = new Label();
+            textBox1 = new TextBox();
             button29 = new Button();
             panel2 = new Panel();
             tb_OriginalAmount = new TextBox();
             label2 = new Label();
             lb_UsedPoint = new Label();
             label19 = new Label();
-            btn_savepoint = new Button();
-            btn_del2 = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            btn_pClear = new Button();
-            btn_pDel = new Button();
-            btn_p1 = new Button();
-            btn_p2 = new Button();
-            btn_p3 = new Button();
-            btn_p4 = new Button();
-            btn_p5 = new Button();
-            btn_p6 = new Button();
-            btn_p000 = new Button();
-            btn_p9 = new Button();
-            btn_p8 = new Button();
-            btn_p7 = new Button();
-            btn_p0 = new Button();
-            btn_p010 = new Button();
-            panel3 = new Panel();
-            ln_point = new Label();
-            lb_cusid = new Label();
             roundedPanel2 = new RoundedPanel();
             colorDialog1 = new ColorDialog();
             panel4.SuspendLayout();
             pnl_Pop_Membership.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            panel3.SuspendLayout();
             pnlStamp.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            panel3.SuspendLayout();
             roundedPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -238,15 +241,15 @@ namespace Kiosk
             lb_cusName.Text = "회원명";
             lb_cusName.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label24
+            // lb_used_point1
             // 
-            label24.BackColor = Color.Transparent;
-            label24.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label24.Location = new Point(237, 245);
-            label24.Name = "label24";
-            label24.Size = new Size(179, 41);
-            label24.TabIndex = 23;
-            label24.Text = "label13";
+            lb_used_point1.BackColor = Color.Transparent;
+            lb_used_point1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_used_point1.Location = new Point(316, 245);
+            lb_used_point1.Name = "lb_used_point1";
+            lb_used_point1.Size = new Size(100, 41);
+            lb_used_point1.TabIndex = 23;
+            lb_used_point1.Text = "0";
             // 
             // label20
             // 
@@ -283,10 +286,10 @@ namespace Kiosk
             // lb_cusNum
             // 
             lb_cusNum.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_cusNum.Location = new Point(208, -5);
+            lb_cusNum.Location = new Point(287, -5);
             lb_cusNum.Multiline = true;
             lb_cusNum.Name = "lb_cusNum";
-            lb_cusNum.Size = new Size(179, 46);
+            lb_cusNum.Size = new Size(100, 46);
             lb_cusNum.TabIndex = 14;
             lb_cusNum.Text = "010-";
             // 
@@ -343,6 +346,8 @@ namespace Kiosk
             pnl_Pop_Membership.BorderRadius = 90;
             pnl_Pop_Membership.BorderSize = 1F;
             pnl_Pop_Membership.BottomBorderRadius = 40;
+            pnl_Pop_Membership.Controls.Add(textBox2);
+            pnl_Pop_Membership.Controls.Add(lb_MemberId);
             pnl_Pop_Membership.Controls.Add(btn_savepoint);
             pnl_Pop_Membership.Controls.Add(btn_del2);
             pnl_Pop_Membership.Controls.Add(lb_roundTop1);
@@ -352,7 +357,7 @@ namespace Kiosk
             pnl_Pop_Membership.Controls.Add(panel4);
             pnl_Pop_Membership.Controls.Add(lb_sum);
             pnl_Pop_Membership.Controls.Add(label20);
-            pnl_Pop_Membership.Controls.Add(label24);
+            pnl_Pop_Membership.Controls.Add(lb_used_point1);
             pnl_Pop_Membership.Controls.Add(lb_cusName);
             pnl_Pop_Membership.Controls.Add(lb_savePoint);
             pnl_Pop_Membership.Controls.Add(label22);
@@ -367,6 +372,284 @@ namespace Kiosk
             pnl_Pop_Membership.ShowShadow = true;
             pnl_Pop_Membership.Size = new Size(772, 509);
             pnl_Pop_Membership.TabIndex = 16;
+            // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox2.Location = new Point(316, 163);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(100, 43);
+            textBox2.TabIndex = 36;
+            // 
+            // lb_MemberId
+            // 
+            lb_MemberId.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_MemberId.Location = new Point(316, 204);
+            lb_MemberId.Name = "lb_MemberId";
+            lb_MemberId.Size = new Size(100, 41);
+            lb_MemberId.TabIndex = 35;
+            // 
+            // btn_savepoint
+            // 
+            btn_savepoint.BackColor = Color.FromArgb(255, 128, 0);
+            btn_savepoint.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_savepoint.Location = new Point(376, 350);
+            btn_savepoint.Name = "btn_savepoint";
+            btn_savepoint.Size = new Size(200, 38);
+            btn_savepoint.TabIndex = 34;
+            btn_savepoint.Text = "2. 적립";
+            btn_savepoint.UseVisualStyleBackColor = false;
+            btn_savepoint.Click += btn_savepoint_Click;
+            // 
+            // btn_del2
+            // 
+            btn_del2.BackColor = Color.FromArgb(211, 47, 47);
+            btn_del2.FlatStyle = FlatStyle.Flat;
+            btn_del2.Location = new Point(29, 345);
+            btn_del2.Name = "btn_del2";
+            btn_del2.Size = new Size(81, 37);
+            btn_del2.TabIndex = 33;
+            btn_del2.Text = "취소";
+            btn_del2.UseVisualStyleBackColor = false;
+            btn_del2.Click += btn_del2_Click;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.BackColor = SystemColors.ActiveCaptionText;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel1.Controls.Add(btn_pClear, 0, 0);
+            tableLayoutPanel1.Controls.Add(btn_pDel, 2, 0);
+            tableLayoutPanel1.Controls.Add(btn_p1, 0, 1);
+            tableLayoutPanel1.Controls.Add(btn_p2, 1, 1);
+            tableLayoutPanel1.Controls.Add(btn_p3, 2, 1);
+            tableLayoutPanel1.Controls.Add(btn_p4, 0, 2);
+            tableLayoutPanel1.Controls.Add(btn_p5, 1, 2);
+            tableLayoutPanel1.Controls.Add(btn_p6, 2, 2);
+            tableLayoutPanel1.Controls.Add(btn_p000, 2, 4);
+            tableLayoutPanel1.Controls.Add(btn_p9, 2, 3);
+            tableLayoutPanel1.Controls.Add(btn_p8, 1, 3);
+            tableLayoutPanel1.Controls.Add(btn_p7, 0, 3);
+            tableLayoutPanel1.Controls.Add(btn_p0, 1, 4);
+            tableLayoutPanel1.Controls.Add(btn_p010, 0, 4);
+            tableLayoutPanel1.Location = new Point(419, 31);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new Size(198, 313);
+            tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
+            // 
+            // btn_pClear
+            // 
+            btn_pClear.BackColor = SystemColors.ActiveCaptionText;
+            tableLayoutPanel1.SetColumnSpan(btn_pClear, 2);
+            btn_pClear.Dock = DockStyle.Fill;
+            btn_pClear.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_pClear.ForeColor = Color.Goldenrod;
+            btn_pClear.Location = new Point(3, 3);
+            btn_pClear.Name = "btn_pClear";
+            btn_pClear.Size = new Size(125, 56);
+            btn_pClear.TabIndex = 6;
+            btn_pClear.Text = "Clear ";
+            btn_pClear.UseVisualStyleBackColor = false;
+            // 
+            // btn_pDel
+            // 
+            btn_pDel.BackColor = Color.Goldenrod;
+            btn_pDel.Font = new Font("맑은 고딕", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_pDel.ForeColor = SystemColors.ActiveCaptionText;
+            btn_pDel.Location = new Point(134, 3);
+            btn_pDel.Name = "btn_pDel";
+            btn_pDel.Size = new Size(61, 56);
+            btn_pDel.TabIndex = 16;
+            btn_pDel.Text = "<-";
+            btn_pDel.UseVisualStyleBackColor = false;
+            // 
+            // btn_p1
+            // 
+            btn_p1.BackColor = Color.Goldenrod;
+            btn_p1.Dock = DockStyle.Fill;
+            btn_p1.FlatStyle = FlatStyle.Flat;
+            btn_p1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p1.Location = new Point(3, 65);
+            btn_p1.Name = "btn_p1";
+            btn_p1.Size = new Size(59, 56);
+            btn_p1.TabIndex = 21;
+            btn_p1.Text = "1";
+            btn_p1.UseVisualStyleBackColor = false;
+            // 
+            // btn_p2
+            // 
+            btn_p2.BackColor = Color.Goldenrod;
+            btn_p2.Dock = DockStyle.Fill;
+            btn_p2.FlatStyle = FlatStyle.Flat;
+            btn_p2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p2.Location = new Point(68, 65);
+            btn_p2.Name = "btn_p2";
+            btn_p2.Size = new Size(60, 56);
+            btn_p2.TabIndex = 18;
+            btn_p2.Text = "2";
+            btn_p2.UseVisualStyleBackColor = false;
+            // 
+            // btn_p3
+            // 
+            btn_p3.BackColor = Color.Goldenrod;
+            btn_p3.FlatStyle = FlatStyle.Flat;
+            btn_p3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p3.Location = new Point(134, 65);
+            btn_p3.Name = "btn_p3";
+            btn_p3.Size = new Size(61, 56);
+            btn_p3.TabIndex = 19;
+            btn_p3.Text = "3";
+            btn_p3.UseVisualStyleBackColor = false;
+            // 
+            // btn_p4
+            // 
+            btn_p4.BackColor = Color.Goldenrod;
+            btn_p4.FlatStyle = FlatStyle.Flat;
+            btn_p4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p4.Location = new Point(3, 127);
+            btn_p4.Name = "btn_p4";
+            btn_p4.Size = new Size(59, 56);
+            btn_p4.TabIndex = 20;
+            btn_p4.Text = "4";
+            btn_p4.UseVisualStyleBackColor = false;
+            // 
+            // btn_p5
+            // 
+            btn_p5.BackColor = Color.Goldenrod;
+            btn_p5.FlatStyle = FlatStyle.Flat;
+            btn_p5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p5.Location = new Point(68, 127);
+            btn_p5.Name = "btn_p5";
+            btn_p5.Size = new Size(60, 56);
+            btn_p5.TabIndex = 25;
+            btn_p5.Text = "5";
+            btn_p5.UseVisualStyleBackColor = false;
+            // 
+            // btn_p6
+            // 
+            btn_p6.BackColor = Color.Goldenrod;
+            btn_p6.FlatStyle = FlatStyle.Flat;
+            btn_p6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p6.Location = new Point(134, 127);
+            btn_p6.Name = "btn_p6";
+            btn_p6.Size = new Size(61, 56);
+            btn_p6.TabIndex = 24;
+            btn_p6.Text = "6";
+            btn_p6.UseVisualStyleBackColor = false;
+            // 
+            // btn_p000
+            // 
+            btn_p000.BackColor = Color.Goldenrod;
+            btn_p000.FlatStyle = FlatStyle.Flat;
+            btn_p000.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p000.Location = new Point(134, 251);
+            btn_p000.Name = "btn_p000";
+            btn_p000.Size = new Size(61, 59);
+            btn_p000.TabIndex = 35;
+            btn_p000.Text = "000";
+            btn_p000.UseVisualStyleBackColor = false;
+            // 
+            // btn_p9
+            // 
+            btn_p9.BackColor = Color.Goldenrod;
+            btn_p9.FlatStyle = FlatStyle.Flat;
+            btn_p9.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p9.Location = new Point(134, 189);
+            btn_p9.Name = "btn_p9";
+            btn_p9.Size = new Size(61, 56);
+            btn_p9.TabIndex = 26;
+            btn_p9.Text = "9";
+            btn_p9.UseVisualStyleBackColor = false;
+            // 
+            // btn_p8
+            // 
+            btn_p8.BackColor = Color.Goldenrod;
+            btn_p8.FlatStyle = FlatStyle.Flat;
+            btn_p8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p8.Location = new Point(68, 189);
+            btn_p8.Name = "btn_p8";
+            btn_p8.Size = new Size(60, 56);
+            btn_p8.TabIndex = 22;
+            btn_p8.Text = "8";
+            btn_p8.UseVisualStyleBackColor = false;
+            // 
+            // btn_p7
+            // 
+            btn_p7.BackColor = Color.Goldenrod;
+            btn_p7.FlatStyle = FlatStyle.Flat;
+            btn_p7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p7.Location = new Point(3, 189);
+            btn_p7.Name = "btn_p7";
+            btn_p7.Size = new Size(59, 56);
+            btn_p7.TabIndex = 23;
+            btn_p7.Text = "7";
+            btn_p7.UseVisualStyleBackColor = false;
+            // 
+            // btn_p0
+            // 
+            btn_p0.BackColor = Color.Goldenrod;
+            btn_p0.FlatStyle = FlatStyle.Flat;
+            btn_p0.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p0.Location = new Point(68, 251);
+            btn_p0.Name = "btn_p0";
+            btn_p0.Size = new Size(60, 59);
+            btn_p0.TabIndex = 33;
+            btn_p0.Text = "0";
+            btn_p0.UseVisualStyleBackColor = false;
+            // 
+            // btn_p010
+            // 
+            btn_p010.BackColor = Color.Goldenrod;
+            btn_p010.FlatStyle = FlatStyle.Flat;
+            btn_p010.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_p010.Location = new Point(3, 251);
+            btn_p010.Name = "btn_p010";
+            btn_p010.Size = new Size(59, 59);
+            btn_p010.TabIndex = 34;
+            btn_p010.Text = "010";
+            btn_p010.UseVisualStyleBackColor = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(ln_MemberId);
+            panel3.Controls.Add(lb_cusid);
+            panel3.Location = new Point(29, 81);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(387, 41);
+            panel3.TabIndex = 19;
+            // 
+            // ln_MemberId
+            // 
+            ln_MemberId.BackColor = Color.Transparent;
+            ln_MemberId.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            ln_MemberId.Location = new Point(287, 0);
+            ln_MemberId.Name = "ln_MemberId";
+            ln_MemberId.Size = new Size(100, 41);
+            ln_MemberId.TabIndex = 20;
+            ln_MemberId.Click += label15_Click;
+            // 
+            // lb_cusid
+            // 
+            lb_cusid.BackColor = SystemColors.ActiveBorder;
+            lb_cusid.FlatStyle = FlatStyle.System;
+            lb_cusid.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lb_cusid.ImageAlign = ContentAlignment.TopLeft;
+            lb_cusid.Location = new Point(0, 0);
+            lb_cusid.Name = "lb_cusid";
+            lb_cusid.Size = new Size(387, 41);
+            lb_cusid.TabIndex = 0;
+            lb_cusid.Text = "회원번호";
+            lb_cusid.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlStamp
             // 
@@ -385,7 +668,7 @@ namespace Kiosk
             pnlStamp.Controls.Add(panel2);
             pnlStamp.Controls.Add(lb_UsedPoint);
             pnlStamp.Controls.Add(label19);
-            pnlStamp.Location = new Point(15, 12);
+            pnlStamp.Location = new Point(12, 12);
             pnlStamp.Name = "pnlStamp";
             pnlStamp.RoundBottomLeft = true;
             pnlStamp.RoundBottomRight = true;
@@ -404,7 +687,6 @@ namespace Kiosk
             lb_used_point.Name = "lb_used_point";
             lb_used_point.Size = new Size(100, 41);
             lb_used_point.TabIndex = 34;
-            lb_used_point.Text = "label6";
             // 
             // label6
             // 
@@ -673,6 +955,7 @@ namespace Kiosk
             // 
             panel1.Controls.Add(lb_point);
             panel1.Controls.Add(lb_cusid1);
+            panel1.Controls.Add(textBox1);
             panel1.Location = new Point(29, 81);
             panel1.Name = "panel1";
             panel1.Size = new Size(387, 41);
@@ -700,6 +983,17 @@ namespace Kiosk
             lb_cusid1.TabIndex = 0;
             lb_cusid1.Text = "회원번호";
             lb_cusid1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox1.Location = new Point(284, 0);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(100, 41);
+            textBox1.TabIndex = 21;
+            textBox1.Text = "P";
             // 
             // button29
             // 
@@ -751,7 +1045,7 @@ namespace Kiosk
             lb_UsedPoint.Name = "lb_UsedPoint";
             lb_UsedPoint.Size = new Size(100, 41);
             lb_UsedPoint.TabIndex = 23;
-            lb_UsedPoint.Text = "label13";
+            lb_UsedPoint.Text = "0";
             // 
             // label19
             // 
@@ -765,267 +1059,6 @@ namespace Kiosk
             label19.TabIndex = 4;
             label19.Text = "잔여 포인트";
             label19.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // btn_savepoint
-            // 
-            btn_savepoint.BackColor = Color.FromArgb(255, 128, 0);
-            btn_savepoint.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_savepoint.Location = new Point(376, 350);
-            btn_savepoint.Name = "btn_savepoint";
-            btn_savepoint.Size = new Size(200, 38);
-            btn_savepoint.TabIndex = 34;
-            btn_savepoint.Text = "2. 적립";
-            btn_savepoint.UseVisualStyleBackColor = false;
-            btn_savepoint.Click += btn_savepoint_Click;
-            // 
-            // btn_del2
-            // 
-            btn_del2.BackColor = Color.FromArgb(211, 47, 47);
-            btn_del2.FlatStyle = FlatStyle.Flat;
-            btn_del2.Location = new Point(29, 345);
-            btn_del2.Name = "btn_del2";
-            btn_del2.Size = new Size(81, 37);
-            btn_del2.TabIndex = 33;
-            btn_del2.Text = "취소";
-            btn_del2.UseVisualStyleBackColor = false;
-            btn_del2.Click += btn_del2_Click;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.BackColor = SystemColors.ActiveCaptionText;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel1.Controls.Add(btn_pClear, 0, 0);
-            tableLayoutPanel1.Controls.Add(btn_pDel, 2, 0);
-            tableLayoutPanel1.Controls.Add(btn_p1, 0, 1);
-            tableLayoutPanel1.Controls.Add(btn_p2, 1, 1);
-            tableLayoutPanel1.Controls.Add(btn_p3, 2, 1);
-            tableLayoutPanel1.Controls.Add(btn_p4, 0, 2);
-            tableLayoutPanel1.Controls.Add(btn_p5, 1, 2);
-            tableLayoutPanel1.Controls.Add(btn_p6, 2, 2);
-            tableLayoutPanel1.Controls.Add(btn_p000, 2, 4);
-            tableLayoutPanel1.Controls.Add(btn_p9, 2, 3);
-            tableLayoutPanel1.Controls.Add(btn_p8, 1, 3);
-            tableLayoutPanel1.Controls.Add(btn_p7, 0, 3);
-            tableLayoutPanel1.Controls.Add(btn_p0, 1, 4);
-            tableLayoutPanel1.Controls.Add(btn_p010, 0, 4);
-            tableLayoutPanel1.Location = new Point(419, 31);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 5;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.Size = new Size(198, 313);
-            tableLayoutPanel1.TabIndex = 0;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
-            // 
-            // btn_pClear
-            // 
-            btn_pClear.BackColor = SystemColors.ActiveCaptionText;
-            tableLayoutPanel1.SetColumnSpan(btn_pClear, 2);
-            btn_pClear.Dock = DockStyle.Fill;
-            btn_pClear.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_pClear.ForeColor = Color.Goldenrod;
-            btn_pClear.Location = new Point(3, 3);
-            btn_pClear.Name = "btn_pClear";
-            btn_pClear.Size = new Size(125, 56);
-            btn_pClear.TabIndex = 6;
-            btn_pClear.Text = "Clear ";
-            btn_pClear.UseVisualStyleBackColor = false;
-            // 
-            // btn_pDel
-            // 
-            btn_pDel.BackColor = Color.Goldenrod;
-            btn_pDel.Font = new Font("맑은 고딕", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_pDel.ForeColor = SystemColors.ActiveCaptionText;
-            btn_pDel.Location = new Point(134, 3);
-            btn_pDel.Name = "btn_pDel";
-            btn_pDel.Size = new Size(61, 56);
-            btn_pDel.TabIndex = 16;
-            btn_pDel.Text = "<-";
-            btn_pDel.UseVisualStyleBackColor = false;
-            // 
-            // btn_p1
-            // 
-            btn_p1.BackColor = Color.Goldenrod;
-            btn_p1.Dock = DockStyle.Fill;
-            btn_p1.FlatStyle = FlatStyle.Flat;
-            btn_p1.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p1.Location = new Point(3, 65);
-            btn_p1.Name = "btn_p1";
-            btn_p1.Size = new Size(59, 56);
-            btn_p1.TabIndex = 21;
-            btn_p1.Text = "1";
-            btn_p1.UseVisualStyleBackColor = false;
-            // 
-            // btn_p2
-            // 
-            btn_p2.BackColor = Color.Goldenrod;
-            btn_p2.Dock = DockStyle.Fill;
-            btn_p2.FlatStyle = FlatStyle.Flat;
-            btn_p2.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p2.Location = new Point(68, 65);
-            btn_p2.Name = "btn_p2";
-            btn_p2.Size = new Size(60, 56);
-            btn_p2.TabIndex = 18;
-            btn_p2.Text = "2";
-            btn_p2.UseVisualStyleBackColor = false;
-            // 
-            // btn_p3
-            // 
-            btn_p3.BackColor = Color.Goldenrod;
-            btn_p3.FlatStyle = FlatStyle.Flat;
-            btn_p3.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p3.Location = new Point(134, 65);
-            btn_p3.Name = "btn_p3";
-            btn_p3.Size = new Size(61, 56);
-            btn_p3.TabIndex = 19;
-            btn_p3.Text = "3";
-            btn_p3.UseVisualStyleBackColor = false;
-            // 
-            // btn_p4
-            // 
-            btn_p4.BackColor = Color.Goldenrod;
-            btn_p4.FlatStyle = FlatStyle.Flat;
-            btn_p4.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p4.Location = new Point(3, 127);
-            btn_p4.Name = "btn_p4";
-            btn_p4.Size = new Size(59, 56);
-            btn_p4.TabIndex = 20;
-            btn_p4.Text = "4";
-            btn_p4.UseVisualStyleBackColor = false;
-            // 
-            // btn_p5
-            // 
-            btn_p5.BackColor = Color.Goldenrod;
-            btn_p5.FlatStyle = FlatStyle.Flat;
-            btn_p5.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p5.Location = new Point(68, 127);
-            btn_p5.Name = "btn_p5";
-            btn_p5.Size = new Size(60, 56);
-            btn_p5.TabIndex = 25;
-            btn_p5.Text = "5";
-            btn_p5.UseVisualStyleBackColor = false;
-            // 
-            // btn_p6
-            // 
-            btn_p6.BackColor = Color.Goldenrod;
-            btn_p6.FlatStyle = FlatStyle.Flat;
-            btn_p6.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p6.Location = new Point(134, 127);
-            btn_p6.Name = "btn_p6";
-            btn_p6.Size = new Size(61, 56);
-            btn_p6.TabIndex = 24;
-            btn_p6.Text = "6";
-            btn_p6.UseVisualStyleBackColor = false;
-            // 
-            // btn_p000
-            // 
-            btn_p000.BackColor = Color.Goldenrod;
-            btn_p000.FlatStyle = FlatStyle.Flat;
-            btn_p000.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p000.Location = new Point(134, 251);
-            btn_p000.Name = "btn_p000";
-            btn_p000.Size = new Size(61, 59);
-            btn_p000.TabIndex = 35;
-            btn_p000.Text = "000";
-            btn_p000.UseVisualStyleBackColor = false;
-            // 
-            // btn_p9
-            // 
-            btn_p9.BackColor = Color.Goldenrod;
-            btn_p9.FlatStyle = FlatStyle.Flat;
-            btn_p9.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p9.Location = new Point(134, 189);
-            btn_p9.Name = "btn_p9";
-            btn_p9.Size = new Size(61, 56);
-            btn_p9.TabIndex = 26;
-            btn_p9.Text = "9";
-            btn_p9.UseVisualStyleBackColor = false;
-            // 
-            // btn_p8
-            // 
-            btn_p8.BackColor = Color.Goldenrod;
-            btn_p8.FlatStyle = FlatStyle.Flat;
-            btn_p8.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p8.Location = new Point(68, 189);
-            btn_p8.Name = "btn_p8";
-            btn_p8.Size = new Size(60, 56);
-            btn_p8.TabIndex = 22;
-            btn_p8.Text = "8";
-            btn_p8.UseVisualStyleBackColor = false;
-            // 
-            // btn_p7
-            // 
-            btn_p7.BackColor = Color.Goldenrod;
-            btn_p7.FlatStyle = FlatStyle.Flat;
-            btn_p7.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p7.Location = new Point(3, 189);
-            btn_p7.Name = "btn_p7";
-            btn_p7.Size = new Size(59, 56);
-            btn_p7.TabIndex = 23;
-            btn_p7.Text = "7";
-            btn_p7.UseVisualStyleBackColor = false;
-            // 
-            // btn_p0
-            // 
-            btn_p0.BackColor = Color.Goldenrod;
-            btn_p0.FlatStyle = FlatStyle.Flat;
-            btn_p0.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p0.Location = new Point(68, 251);
-            btn_p0.Name = "btn_p0";
-            btn_p0.Size = new Size(60, 59);
-            btn_p0.TabIndex = 33;
-            btn_p0.Text = "0";
-            btn_p0.UseVisualStyleBackColor = false;
-            // 
-            // btn_p010
-            // 
-            btn_p010.BackColor = Color.Goldenrod;
-            btn_p010.FlatStyle = FlatStyle.Flat;
-            btn_p010.Font = new Font("맑은 고딕", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_p010.Location = new Point(3, 251);
-            btn_p010.Name = "btn_p010";
-            btn_p010.Size = new Size(59, 59);
-            btn_p010.TabIndex = 34;
-            btn_p010.Text = "010";
-            btn_p010.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(ln_point);
-            panel3.Controls.Add(lb_cusid);
-            panel3.Location = new Point(29, 81);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(387, 41);
-            panel3.TabIndex = 19;
-            // 
-            // ln_point
-            // 
-            ln_point.BackColor = Color.Transparent;
-            ln_point.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            ln_point.Location = new Point(208, 0);
-            ln_point.Name = "ln_point";
-            ln_point.Size = new Size(179, 41);
-            ln_point.TabIndex = 20;
-            ln_point.Click += label15_Click;
-            // 
-            // lb_cusid
-            // 
-            lb_cusid.BackColor = SystemColors.ActiveBorder;
-            lb_cusid.FlatStyle = FlatStyle.System;
-            lb_cusid.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_cusid.ImageAlign = ContentAlignment.TopLeft;
-            lb_cusid.Location = new Point(0, 0);
-            lb_cusid.Name = "lb_cusid";
-            lb_cusid.Size = new Size(387, 41);
-            lb_cusid.TabIndex = 0;
-            lb_cusid.Text = "회원번호";
-            lb_cusid.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // roundedPanel2
             // 
@@ -1068,13 +1101,15 @@ namespace Kiosk
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             pnl_Pop_Membership.ResumeLayout(false);
+            pnl_Pop_Membership.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             pnlStamp.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             roundedPanel2.ResumeLayout(false);
             roundedPanel2.PerformLayout();
             ResumeLayout(false);
@@ -1098,7 +1133,7 @@ namespace Kiosk
         private Label label22;
         private Label lb_savePoint;
         private Label lb_cusName;
-        private Label label24;
+        private Label lb_used_point1;
         private Label label20;
         private Label lb_sum;
         private Panel panel4;
@@ -1146,11 +1181,10 @@ namespace Kiosk
         private RoundedToplabel roundedToplabel1;
         private RoundedPanel pnlStamp;
         private Panel panel2;
-        private Label label7;
         private TextBox tb_OriginalAmount;
         private Label label2;
         private Panel panel3;
-        private Label ln_point;
+        private Label ln_MemberId;
         private Label lb_cusid;
         private Button btn_del1;
         private Button btn_del2;
@@ -1164,5 +1198,8 @@ namespace Kiosk
         private Label lb_cusid1;
         private ColorDialog colorDialog1;
         private Label label6;
+        private TextBox textBox1;
+        private Label lb_MemberId;
+        private TextBox textBox2;
     }
 }

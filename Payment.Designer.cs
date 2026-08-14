@@ -216,7 +216,7 @@
             roundedPanel2.BorderSize = 1F;
             roundedPanel2.BottomBorderRadius = 40;
             roundedPanel2.Controls.Add(richTextBox1);
-            roundedPanel2.Location = new Point(140, 31);
+            roundedPanel2.Location = new Point(140, 44);
             roundedPanel2.Name = "roundedPanel2";
             roundedPanel2.RoundBottomLeft = true;
             roundedPanel2.RoundBottomRight = true;
