@@ -509,5 +509,10 @@ namespace Kiosk
             // 쿠폰 / 상품권 클릭 시 결제 처리
             CompletePayment("쿠폰 / 상품권");
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -51,9 +51,10 @@
             // 
             btn_back.BackColor = SystemColors.ActiveBorder;
             btn_back.FlatStyle = FlatStyle.Flat;
-            btn_back.Location = new Point(224, 454);
+            btn_back.Location = new Point(320, 757);
+            btn_back.Margin = new Padding(4, 5, 4, 5);
             btn_back.Name = "btn_back";
-            btn_back.Size = new Size(200, 68);
+            btn_back.Size = new Size(286, 113);
             btn_back.TabIndex = 20;
             btn_back.Text = "이전";
             btn_back.UseVisualStyleBackColor = false;
@@ -63,9 +64,10 @@
             // 
             btn_allDelete.BackColor = Color.FromArgb(211, 47, 47);
             btn_allDelete.FlatStyle = FlatStyle.Flat;
-            btn_allDelete.Location = new Point(48, 454);
+            btn_allDelete.Location = new Point(69, 757);
+            btn_allDelete.Margin = new Padding(4, 5, 4, 5);
             btn_allDelete.Name = "btn_allDelete";
-            btn_allDelete.Size = new Size(103, 68);
+            btn_allDelete.Size = new Size(147, 113);
             btn_allDelete.TabIndex = 19;
             btn_allDelete.Text = "전체 취소";
             btn_allDelete.UseVisualStyleBackColor = false;
@@ -74,9 +76,10 @@
             // 
             btn_KakaoPay.BackColor = SystemColors.ControlLightLight;
             btn_KakaoPay.FlatStyle = FlatStyle.Flat;
-            btn_KakaoPay.Location = new Point(238, 126);
+            btn_KakaoPay.Location = new Point(340, 210);
+            btn_KakaoPay.Margin = new Padding(4, 5, 4, 5);
             btn_KakaoPay.Name = "btn_KakaoPay";
-            btn_KakaoPay.Size = new Size(186, 91);
+            btn_KakaoPay.Size = new Size(266, 152);
             btn_KakaoPay.TabIndex = 18;
             btn_KakaoPay.Text = "카카오 페이";
             btn_KakaoPay.UseVisualStyleBackColor = false;
@@ -86,9 +89,10 @@
             // 
             btn_naverPay.BackColor = SystemColors.ControlLightLight;
             btn_naverPay.FlatStyle = FlatStyle.Flat;
-            btn_naverPay.Location = new Point(143, 126);
+            btn_naverPay.Location = new Point(204, 210);
+            btn_naverPay.Margin = new Padding(4, 5, 4, 5);
             btn_naverPay.Name = "btn_naverPay";
-            btn_naverPay.Size = new Size(89, 91);
+            btn_naverPay.Size = new Size(127, 152);
             btn_naverPay.TabIndex = 16;
             btn_naverPay.Text = "네이버 페이";
             btn_naverPay.UseVisualStyleBackColor = false;
@@ -98,9 +102,10 @@
             // 
             btn_card.BackColor = SystemColors.ControlLightLight;
             btn_card.FlatStyle = FlatStyle.Flat;
-            btn_card.Location = new Point(46, 126);
+            btn_card.Location = new Point(66, 210);
+            btn_card.Margin = new Padding(4, 5, 4, 5);
             btn_card.Name = "btn_card";
-            btn_card.Size = new Size(89, 91);
+            btn_card.Size = new Size(127, 152);
             btn_card.TabIndex = 15;
             btn_card.Text = "카드 결제";
             btn_card.UseVisualStyleBackColor = false;
@@ -109,9 +114,10 @@
             // label2
             // 
             label2.BackColor = SystemColors.GradientActiveCaption;
-            label2.Location = new Point(46, 95);
+            label2.Location = new Point(66, 158);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(378, 28);
+            label2.Size = new Size(540, 47);
             label2.TabIndex = 14;
             label2.Text = "결제 방식";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -121,17 +127,19 @@
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(35, 41);
+            label1.Location = new Point(50, 68);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(0, 15);
+            label1.Size = new Size(0, 25);
             label1.TabIndex = 13;
             // 
             // label4
             // 
             label4.Font = new Font("맑은 고딕", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(28, 60);
+            label4.Location = new Point(40, 100);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(249, 23);
+            label4.Size = new Size(356, 38);
             label4.TabIndex = 22;
             label4.Text = "결제 방식을 선택해주세요 ! ";
             // 
@@ -140,9 +148,10 @@
             label5.AutoSize = true;
             label5.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.MenuHighlight;
-            label5.Location = new Point(28, 45);
+            label5.Location = new Point(40, 75);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(44, 15);
+            label5.Size = new Size(65, 25);
             label5.TabIndex = 21;
             label5.Text = "Step2.";
             // 
@@ -150,9 +159,10 @@
             // 
             btn_SamsungPay.BackColor = SystemColors.ControlLightLight;
             btn_SamsungPay.FlatStyle = FlatStyle.Flat;
-            btn_SamsungPay.Location = new Point(46, 223);
+            btn_SamsungPay.Location = new Point(66, 372);
+            btn_SamsungPay.Margin = new Padding(4, 5, 4, 5);
             btn_SamsungPay.Name = "btn_SamsungPay";
-            btn_SamsungPay.Size = new Size(186, 91);
+            btn_SamsungPay.Size = new Size(266, 152);
             btn_SamsungPay.TabIndex = 23;
             btn_SamsungPay.Text = "삼성페이";
             btn_SamsungPay.UseVisualStyleBackColor = false;
@@ -161,9 +171,10 @@
             // label3
             // 
             label3.BackColor = SystemColors.GradientActiveCaption;
-            label3.Location = new Point(46, 326);
+            label3.Location = new Point(66, 543);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(378, 28);
+            label3.Size = new Size(540, 47);
             label3.TabIndex = 24;
             label3.Text = "상품권 결제";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -172,9 +183,10 @@
             // 
             btn_coupon.BackColor = SystemColors.ControlLightLight;
             btn_coupon.FlatStyle = FlatStyle.Flat;
-            btn_coupon.Location = new Point(48, 357);
+            btn_coupon.Location = new Point(69, 595);
+            btn_coupon.Margin = new Padding(4, 5, 4, 5);
             btn_coupon.Name = "btn_coupon";
-            btn_coupon.Size = new Size(186, 91);
+            btn_coupon.Size = new Size(266, 152);
             btn_coupon.TabIndex = 25;
             btn_coupon.Text = "쿠폰 / 상품권 복합 결제";
             btn_coupon.UseVisualStyleBackColor = false;
@@ -197,7 +209,8 @@
             roundedPanel1.Controls.Add(btn_allDelete);
             roundedPanel1.Controls.Add(btn_back);
             roundedPanel1.Controls.Add(label5);
-            roundedPanel1.Location = new Point(140, 41);
+            roundedPanel1.Location = new Point(200, 68);
+            roundedPanel1.Margin = new Padding(4, 5, 4, 5);
             roundedPanel1.Name = "roundedPanel1";
             roundedPanel1.RoundBottomLeft = true;
             roundedPanel1.RoundBottomRight = true;
@@ -206,7 +219,7 @@
             roundedPanel1.ShadowColor = Color.FromArgb(60, 0, 0, 0);
             roundedPanel1.ShadowDepth = 8;
             roundedPanel1.ShowShadow = true;
-            roundedPanel1.Size = new Size(470, 572);
+            roundedPanel1.Size = new Size(671, 953);
             roundedPanel1.TabIndex = 26;
             // 
             // roundedPanel2
@@ -216,7 +229,8 @@
             roundedPanel2.BorderSize = 1F;
             roundedPanel2.BottomBorderRadius = 40;
             roundedPanel2.Controls.Add(richTextBox1);
-            roundedPanel2.Location = new Point(140, 44);
+            roundedPanel2.Location = new Point(200, 68);
+            roundedPanel2.Margin = new Padding(4, 5, 4, 5);
             roundedPanel2.Name = "roundedPanel2";
             roundedPanel2.RoundBottomLeft = true;
             roundedPanel2.RoundBottomRight = true;
@@ -225,7 +239,7 @@
             roundedPanel2.ShadowColor = Color.FromArgb(60, 0, 0, 0);
             roundedPanel2.ShadowDepth = 8;
             roundedPanel2.ShowShadow = true;
-            roundedPanel2.Size = new Size(478, 591);
+            roundedPanel2.Size = new Size(683, 985);
             roundedPanel2.TabIndex = 27;
             // 
             // richTextBox1
@@ -233,23 +247,25 @@
             richTextBox1.BackColor = Color.White;
             richTextBox1.BorderStyle = BorderStyle.None;
             richTextBox1.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            richTextBox1.Location = new Point(28, 60);
+            richTextBox1.Location = new Point(40, 100);
+            richTextBox1.Margin = new Padding(4, 5, 4, 5);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox1.Size = new Size(420, 480);
+            richTextBox1.Size = new Size(600, 800);
             richTextBox1.TabIndex = 0;
             richTextBox1.TabStop = false;
             richTextBox1.Text = "";
             // 
             // Payment
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1219, 700);
+            ClientSize = new Size(1741, 1167);
             Controls.Add(roundedPanel2);
             Controls.Add(roundedPanel1);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Payment";
             Text = "Payment";
             Load += Payment_Load;

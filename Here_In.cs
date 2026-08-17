@@ -138,7 +138,8 @@ namespace Kiosk
             try
             {
                 // 관리자 폼 소켓 포트(9000)로 TCP 연결 수립
-                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("192.168.0.62", 9000))
+                using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("127.0.0.1", 9000))
+                //using (System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("192.168.0.62", 9000))
                 using (System.Net.Sockets.NetworkStream stream = client.GetStream())
                 {
                     // 테이블 선택 액션 JSON 전송
@@ -161,6 +162,8 @@ namespace Kiosk
                 MessageBox.Show($"관리자 테이블 전송 실패 ({ex.Message})", "디버그 통신 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+
 
         private void btn_choice_Click_1(object sender, EventArgs e)
         {
