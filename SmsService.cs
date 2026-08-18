@@ -11,8 +11,8 @@ namespace Kiosk
     {
         // api 문서 제일 왼쪽 상단 대시보드에서 키 값 가져와야 함. 
         // https://www.figma.com/board/EYl6PAsWEA2K3gVaDmnzEM/Kiosk?node-id=0-1&t=0kQY2BQBO7zMICSu-1
-        private readonly string apiKey = "";
-        private readonly string apiSecret = "";
+        private readonly string apiKey = "NCSOVG24QAL0IGQM";
+        private readonly string apiSecret = "X2EPBHPYZWSYKPAQUNCCU4BUGMYCLAXK";
         private readonly string senderNumber = "01050334000"; // 발신번호 지정
 
         // HMAC SHA256 서명 생성 (Solapi 인증 스펙)

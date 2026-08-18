@@ -220,6 +220,7 @@ namespace Kiosk
             }
 
             // [2회차 시뮬레이션용 대기] 임시 테스트를 위해 3초 후 순번 호출 전송
+            /*
             await Task.Delay(3000);
 
             // [2회차] 입장 안내 문자 내용 구성 (SMS 단문 규격)
@@ -247,6 +248,7 @@ namespace Kiosk
                     MessageBox.Show("대기 제한 시간(3분)이 초과되어 대기열 큐에서 자동으로 제거되었습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+            */
 
             // 테스트용 번호 업데이트
             queueNum++;
